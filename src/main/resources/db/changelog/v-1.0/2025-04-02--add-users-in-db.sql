@@ -1,0 +1,17 @@
+INSERT INTO users (id, username, password, email, role, points) VALUES
+    (gen_random_uuid(), 'DuelMaster', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'duelmaster@example.com', 'USER', 950),
+    (gen_random_uuid(), 'QuizKing', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'quizking@example.com', 'USER', 920),
+    (gen_random_uuid(), 'WordWarrior', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'wordwarrior@example.com', 'USER', 890),
+    (gen_random_uuid(), 'GrammarNinja', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'ninja@example.com', 'USER', 860),
+    (gen_random_uuid(), 'LangExpert', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'expert@example.com', 'USER', 1000),
+    (gen_random_uuid(), 'PolyglotPro', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'polyglot@example.com', 'USER', 980),
+    (gen_random_uuid(), 'FastLearner', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'fastlearner@example.com', 'USER', 970),
+    (gen_random_uuid(), 'WordSmith', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'wordsmith@example.com', 'USER', 940),
+    (gen_random_uuid(), 'SyntaxStar', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'syntax@example.com', 'USER', 910),
+    (gen_random_uuid(), 'VocabViking', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'viking@example.com', 'USER', 880),
+    (gen_random_uuid(), 'PhrasePhantom', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'phantom@example.com', 'USER', 870),
+    (gen_random_uuid(), 'GrammarGuru', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'guru@example.com', 'USER', 1000),
+    (gen_random_uuid(), 'LinguaLeo', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'leo@example.com', 'USER', 960),
+    (gen_random_uuid(), 'WordWizard', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'wizard@example.com', 'USER', 990),
+    (gen_random_uuid(), 'EduExpert', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'edu@example.com', 'USER', 930),
+    (gen_random_uuid(), 'TopPlayer', '$2a$10$U3tGZ.IsUQwf4D4v4Z.4QO2e2jJZsAM2q3k7pB5vQ7bB6s1YzYdW2', 'topplayer@example.com', 'USER', 1000);

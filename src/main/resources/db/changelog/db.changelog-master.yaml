@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: v-1.0/v-1.0-accumulative-changelog.yaml
+      relativeToChangelogFile: true

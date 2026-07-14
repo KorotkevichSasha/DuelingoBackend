@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - include:
+      file: 2025-18-01--init-db.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 2025-01-02--add-user-points-index.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 2025-02-02--add-user-username-index.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 2025-02-22--add-questions-ids.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 2025-03-01 -- add-words-table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 2025-04-01 -- add-time-field-to-duel.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 2025-04-02--add-users-in-db.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 2025-04-03--add-achievements-tables.sql
+      relativeToChangelogFile: true

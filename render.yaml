@@ -1,0 +1,63 @@
+services:
+  # Backend Service
+  - type: web
+    name: duelingo-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: PORT
+        value: 8082
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: duelingo-db
+          property: connectionString
+          transform: "jdbc:postgresql://${host}:${port}/${database}"
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: duelingo-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: duelingo-db
+          property: password
+      # Railway MongoDB connection string
+      - key: SPRING_DATA_MONGODB_URI
+        sync: false
+      # Railway Redis connection
+      - key: SPRING_REDIS_HOST
+        sync: false
+      - key: SPRING_REDIS_PORT
+        sync: false
+      - key: SPRING_REDIS_PASSWORD
+        sync: false
+      - key: JWT_SIGNING_KEY
+        sync: false
+      - key: SPRING_MAIL_USERNAME
+        sync: false
+      - key: SPRING_MAIL_PASSWORD
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+
+  # Frontend Service
+  - type: web
+    name: duelingo-admin
+    env: static
+    buildCommand: cd admin-panel && npm install && npm run build
+    staticPublishPath: admin-panel/dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+databases:
+  - name: duelingo-db
+    databaseName: duelingo
+    plan: free 

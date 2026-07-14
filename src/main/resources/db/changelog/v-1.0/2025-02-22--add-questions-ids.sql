@@ -1,0 +1,1 @@
+ALTER TABLE duel ADD COLUMN question_ids VARCHAR[];

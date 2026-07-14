@@ -1,0 +1,462 @@
+[
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"I ___ like coffee.","options":["does","do","am","is"],"correctAnswers":["do"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"She ___ to school every day.","options":["go","goes","gone","going"],"correctAnswers":["goes"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"She ___ to school every day.","options":["go","goes","gone","going"],"correctAnswers":["goes"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"She ___ to school every day.","options":["go","goes","gone","going"],"correctAnswers":["goes"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"She ___ to school every day.","options":["go","goes","gone","going"],"correctAnswers":["goes"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"I ___ like coffee.","options":["does","do","am","is"],"correctAnswers":["do"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"I ___ like coffee.","options":["does","do","am","is"],"correctAnswers":["do"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"I ___ like coffee.","options":["does","do","am","is"],"correctAnswers":["do"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"I ___ like coffee.","options":["does","do","am","is"],"correctAnswers":["do"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"She ___ to school every day.","options":["go","goes","gone","going"],"correctAnswers":["goes"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"I ___ like coffee.","options":["does","do","am","is"],"correctAnswers":["do"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"I ___ like coffee.","options":["does","do","am","is"],"correctAnswers":["do"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"She ___ to school every day.","options":["go","goes","gone","going"],"correctAnswers":["goes"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"She ___ to school every day.","options":["go","goes","gone","going"],"correctAnswers":["goes"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"He ___ a new car last year.","options":["buys","bought","buying","buy"],"correctAnswers":["bought"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"They ___ to the park yesterday.","options":["go","went","gone","going"],"correctAnswers":["went"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"He ___ a new car last year.","options":["buys","bought","buying","buy"],"correctAnswers":["bought"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"They ___ to the park yesterday.","options":["go","went","gone","going"],"correctAnswers":["went"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"He ___ a new car last year.","options":["buys","bought","buying","buy"],"correctAnswers":["bought"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"They ___ to the park yesterday.","options":["go","went","gone","going"],"correctAnswers":["went"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"He ___ a new car last year.","options":["buys","bought","buying","buy"],"correctAnswers":["bought"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"He ___ a new car last year.","options":["buys","bought","buying","buy"],"correctAnswers":["bought"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"He ___ a new car last year.","options":["buys","bought","buying","buy"],"correctAnswers":["bought"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"They ___ to the park yesterday.","options":["go","went","gone","going"],"correctAnswers":["went"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"They ___ finish the project by tomorrow.","options":["will","are","shall","is"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"They ___ finish the project by tomorrow.","options":["will","are","shall","is"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"They ___ finish the project by tomorrow.","options":["will","are","shall","is"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"They ___ finish the project by tomorrow.","options":["will","are","shall","is"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"I ___ call you later.","options":["will","am","shall","do"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"They ___ finish the project by tomorrow.","options":["will","are","shall","is"],"correctAnswers":["will"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"___ Eiffel Tower is in Paris.","options":["A","An","The","No article"],"correctAnswers":["The"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"I saw ___ dog in the park.","options":["a","an","the","no article"],"correctAnswers":["a"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"___ Eiffel Tower is in Paris.","options":["A","An","The","No article"],"correctAnswers":["The"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"I saw ___ dog in the park.","options":["a","an","the","no article"],"correctAnswers":["a"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"___ Eiffel Tower is in Paris.","options":["A","An","The","No article"],"correctAnswers":["The"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"___ Eiffel Tower is in Paris.","options":["A","An","The","No article"],"correctAnswers":["The"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"___ Eiffel Tower is in Paris.","options":["A","An","The","No article"],"correctAnswers":["The"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"___ Eiffel Tower is in Paris.","options":["A","An","The","No article"],"correctAnswers":["The"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"I saw ___ dog in the park.","options":["a","an","the","no article"],"correctAnswers":["a"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"___ Eiffel Tower is in Paris.","options":["A","An","The","No article"],"correctAnswers":["The"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"___ Eiffel Tower is in Paris.","options":["A","An","The","No article"],"correctAnswers":["The"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"I saw ___ dog in the park.","options":["a","an","the","no article"],"correctAnswers":["a"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"I saw ___ dog in the park.","options":["a","an","the","no article"],"correctAnswers":["a"],"audioUrl":null,"topic":"Articles (a/an/the)"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"She arrived ___ the airport at 5 PM.","options":["at","to","in","on"],"correctAnswers":["at"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"She arrived ___ the airport at 5 PM.","options":["at","to","in","on"],"correctAnswers":["at"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"She arrived ___ the airport at 5 PM.","options":["at","to","in","on"],"correctAnswers":["at"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"The keys are ___ the table.","options":["on","in","at","over"],"correctAnswers":["on"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"The keys are ___ the table.","options":["on","in","at","over"],"correctAnswers":["on"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"The keys are ___ the table.","options":["on","in","at","over"],"correctAnswers":["on"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"The keys are ___ the table.","options":["on","in","at","over"],"correctAnswers":["on"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"She arrived ___ the airport at 5 PM.","options":["at","to","in","on"],"correctAnswers":["at"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"The keys are ___ the table.","options":["on","in","at","over"],"correctAnswers":["on"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"She arrived ___ the airport at 5 PM.","options":["at","to","in","on"],"correctAnswers":["at"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"She arrived ___ the airport at 5 PM.","options":["at","to","in","on"],"correctAnswers":["at"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"The keys are ___ the table.","options":["on","in","at","over"],"correctAnswers":["on"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"The keys are ___ the table.","options":["on","in","at","over"],"correctAnswers":["on"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"The keys are ___ the table.","options":["on","in","at","over"],"correctAnswers":["on"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"We ___ go to the party if we have time.","options":["will","could","might","must"],"correctAnswers":["might"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"You ___ study harder for the exam.","options":["should","can","may","might"],"correctAnswers":["should"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"We ___ go to the party if we have time.","options":["will","could","might","must"],"correctAnswers":["might"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"We ___ go to the party if we have time.","options":["will","could","might","must"],"correctAnswers":["might"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"You ___ study harder for the exam.","options":["should","can","may","might"],"correctAnswers":["should"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"You ___ study harder for the exam.","options":["should","can","may","might"],"correctAnswers":["should"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"We ___ go to the party if we have time.","options":["will","could","might","must"],"correctAnswers":["might"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"You ___ study harder for the exam.","options":["should","can","may","might"],"correctAnswers":["should"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"You ___ study harder for the exam.","options":["should","can","may","might"],"correctAnswers":["should"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"You ___ study harder for the exam.","options":["should","can","may","might"],"correctAnswers":["should"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"This is the ___ movie I've ever seen.","options":["better","best","good","well"],"correctAnswers":["best"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"This is the ___ movie I've ever seen.","options":["better","best","good","well"],"correctAnswers":["best"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"She speaks English very ___.","options":["good","well","bad","slow"],"correctAnswers":["well"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"This is the ___ movie I've ever seen.","options":["better","best","good","well"],"correctAnswers":["best"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"She speaks English very ___.","options":["good","well","bad","slow"],"correctAnswers":["well"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"She speaks English very ___.","options":["good","well","bad","slow"],"correctAnswers":["well"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"She speaks English very ___.","options":["good","well","bad","slow"],"correctAnswers":["well"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"This is the ___ movie I've ever seen.","options":["better","best","good","well"],"correctAnswers":["best"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"This is the ___ movie I've ever seen.","options":["better","best","good","well"],"correctAnswers":["best"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"She speaks English very ___.","options":["good","well","bad","slow"],"correctAnswers":["well"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"This is the ___ movie I've ever seen.","options":["better","best","good","well"],"correctAnswers":["best"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"She speaks English very ___.","options":["good","well","bad","slow"],"correctAnswers":["well"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"This is the ___ movie I've ever seen.","options":["better","best","good","well"],"correctAnswers":["best"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"She speaks English very ___.","options":["good","well","bad","slow"],"correctAnswers":["well"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"If it rains, we ___ stay at home.","options":["will","would","should","can"],"correctAnswers":["will"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"If it rains, we ___ stay at home.","options":["will","would","should","can"],"correctAnswers":["will"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"If it rains, we ___ stay at home.","options":["will","would","should","can"],"correctAnswers":["will"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"If it rains, we ___ stay at home.","options":["will","would","should","can"],"correctAnswers":["will"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"If it rains, we ___ stay at home.","options":["will","would","should","can"],"correctAnswers":["will"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"If it rains, we ___ stay at home.","options":["will","would","should","can"],"correctAnswers":["will"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"If I were you, I ___ apologize.","options":["will","would","should","might"],"correctAnswers":["would"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"The windows ___ cleaned yesterday.","options":["was","were","are","is"],"correctAnswers":["were"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"The windows ___ cleaned yesterday.","options":["was","were","are","is"],"correctAnswers":["were"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"The windows ___ cleaned yesterday.","options":["was","were","are","is"],"correctAnswers":["were"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"The windows ___ cleaned yesterday.","options":["was","were","are","is"],"correctAnswers":["were"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"FILL_IN_INPUT","questionText":"The windows ___ cleaned yesterday.","options":["was","were","are","is"],"correctAnswers":["were"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"The windows ___ cleaned yesterday.","options":["was","were","are","is"],"correctAnswers":["were"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"The book ___ by J.K. Rowling.","options":["was written","is written","writes","wrote"],"correctAnswers":["was written"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"The windows ___ cleaned yesterday.","options":["was","were","are","is"],"correctAnswers":["were"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"She asked if I ___ help her.","options":["will","would","can","could"],"correctAnswers":["could"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"She asked if I ___ help her.","options":["will","would","can","could"],"correctAnswers":["could"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"She asked if I ___ help her.","options":["will","would","can","could"],"correctAnswers":["could"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"He said he ___ tired.","options":["is","was","were","are"],"correctAnswers":["was"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"She asked if I ___ help her.","options":["will","would","can","could"],"correctAnswers":["could"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"He said he ___ tired.","options":["is","was","were","are"],"correctAnswers":["was"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"FILL_IN_CHOICE","questionText":"He said he ___ tired.","options":["is","was","were","are"],"correctAnswers":["was"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"She asked if I ___ help her.","options":["will","would","can","could"],"correctAnswers":["could"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"FILL_IN_INPUT","questionText":"He said he ___ tired.","options":["is","was","were","are"],"correctAnswers":["was"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"EASY","type":"FILL_IN_CHOICE","questionText":"She asked if I ___ help her.","options":["will","would","can","could"],"correctAnswers":["could"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"EASY","type":"FILL_IN_INPUT","questionText":"He said he ___ tired.","options":["is","was","were","are"],"correctAnswers":["was"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"MEDIUM","type":"FILL_IN_CHOICE","questionText":"She asked if I ___ help her.","options":["will","would","can","could"],"correctAnswers":["could"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Он играет в футбол по выходным.","options":["He","play","plays","football","on","weekends","yesterday","tomorrow"],"correctAnswers":["He","plays","football","on","weekends"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Она уже сделала домашнее задание.","options":["She","did","done","has","have","homework","already","yesterday"],"correctAnswers":["She","has","done","homework","already"],"audioUrl":null,"topic":"Present Perfect"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы у меня было больше времени, я бы путешествовал.","options":["If","I","had","have","more","time","I","would","travel","traveled"],"correctAnswers":["If","I","had","more","time","I","would","travel"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Моя книга на столе.","options":["My","book","is","on","the","table","in","under"],"correctAnswers":["My","book","is","on","the","table"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Эта задача сложнее, чем предыдущая.","options":["This","task","is","more","difficult","than","the","last","previous"],"correctAnswers":["This","task","is","more","difficult","than","the","previous"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Ему сказали подождать у входа.","options":["He","was","told","to","wait","at","the","entrance"],"correctAnswers":["He","was","told","to","wait","at","the","entrance"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Мы будем смотреть фильм вечером.","options":["We","will","watch","a","movie","in","the","evening"],"correctAnswers":["We","will","watch","a","movie","in","the","evening"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Она сказала, что придет завтра.","options":["She","said","that","she","will","would","come","tomorrow","yesterday"],"correctAnswers":["She","said","that","she","would","come","tomorrow"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Ты должен был помочь ему вчера.","options":["You","should","must","have","helped","him","yesterday","tomorrow"],"correctAnswers":["You","should","have","helped","him","yesterday"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Они живут в большом доме.","options":["They","live","lives","in","a","big","house","apartment"],"correctAnswers":["They","live","in","a","big","house"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Я никогда не был в Париже.","options":["I","never","have","been","to","Paris","before","yesterday"],"correctAnswers":["I","have","never","been","to","Paris"],"audioUrl":null,"topic":"Present Perfect"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы я знал ответ, я бы тебе сказал.","options":["If","I","knew","know","the","answer","I","would","tell","told","you"],"correctAnswers":["If","I","knew","the","answer","I","would","tell","you"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Книга лежит под столом.","options":["The","book","is","on","under","the","table","chair"],"correctAnswers":["The","book","is","under","the","table"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Этот тест легче, чем предыдущий.","options":["This","test","is","easier","more","easy","than","the","last","previous"],"correctAnswers":["This","test","is","easier","than","the","previous"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Доклад был написан вчера.","options":["The","report","was","written","wrote","yesterday","today","last week"],"correctAnswers":["The","report","was","written","yesterday"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Мы встретимся завтра утром.","options":["We","will","meet","met","tomorrow","morning","yesterday"],"correctAnswers":["We","will","meet","tomorrow","morning"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Он сказал, что уезжает в Лондон.","options":["He","said","that","he","is","was","going","to","London"],"correctAnswers":["He","said","that","he","was","going","to","London"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Ты не должен был говорить ему правду.","options":["You","should","must","not","have","told","him","the","truth"],"correctAnswers":["You","should","not","have","told","him","the","truth"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Они живут в большом доме.","options":["They","live","lives","in","a","big","house","apartment"],"correctAnswers":["They","live","in","a","big","house"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Я никогда не был в Париже.","options":["I","never","have","been","to","Paris","before","yesterday"],"correctAnswers":["I","have","never","been","to","Paris"],"audioUrl":null,"topic":"Present Perfect"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы я знал ответ, я бы тебе сказал.","options":["If","I","knew","know","the","answer","I","would","tell","told","you"],"correctAnswers":["If","I","knew","the","answer","I","would","tell","you"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Книга лежит под столом.","options":["The","book","is","on","under","the","table","chair"],"correctAnswers":["The","book","is","under","the","table"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Этот тест легче, чем предыдущий.","options":["This","test","is","easier","more","easy","than","the","last","previous"],"correctAnswers":["This","test","is","easier","than","the","previous"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Доклад был написан вчера.","options":["The","report","was","written","wrote","yesterday","today","last week"],"correctAnswers":["The","report","was","written","yesterday"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Он может плавать очень быстро.","options":["He","can","swim","swims","very","fast","slowly"],"correctAnswers":["He","can","swim","very","fast"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Они сказали, что приедут поздно.","options":["They","said","that","they","will","would","arrive","late"],"correctAnswers":["They","said","that","they","would","arrive","late"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы он тренировался больше, он бы выиграл.","options":["If","he","trained","trains","more","he","would","win","won"],"correctAnswers":["If","he","trained","more","he","would","win"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Она всегда завтракает в 7 утра.","options":["She","always","has","have","breakfast","at","7","am"],"correctAnswers":["She","always","has","breakfast","at","7","am"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Я уже посмотрел этот фильм дважды.","options":["I","already","have","watched","watch","this","movie","twice"],"correctAnswers":["I","have","already","watched","this","movie","twice"],"audioUrl":null,"topic":"Present Perfect"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы у меня было больше денег, я бы путешествовал по миру.","options":["If","I","had","have","more","money","I","would","travel","around","the","world"],"correctAnswers":["If","I","had","more","money","I","would","travel","around","the","world"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Мяч катился под кровать.","options":["The","ball","rolled","rolls","under","the","bed","chair"],"correctAnswers":["The","ball","rolled","under","the","bed"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Этот фильм интереснее, чем книга.","options":["This","movie","is","more","interesting","than","the","book","boring"],"correctAnswers":["This","movie","is","more","interesting","than","the","book"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Эти письма были отправлены вчера.","options":["These","letters","were","sent","send","yesterday","tomorrow"],"correctAnswers":["These","letters","were","sent","yesterday"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Ты можешь помочь мне с этим заданием?","options":["Can","you","help","helps","me","with","this","task"],"correctAnswers":["Can","you","help","me","with","this","task"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Она сказала, что хочет прийти пораньше.","options":["She","said","that","she","wants","want","to","come","earlier"],"correctAnswers":["She","said","that","she","wants","to","come","earlier"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы он выучил больше слов, он бы сдал тест.","options":["If","he","learned","learns","more","words","he","would","pass","passed","the","test"],"correctAnswers":["If","he","learned","more","words","he","would","pass","the","test"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Она всегда завтракает в 7 утра.","options":["She","always","has","have","breakfast","at","7","am"],"correctAnswers":["She","always","has","breakfast","at","7","am"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Я уже посмотрел этот фильм дважды.","options":["I","already","have","watched","watch","this","movie","twice"],"correctAnswers":["I","have","already","watched","this","movie","twice"],"audioUrl":null,"topic":"Present Perfect"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы у меня было больше денег, я бы путешествовал по миру.","options":["If","I","had","have","more","money","I","would","travel","around","the","world"],"correctAnswers":["If","I","had","more","money","I","would","travel","around","the","world"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Мяч катился под кровать.","options":["The","ball","rolled","rolls","under","the","bed","chair"],"correctAnswers":["The","ball","rolled","under","the","bed"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Этот фильм интереснее, чем книга.","options":["This","movie","is","more","interesting","than","the","book","boring"],"correctAnswers":["This","movie","is","more","interesting","than","the","book"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Эти письма были отправлены вчера.","options":["These","letters","were","sent","send","yesterday","tomorrow"],"correctAnswers":["These","letters","were","sent","yesterday"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Ты можешь помочь мне с этим заданием?","options":["Can","you","help","helps","me","with","this","task"],"correctAnswers":["Can","you","help","me","with","this","task"],"audioUrl":null,"topic":"Modal Verbs"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Она сказала, что хочет прийти пораньше.","options":["She","said","that","she","wants","want","to","come","earlier"],"correctAnswers":["She","said","that","she","wants","to","come","earlier"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы он выучил больше слов, он бы сдал тест.","options":["If","he","learned","learns","more","words","he","would","pass","passed","the","test"],"correctAnswers":["If","he","learned","more","words","he","would","pass","the","test"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"К следующему году я закончу этот проект.","options":["By","next","year","I","will","have","finished","finish","this","project"],"correctAnswers":["By","next","year","I","will","have","finished","this","project"],"audioUrl":null,"topic":"Future Perfect"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Каждый вечер мой кот сидит на подоконнике и наблюдает за машинами.","options":["Every","evening","my","cat","sits","sit","on","the","windowsill","and","watches","watch","cars"],"correctAnswers":["Every","evening","my","cat","sits","on","the","windowsill","and","watches","cars"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Она никогда не пробовала устрицы раньше, но вчера решилась.","options":["She","never","has","had","tried","oysters","before","but","yesterday","she","decided"],"correctAnswers":["She","had","never","tried","oysters","before","but","yesterday","she","decided"],"audioUrl":null,"topic":"Present Perfect"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы марсиане прилетели на Землю, мы бы показали им интернет-мемы.","options":["If","Martians","came","come","to","Earth","we","would","show","them","Internet","memes"],"correctAnswers":["If","Martians","came","to","Earth","we","would","show","them","Internet","memes"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Книга лежала под розовым зонтиком на пляже.","options":["The","book","was","laying","lying","under","the","pink","umbrella","on","the","beach"],"correctAnswers":["The","book","was","lying","under","the","pink","umbrella","on","the","beach"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Этот фильм настолько скучный, что я уснул через десять минут.","options":["This","movie","is","so","boring","that","I","fell","fall","asleep","after","ten","minutes"],"correctAnswers":["This","movie","is","so","boring","that","I","fell","asleep","after","ten","minutes"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Картины были украдены из музея под покровом ночи.","options":["The","paintings","were","stolen","steal","from","the","museum","under","the","cover","of","night"],"correctAnswers":["The","paintings","were","stolen","from","the","museum","under","the","cover","of","night"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Робот утверждал, что научился сочинять стихи, но его рифмы были странными.","options":["The","robot","claimed","claims","that","he","had","has","learned","to","write","poetry","but","his","rhymes","were","was","strange"],"correctAnswers":["The","robot","claimed","that","he","had","learned","to","write","poetry","but","his","rhymes","were","strange"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"К 2050 году люди будут выращивать овощи на Марсе в специальных теплицах.","options":["By","2050","humans","will","have","grown","grow","vegetables","on","Mars","in","special","greenhouses"],"correctAnswers":["By","2050","humans","will","have","grown","vegetables","on","Mars","in","special","greenhouses"],"audioUrl":null,"topic":"Future Perfect"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Каждое утро старый фонарь освещает пустую улицу.","options":["Every","morning","the","old","lamp","lights","light","up","an","empty","street"],"correctAnswers":["Every","morning","the","old","lamp","lights","up","an","empty","street"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Когда я вошел в комнату, радио уже играло старую мелодию.","options":["When","I","entered","enter","the","room","the","radio","had","has","already","been","playing","an","old","melody"],"correctAnswers":["When","I","entered","the","room","the","radio","had","already","been","playing","an","old","melody"],"audioUrl":null,"topic":"Past Perfect Continuous"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы у меня была машина времени, я бы отправился в эпоху Возрождения.","options":["If","I","had","have","a","time","machine","I","would","travel","to","the","Renaissance","era"],"correctAnswers":["If","I","had","a","time","machine","I","would","travel","to","the","Renaissance","era"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Луна висела в небе, как огромный серебряный шар.","options":["The","moon","was","hanging","hangs","in","the","sky","like","a","huge","silver","ball"],"correctAnswers":["The","moon","was","hanging","in","the","sky","like","a","huge","silver","ball"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Этот чай настолько горячий, что можно сварить в нем яйцо.","options":["This","tea","is","so","hot","that","you","can","boil","an","egg","in","it"],"correctAnswers":["This","tea","is","so","hot","that","you","can","boil","an","egg","in","it"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Все письма были написаны пером и запечатаны сургучной печатью.","options":["All","letters","were","written","write","with","a","feather","pen","and","sealed","seal","with","a","wax","stamp"],"correctAnswers":["All","letters","were","written","with","a","feather","pen","and","sealed","with","a","wax","stamp"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Человек утверждал, что встретил говорящего попугая в джунглях.","options":["The","man","claimed","claims","that","he","had","has","met","a","talking","parrot","in","the","jungle"],"correctAnswers":["The","man","claimed","that","he","had","met","a","talking","parrot","in","the","jungle"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"К 2080 году ученые создадут города, парящие в воздухе.","options":["By","2080","scientists","will","have","created","create","floating","cities","in","the","air"],"correctAnswers":["By","2080","scientists","will","have","created","floating","cities","in","the","air"],"audioUrl":null,"topic":"Future Perfect"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Робот приносит газету каждое утро.","options":["The","robot","brings","bring","the","newspaper","every","morning"],"correctAnswers":["The","robot","brings","the","newspaper","every","morning"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Когда мы приехали, замок уже был покрыт плющом.","options":["When","we","arrived","arrive","the","castle","had","has","already","been","covered","with","ivy"],"correctAnswers":["When","we","arrived","the","castle","had","already","been","covered","with","ivy"],"audioUrl":null,"topic":"Past Perfect"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы инопланетяне прилетели, они бы удивились нашему миру.","options":["If","aliens","came","come","they","would","be","surprised","by","our","world"],"correctAnswers":["If","aliens","came","they","would","be","surprised","by","our","world"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Кот сидит под столом, наблюдая за мышью.","options":["The","cat","is","sitting","sits","under","the","table","watching","a","mouse"],"correctAnswers":["The","cat","is","sitting","under","the","table","watching","a","mouse"],"audioUrl":null,"topic":"Prepositions"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Этот мост настолько старый, что по нему опасно ходить.","options":["This","bridge","is","so","old","that","it","is","dangerous","to","walk","on","it"],"correctAnswers":["This","bridge","is","so","old","that","it","is","dangerous","to","walk","on","it"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Картины в музее были нарисованы великими художниками прошлого.","options":["The","paintings","were","was","painted","by","great","artists","of","the","past"],"correctAnswers":["The","paintings","were","painted","by","great","artists","of","the","past"],"audioUrl":null,"topic":"Passive Voice"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Она сказала, что завтра у нее важная встреча.","options":["She","said","says","that","she","has","will","have","an","important","meeting","tomorrow"],"correctAnswers":["She","said","that","she","would","have","an","important","meeting","tomorrow"],"audioUrl":null,"topic":"Reported Speech"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"К 2100 году люди, возможно, будут жить на других планетах.","options":["By","2100","people","may","might","will","be","living","live","on","other","planets"],"correctAnswers":["By","2100","people","may","be","living","on","other","planets"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Гигантский банан упал с неба прямо на мой дом.","options":["A","giant","banana","fell","falls","from","the","sky","onto","my","house"],"correctAnswers":["A","giant","banana","fell","from","the","sky","onto","my","house"],"audioUrl":null,"topic":"Past Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Если бы утки управляли миром, все бы ходили в ластах.","options":["If","ducks","ruled","rule","the","world","everyone","would","wear","flippers"],"correctAnswers":["If","ducks","ruled","the","world","everyone","would","wear","flippers"],"audioUrl":null,"topic":"Conditional Sentences"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"В будущем люди, возможно, будут выращивать деревья на Луне для кислорода.","options":["In","the","future","people","may","might","will","grow","trees","on","the","Moon","for","oxygen"],"correctAnswers":["In","the","future","people","may","grow","trees","on","the","Moon","for","oxygen"],"audioUrl":null,"topic":"Future Simple"},
+{"difficulty":"EASY","type":"SENTENCE_CONSTRUCTION","questionText":"Моя кошка думает, что она секретный агент.","options":["My","cat","thinks","think","she","is","a","secret","agent"],"correctAnswers":["My","cat","thinks","she","is","a","secret","agent"],"audioUrl":null,"topic":"Present Simple"},
+{"difficulty":"MEDIUM","type":"SENTENCE_CONSTRUCTION","questionText":"Зеркала на самом деле — порталы в параллельные миры, но они ленивые и просто копируют нас.","options":["Mirrors","are","actually","portals","to","parallel","worlds","but","they","are","lazy","and","just","copy","us"],"correctAnswers":["Mirrors","are","actually","portals","to","parallel","worlds","but","they","are","lazy","and","just","copy","us"],"audioUrl":null,"topic":"Adjectives and Adverbs"},
+{"difficulty":"HARD","type":"SENTENCE_CONSTRUCTION","questionText":"Роботы будущего, возможно, будут писать стихи лучше, чем люди.","options":["The","robots","of","the","future","may","might","will","write","poetry","better","than","humans"],"correctAnswers":["The","robots","of","the","future","may","write","poetry","better","than","humans"],"audioUrl":null,"topic":"Future Simple"},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Freshly squeezed orange juice tastes best in the morning",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Cryptographic algorithms secure modern digital communications",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Neon lights illuminate the bustling city streets at night",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Quantum physics challenges our classical understanding of reality",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Vibrant autumn leaves cascade gently in the crisp wind",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Synthetic polymers revolutionized material engineering",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Astronomical observations require precise calibration of instruments",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Jazz improvisation demands exceptional musical creativity",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Thermal convection currents drive atmospheric weather patterns",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Microprocessor architecture evolved exponentially since 1971",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Bio-luminescent organisms glow in deep ocean trenches",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Ancient philosophers contemplated the nature of existence",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Precision engineering enabled nanotechnology breakthroughs",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Cognitive dissonance influences decision-making processes",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Meteorological satellites monitor tropical storm formations",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Ephemeral art installations challenge traditional aesthetics",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Neural networks emulate biological learning mechanisms",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Urban architecture reflects cultural and historical contexts",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Chromatographic separation techniques identify chemical compounds",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Orchestral conductors interpret musical scores uniquely",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Genome sequencing enables personalized treatment strategies",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Sustainable agriculture reduces environmental degradation impacts",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Postmodern narratives challenge linear storytelling conventions",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Quantum entanglement demonstrates non-local particle correlations",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Fractal geometry describes self-similar patterns in nature",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Cultural assimilation processes vary across immigrant communities",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Theremin operation requires precise hand movement control",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Tectonic plate movements shape continental drift patterns",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Molecular gastronomy transforms traditional cooking techniques",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Exoplanet detection utilizes gravitational microlensing effects",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Neurosynaptic chips mimic biological neural networks",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Hydroponic systems optimize plant growth without soil",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Cryptocurrency mining consumes significant computational resources",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Particle accelerators reveal subatomic structure mysteries",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Bioluminescent fungi illuminate forest floors nocturnally",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Epigenetic modifications influence gene expression patterns",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Augmented reality interfaces enhance surgical precision",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Antimicrobial resistance threatens modern healthcare systems",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Semiconductor doping alters electrical conductivity properties",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Ocean acidification impacts marine calcifying organisms",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Holographic data storage increases information density",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Cognitive behavioral therapy restructures maladaptive thoughts",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Topological insulators conduct electricity surface-exclusively",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Photovoltaic cells convert sunlight into electrical energy",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Cryogenic preservation maintains biological sample integrity",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Synthetic biology engineers novel biological systems",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Antioxidants neutralize free radical oxidative damage",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Metamaterials manipulate electromagnetic wave propagation",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "Neuroplasticity enables brain adaptation throughout life",
+  "audioUrl": null
+},
+{
+  "type": "AUDIO_RECOGNITION",
+  "questionText": "CRISPR technology revolutionizes genetic editing precision",
+  "audioUrl": null
+}
+]
