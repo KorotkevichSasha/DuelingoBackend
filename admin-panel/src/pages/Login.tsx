@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Box,
   Card,
   CardContent,
   TextField,
@@ -88,4 +87,4 @@ export default function Login() {
       </Card>
     </Container>
   );
-} 
+}

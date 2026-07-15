@@ -7,9 +7,6 @@ import {
   TextField,
   MenuItem,
   Button,
-  IconButton,
-  Menu,
-  Tooltip,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -20,11 +17,11 @@ import {
   InputLabel,
 } from '@mui/material';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import type { GridColDef, GridValueGetterParams, GridRowParams } from '@mui/x-data-grid';
+import type { GridColDef, GridRowParams } from '@mui/x-data-grid';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
 import { fetchUsers, updateUserRole, resetUserPassword } from '../api/users';
-import { MoreVert as MoreVertIcon, Edit as EditIcon, LockReset as LockResetIcon } from '@mui/icons-material';
+import { Edit as EditIcon, LockReset as LockResetIcon } from '@mui/icons-material';
 
 export default function Users() {
   const [page, setPage] = useState(0);
@@ -72,7 +69,7 @@ export default function Users() {
       enqueueSnackbar('User role updated successfully', { variant: 'success' });
       queryClient.invalidateQueries({ queryKey: ['users'] });
       handleRoleDialogClose();
-    } catch (error) {
+    } catch {
       enqueueSnackbar('Failed to update user role', { variant: 'error' });
     }
   };
@@ -84,7 +81,7 @@ export default function Users() {
       await resetUserPassword(selectedUser.id);
       enqueueSnackbar('Password reset successful', { variant: 'success' });
       handlePasswordResetDialogClose();
-    } catch (error) {
+    } catch {
       enqueueSnackbar('Failed to reset password', { variant: 'error' });
     }
   };
@@ -243,4 +240,4 @@ export default function Users() {
       </Dialog>
     </Box>
   );
-} 
+}

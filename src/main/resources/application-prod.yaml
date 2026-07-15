@@ -65,6 +65,9 @@ jwt:
     expiration: 604800000 # 7 days in milliseconds
 
 management:
+  health:
+    mail:
+      enabled: false
   endpoints:
     web:
       exposure:

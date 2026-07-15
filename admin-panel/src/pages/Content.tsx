@@ -20,6 +20,7 @@ import {
   Select,
   FormHelperText,
 } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import type { GridColDef } from '@mui/x-data-grid';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -183,7 +184,7 @@ export default function Content() {
   };
 
   // Handle test difficulty select
-  const handleTestDifficultyChange = (e: any) => {
+  const handleTestDifficultyChange = (e: SelectChangeEvent<string>) => {
     setNewTest(prev => ({ ...prev, difficulty: e.target.value }));
   };
 
@@ -207,7 +208,7 @@ export default function Content() {
   };
 
   // Handle question type and difficulty select
-  const handleQuestionSelectChange = (e: any) => {
+  const handleQuestionSelectChange = (e: SelectChangeEvent<string>) => {
     const { name, value } = e.target;
     setNewQuestion(prev => ({ ...prev, [name]: value }));
   };
@@ -631,4 +632,4 @@ export default function Content() {
       </Dialog>
     </Box>
   );
-} 
+}

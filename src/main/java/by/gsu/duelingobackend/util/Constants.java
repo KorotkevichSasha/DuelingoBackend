@@ -14,7 +14,8 @@ public final class Constants {
             "/swagger-resources/**",
             "/v3/api-docs/**",
             "/ws/**",
-            "/actuator/prometheus"
+            "/actuator/health",
+            "/actuator/info"
     );
 
     public static final List<String> ADMIN_URLS = List.of(

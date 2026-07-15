@@ -76,7 +76,7 @@ export default function Layout({ children }: LayoutProps) {
       await logout();
       enqueueSnackbar('Logged out successfully', { variant: 'success' });
       navigate('/login');
-    } catch (error) {
+    } catch {
       enqueueSnackbar('Error logging out', { variant: 'error' });
     }
   };
@@ -163,4 +163,4 @@ export default function Layout({ children }: LayoutProps) {
       </Main>
     </Box>
   );
-} 
+}
