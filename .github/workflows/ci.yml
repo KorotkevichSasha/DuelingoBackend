@@ -32,13 +32,13 @@ jobs:
         npm run build
         
     - name: Upload Backend Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: backend-artifacts
         path: build/libs/
         
     - name: Upload Frontend Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: frontend-artifacts
         path: admin-panel/dist/
