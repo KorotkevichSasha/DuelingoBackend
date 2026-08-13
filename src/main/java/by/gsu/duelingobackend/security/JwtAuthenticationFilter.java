@@ -1,6 +1,8 @@
 package by.gsu.duelingobackend.security;
 
 import by.gsu.duelingobackend.service.JwtService;
+import by.gsu.duelingobackend.exceptions.EntityNotFoundException;
+import io.jsonwebtoken.JwtException;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,15 +45,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String jwt = authHeader.substring(BEARER_PREFIX.length());
-        String username = jwtService.extractUsername(jwt);
+        try {
+            String jwt = authHeader.substring(BEARER_PREFIX.length());
+            String username = jwtService.extractUsername(jwt);
 
-        if (StringUtils.isNotEmpty(username) && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            if (StringUtils.isNotEmpty(username) && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            if (jwtService.isTokenValid(jwt, userDetails)) {
+                if (!jwtService.isAccessTokenValid(jwt, userDetails)) {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired access token");
+                    return;
+                }
+
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
-
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
@@ -61,6 +68,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 context.setAuthentication(authToken);
                 SecurityContextHolder.setContext(context);
             }
+        } catch (JwtException | IllegalArgumentException | AuthenticationException | EntityNotFoundException exception) {
+            SecurityContextHolder.clearContext();
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired access token");
+            return;
         }
         filterChain.doFilter(request, response);
     }

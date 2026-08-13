@@ -13,5 +13,7 @@ import java.util.UUID;
 public interface UserWordProgressRepository extends JpaRepository<UserWordProgress, UUID> {
 
     Optional<UserWordProgress> findByUserIdAndWordId(UUID userId, UUID wordId);
+    List<UserWordProgress> findByUserId(UUID userId);
     List<UserWordProgress> findByUserIdAndNextReviewDateLessThanEqual(UUID userId, LocalDate date);
+    void deleteByUserIdAndWordId(UUID userId, UUID wordId);
 }

@@ -7,10 +7,13 @@ import by.gsu.duelingobackend.dto.response.user.UserProfileResponse;
 import by.gsu.duelingobackend.exceptions.EntityAlreadyExistsException;
 import by.gsu.duelingobackend.exceptions.EntityNotFoundException;
 import by.gsu.duelingobackend.exceptions.FileUploadException;
+import by.gsu.duelingobackend.exceptions.InvalidOperationException;
 import by.gsu.duelingobackend.mapper.UserMapper;
 import by.gsu.duelingobackend.model.User;
 import by.gsu.duelingobackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -20,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +34,7 @@ import static by.gsu.duelingobackend.util.Constants.USER_NOT_FOUND_BY_USERNAME_E
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -85,8 +90,19 @@ public class UserService {
 
     }
 
-    public PaginationResponse<FriendResponse> searchUsers(String query, Pageable pageable) {
-        Page<User> page = userRepository.findByUsernameContainingIgnoreCase(query, pageable);
+    @Transactional
+    public void recordLogin(String username) {
+        User user = getByUsername(username);
+        user.setLastLogin(LocalDateTime.now());
+        userRepository.save(user);
+    }
+
+    public PaginationResponse<FriendResponse> searchUsers(UUID currentUserId, String query, Pageable pageable) {
+        Page<User> page = userRepository.findByIdNotAndUsernameContainingIgnoreCase(
+                currentUserId,
+                query.trim(),
+                pageable
+        );
 
         List<FriendResponse> userDtos = page.getContent().stream()
                 .map(userMapper::toFriendResponse)
@@ -114,5 +130,38 @@ public class UserService {
         user.setAvatarUrl(avatarUrl);
         userRepository.save(user);
         return userMapper.toUserProfileResponse(user);
+    }
+
+    @Transactional
+    @CachePut(value = "users", key = "#username")
+    public UserProfileResponse selectDefaultAvatar(String username, int index) {
+        if (index < 1 || index > 10) {
+            throw new InvalidOperationException("Default avatar index must be between 1 and 10");
+        }
+        User user = getByUsername(username);
+        try {
+            fileStorageService.deleteAvatar(user.getId());
+        } catch (IOException exception) {
+            log.debug("No custom avatar to delete for {}", user.getId());
+        }
+        user.setAvatarUrl("default:" + index);
+        userRepository.save(user);
+        return userMapper.toUserProfileResponse(user);
+    }
+
+    @Transactional
+    @CacheEvict(value = "users", allEntries = true)
+    public void deleteAccount(String username) {
+        User user = getByUsername(username);
+        UUID userId = user.getId();
+
+        leaderboardService.removeUser(userId);
+        userRepository.delete(user);
+
+        try {
+            fileStorageService.deleteAvatar(userId);
+        } catch (IOException exception) {
+            log.warn("Account {} was deleted, but its avatar could not be removed", userId, exception);
+        }
     }
 }

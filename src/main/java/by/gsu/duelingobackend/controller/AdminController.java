@@ -4,6 +4,10 @@ import by.gsu.duelingobackend.dto.response.admin.statistics.AdminContentStatisti
 import by.gsu.duelingobackend.dto.response.admin.statistics.AdminLearningStatisticsResponse;
 import by.gsu.duelingobackend.dto.response.admin.statistics.AdminUserStatisticsResponse;
 import by.gsu.duelingobackend.dto.response.admin.user.AdminUserListResponse;
+import by.gsu.duelingobackend.dto.response.admin.user.AdminUserReportResponse;
+import by.gsu.duelingobackend.repository.UserReportRepository;
+import org.springframework.data.domain.PageRequest;
+import java.util.List;
 import by.gsu.duelingobackend.model.enums.Role;
 import by.gsu.duelingobackend.service.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +29,17 @@ import java.util.UUID;
 public class AdminController {
 
     private final AdminService adminService;
+    private final UserReportRepository userReportRepository;
+
+    @GetMapping("/reports")
+    public List<AdminUserReportResponse> getReports(
+            @RequestParam(defaultValue = "100") int size) {
+        return userReportRepository.findAllByOrderByCreatedAtDesc(PageRequest.of(0, Math.min(size, 200)))
+                .stream().map(report -> new AdminUserReportResponse(
+                        report.getId(), report.getReporter().getId(), report.getReporter().getUsername(),
+                        report.getReportedUser().getId(), report.getReportedUser().getUsername(),
+                        report.getReason(), report.getCreatedAt())).toList();
+    }
 
     @GetMapping("/users")
     public ResponseEntity<AdminUserListResponse> getAllUsers(
@@ -44,12 +58,6 @@ public class AdminController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/users/{userId}/reset-password")
-    public ResponseEntity<Void> resetUserPassword(@PathVariable UUID userId) {
-        adminService.resetUserPassword(userId);
-        return ResponseEntity.ok().build();
-    }
-
     @GetMapping("/statistics/users")
     public ResponseEntity<AdminUserStatisticsResponse> getUserStatistics() {
         return ResponseEntity.ok(adminService.getUserStatistics());
@@ -64,4 +72,4 @@ public class AdminController {
     public ResponseEntity<AdminLearningStatisticsResponse> getLearningStatistics() {
         return ResponseEntity.ok(adminService.getLearningStatistics());
     }
-} 
+}

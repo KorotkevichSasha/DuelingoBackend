@@ -11,22 +11,30 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
+import java.io.FileNotFoundException;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
+        Map<String, List<String>> errors = new LinkedHashMap<>();
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.put(error.getField(), error.getDefaultMessage());
+            errors.computeIfAbsent(error.getField(), ignored -> new ArrayList<>())
+                    .add(error.getDefaultMessage());
         }
         String message = "Validation failed: " + errors;
         ErrorResponse errorResponse = new ErrorResponse(
@@ -45,6 +53,15 @@ public class GlobalExceptionHandler {
                 System.currentTimeMillis()
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<ErrorResponse> handleDisabledAccount(DisabledException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponse(
+                HttpStatus.FORBIDDEN.value(),
+                "Email address is not verified",
+                System.currentTimeMillis()
+        ));
     }
 
     @ExceptionHandler(AuthenticationException.class)
@@ -107,6 +124,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
+    @ExceptionHandler(FileNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleFileNotFound(FileNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(), "File not found", System.currentTimeMillis()));
+    }
+
     @ExceptionHandler(InvalidFileTypeException.class)
     public ResponseEntity<ErrorResponse> handleInvalidFileTypeException(InvalidFileTypeException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
@@ -119,9 +142,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralExceptions(Exception ex) {
+        log.error("Unhandled request failure", ex);
         ErrorResponse errorResponse = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "An unexpected error occurred: " + ex.getMessage(),
+                "An unexpected error occurred",
                 System.currentTimeMillis()
         );
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);

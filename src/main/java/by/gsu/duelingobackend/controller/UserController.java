@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -90,9 +92,10 @@ public class UserController {
     public PaginationResponse<FriendResponse> searchUsers(
             @RequestParam String query,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "10") int size,
+            @AuthenticationPrincipal UserDetailsImpl principal
     ) {
-        return userService.searchUsers(query, PageRequest.of(page, size));
+        return userService.searchUsers(principal.getUser().getId(), query, PageRequest.of(page, size));
     }
 
     @GetMapping("/{userId}/friends")
@@ -111,5 +114,18 @@ public class UserController {
             @RequestParam(defaultValue = "10") int size
     ) {
         return relationshipService.getUserFriends(principal.getUser().getId(), PageRequest.of(page, size));
+    }
+
+    @PutMapping("/profile/avatar/default/{index}")
+    public UserProfileResponse selectDefaultAvatar(
+            @AuthenticationPrincipal UserDetailsImpl principal,
+            @PathVariable int index) {
+        return userService.selectDefaultAvatar(principal.getUsername(), index);
+    }
+
+    @DeleteMapping("/me")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAccount(@AuthenticationPrincipal UserDetailsImpl principal) {
+        userService.deleteAccount(principal.getUsername());
     }
 }

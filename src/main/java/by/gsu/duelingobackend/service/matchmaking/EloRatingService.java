@@ -43,8 +43,8 @@ public class EloRatingService {
         log.info("Expected score: {}, Actual score: {}", expectedScore, actualScore);
         log.info("Delta1: {}, Delta2: {}", delta1, delta2);
 
-        player1.setPoints(player1.getPoints() + delta1);
-        player2.setPoints(player2.getPoints() + delta2);
+        player1.setPoints(Math.max(0, player1.getPoints() + delta1));
+        player2.setPoints(Math.max(0, player2.getPoints() + delta2));
 
         userRepository.saveAll(List.of(player1, player2));
 

@@ -1,6 +1,7 @@
 package by.gsu.duelingobackend.controller;
 
 import by.gsu.duelingobackend.dto.request.DuelFinishRequest;
+import by.gsu.duelingobackend.dto.request.MatchmakingRequest;
 import by.gsu.duelingobackend.security.UserDetailsImpl;
 import by.gsu.duelingobackend.service.DuelService;
 import by.gsu.duelingobackend.service.matchmaking.MatchmakingService;
@@ -22,11 +23,11 @@ public class DuelController {
     private final DuelService duelService;
 
     @MessageMapping("/matchmaking/join")
-    public void joinMatchmakingQueue(Principal principal) {
+    public void joinMatchmakingQueue(@Payload(required = false) MatchmakingRequest request, Principal principal) {
         if (principal instanceof UsernamePasswordAuthenticationToken) {
             UserDetailsImpl userDetails = (UserDetailsImpl) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
             log.info(userDetails.getUsername() + "in controller");
-            matchmakingService.joinMatchmakingQueue(userDetails.getUser());
+            matchmakingService.joinMatchmakingQueue(userDetails.getUser(), request == null ? null : request.difficulty());
         }
     }
 
@@ -47,7 +48,8 @@ public class DuelController {
                     request.duelId(),
                     userDetails.getUser().getId(),
                     request.correctAnswers(),
-                    request.timeSpent()
+                    request.timeSpent(),
+                    request.answers()
             );
         }
     }

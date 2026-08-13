@@ -3,7 +3,10 @@ package by.gsu.duelingobackend.controller;
 import by.gsu.duelingobackend.dto.request.RefreshTokenRequest;
 import by.gsu.duelingobackend.dto.request.SignInRequest;
 import by.gsu.duelingobackend.dto.request.SignUpRequest;
+import by.gsu.duelingobackend.dto.request.VerifyEmailRequest;
+import by.gsu.duelingobackend.dto.request.ResendVerificationRequest;
 import by.gsu.duelingobackend.dto.response.JwtAuthenticationResponse;
+import by.gsu.duelingobackend.dto.response.RegistrationResponse;
 import by.gsu.duelingobackend.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +26,18 @@ public class AuthController {
 
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
-    public JwtAuthenticationResponse signUp(@RequestBody @Valid SignUpRequest request) {
+    public RegistrationResponse signUp(@RequestBody @Valid SignUpRequest request) {
         return authenticationService.signUp(request);
+    }
+
+    @PostMapping("/verify-email")
+    public JwtAuthenticationResponse verifyEmail(@RequestBody @Valid VerifyEmailRequest request) {
+        return authenticationService.verifyEmail(request.email(), request.code());
+    }
+
+    @PostMapping("/resend-verification")
+    public RegistrationResponse resendVerification(@RequestBody @Valid ResendVerificationRequest request) {
+        return authenticationService.resendVerification(request.email());
     }
 
     @PostMapping("/sign-in")

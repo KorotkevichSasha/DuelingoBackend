@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,6 +45,20 @@ public class WordController {
     @GetMapping("/due")
     public List<WordProgressResponse> getDueWords(@AuthenticationPrincipal UserDetailsImpl principal) {
         return progressService.getDueWords(principal.getUser().getId());
+    }
+
+    @GetMapping
+    public List<WordProgressResponse> getAllWords(@AuthenticationPrincipal UserDetailsImpl principal) {
+        return userWordService.getAllWords(principal.getUser().getId());
+    }
+
+    @DeleteMapping("/{wordId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteWord(
+            @PathVariable UUID wordId,
+            @AuthenticationPrincipal UserDetailsImpl principal
+    ) {
+        userWordService.deleteWord(principal.getUser().getId(), wordId);
     }
 
     @PostMapping("/{wordId}/review")

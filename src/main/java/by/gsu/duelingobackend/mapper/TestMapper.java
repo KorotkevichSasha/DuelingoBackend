@@ -10,7 +10,8 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(
         componentModel = MappingConstants.ComponentModel.SPRING,
-        unmappedTargetPolicy = ReportingPolicy.ERROR
+        unmappedTargetPolicy = ReportingPolicy.ERROR,
+        uses = QuestionMapper.class
 )
 public interface TestMapper {
 

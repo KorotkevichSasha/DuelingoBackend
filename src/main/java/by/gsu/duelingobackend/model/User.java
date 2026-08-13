@@ -78,6 +78,10 @@ public class User {
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
+    @Builder.Default
+    @Column(name = "email_verified", nullable = false)
+    private boolean emailVerified = true;
+
     @OneToMany(mappedBy = "user")
     private List<UserTestProgress> progress;
 

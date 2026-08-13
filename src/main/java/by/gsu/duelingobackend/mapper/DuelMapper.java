@@ -1,6 +1,7 @@
 package by.gsu.duelingobackend.mapper;
 
 import by.gsu.duelingobackend.dto.response.DuelInHistoryResponse;
+import by.gsu.duelingobackend.dto.response.DuelAnswerReviewResponse;
 import by.gsu.duelingobackend.dto.response.DuelResponse;
 import by.gsu.duelingobackend.model.Duel;
 import by.gsu.duelingobackend.model.document.Question;
@@ -14,7 +15,7 @@ import java.util.List;
 @Mapper(
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.ERROR,
-        uses = {UserMapper.class}
+        uses = {UserMapper.class, QuestionMapper.class}
 )
 public interface DuelMapper {
 
@@ -23,5 +24,19 @@ public interface DuelMapper {
     @Mapping(target = "player2", source = "duel.player2")
     DuelResponse toResponse(Duel duel, List<Question> questions);
 
-    DuelInHistoryResponse toDuelInHistoryResponse(Duel duel);
+    @Mapping(target = "yourAnswers", source = "yourAnswers")
+    @Mapping(target = "opponentAnswers", source = "opponentAnswers")
+    @Mapping(target = "mode", constant = "ONLINE")
+    @Mapping(target = "id", source = "duel.id")
+    @Mapping(target = "player1", source = "duel.player1")
+    @Mapping(target = "player1Score", source = "duel.player1Score")
+    @Mapping(target = "player1Time", source = "duel.player1Time")
+    @Mapping(target = "player2", source = "duel.player2")
+    @Mapping(target = "player2Score", source = "duel.player2Score")
+    @Mapping(target = "player2Time", source = "duel.player2Time")
+    DuelInHistoryResponse toDuelInHistoryResponse(
+            Duel duel,
+            List<DuelAnswerReviewResponse> yourAnswers,
+            List<DuelAnswerReviewResponse> opponentAnswers
+    );
 }

@@ -6,6 +6,9 @@ import java.util.UUID;
 
 public record DuelFoundEvent(
         DuelResponse duel,
-        UUID opponentId
+        UUID opponentId,
+        String difficulty,
+        long durationMillis,
+        boolean friendChallenge
 ) {
 }

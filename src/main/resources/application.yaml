@@ -3,4 +3,16 @@ spring:
     name: duelingo-backend
 
   profiles:
-    active: dev
+    default: dev
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+server:
+  shutdown: graceful
+  forward-headers-strategy: framework
+  compression:
+    enabled: true
+
+app:
+  content:
+    bootstrap-enabled: ${CONTENT_BOOTSTRAP_ENABLED:true}

@@ -14,7 +14,6 @@ import by.gsu.duelingobackend.repository.test.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +31,6 @@ public class AdminService {
     private final DuelRepository duelRepository;
     private final TestRepository testRepository;
     private final QuestionRepository questionRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public AdminUserListResponse getAllUsers(int page, int size, String search, Role role) {
         Page<User> userPage;
@@ -64,17 +62,6 @@ public class AdminService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
         user.setRole(newRole);
         userRepository.save(user);
-    }
-
-    @Transactional
-    public void resetUserPassword(UUID userId) {
-        var user = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        // Generate a random password or use a default one
-        String newPassword = UUID.randomUUID().toString().substring(0, 8);
-        user.setPassword(passwordEncoder.encode(newPassword));
-        userRepository.save(user);
-        // TODO: Send email with new password
     }
 
     public AdminUserStatisticsResponse getUserStatistics() {
@@ -118,4 +105,4 @@ public class AdminService {
 //                .totalDuels(duelRepository.countByPlayer1IdOrPlayer2Id(user.getId(), user.getId()))
                 .build();
     }
-} 
+}

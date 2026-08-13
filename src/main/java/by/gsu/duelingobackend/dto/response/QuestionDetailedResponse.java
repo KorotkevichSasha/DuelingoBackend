@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public record QuestionDetailedResponse(
-
+        String id,
         QuestionDifficulty difficulty,
         QuestionType type,
         String questionText,

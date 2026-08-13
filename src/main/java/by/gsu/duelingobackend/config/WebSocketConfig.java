@@ -64,6 +64,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                             String token = authorizationHeader.substring(7);
                             String username = jwtService.extractUsername(token);
                             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                            if (!jwtService.isAccessTokenValid(token, userDetails)) {
+                                throw new BadCredentialsException("Invalid WebSocket access token");
+                            }
                             UsernamePasswordAuthenticationToken authToken =
                                     new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
@@ -78,7 +81,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                     }
                 }
 
-                log.info("Incoming STOMP command: {}", accessor.getCommand());
+                log.debug("Incoming STOMP command: {}", accessor.getCommand());
                 return message;
             }
 

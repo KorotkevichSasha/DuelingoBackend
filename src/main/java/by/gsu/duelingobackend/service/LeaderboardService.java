@@ -43,6 +43,10 @@ public class LeaderboardService {
         );
     }
 
+    public void removeUser(UUID userId) {
+        redisTemplate.opsForZSet().remove(LEADERBOARD_KEY, userId.toString());
+    }
+
     public Long getUserRank(UUID userId) {
         Long rank = redisTemplate.opsForZSet().reverseRank(LEADERBOARD_KEY, userId.toString());
         return rank != null ? rank + 1 : null;
@@ -125,16 +129,20 @@ public class LeaderboardService {
 
     @PostConstruct
     public void initializeLeaderboard() {
-        if (Boolean.FALSE.equals(redisTemplate.hasKey(LEADERBOARD_KEY))) {
-            List<User> users = userRepository.findAll();
-            users.forEach(user ->
-                    redisTemplate.opsForZSet().add(
-                            LEADERBOARD_KEY,
-                            user.getId().toString(),
-                            user.getPoints()
-                    )
-            );
+        List<User> users = userRepository.findAll();
+        Set<String> actualUserIds = users.stream()
+                .map(user -> user.getId().toString())
+                .collect(Collectors.toSet());
+
+        Set<Object> cachedUserIds = redisTemplate.opsForZSet().range(LEADERBOARD_KEY, 0, -1);
+        if (cachedUserIds != null) {
+            cachedUserIds.stream()
+                    .filter(cachedId -> !actualUserIds.contains(String.valueOf(cachedId)))
+                    .forEach(cachedId -> redisTemplate.opsForZSet().remove(LEADERBOARD_KEY, cachedId));
         }
+
+        users.forEach(user -> updateUserScore(user.getId(), user.getPoints()));
+        log.info("Leaderboard synchronized with {} active users", users.size());
     }
 
 
