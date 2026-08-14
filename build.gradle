@@ -33,7 +33,7 @@ dependencies {
     implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.9.2'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'com.google.cloud:google-cloud-speech:4.54.0'
-    implementation 'org.apache.commons:commons-text:1.13.0'
+    implementation 'org.apache.commons:commons-text:1.15.0'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     compileOnly 'org.projectlombok:lombok'
