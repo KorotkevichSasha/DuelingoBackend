@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.util.ReflectionTestUtils;
+import by.gsu.duelingobackend.model.enums.Role;
+import by.gsu.duelingobackend.security.UserDetailsImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,5 +35,25 @@ class JwtServiceTest {
         assertThat(jwtService.isRefreshTokenValid(refreshToken, user)).isTrue();
         assertThat(jwtService.isAccessTokenValid(refreshToken, user)).isFalse();
         assertThat(jwtService.isRefreshTokenValid(accessToken, user)).isFalse();
+    }
+
+    @Test
+    void passwordResetVersionInvalidatesPreviouslyIssuedTokens() {
+        var account = by.gsu.duelingobackend.model.User.builder()
+                .username("versioned-user")
+                .password("irrelevant")
+                .email("versioned@example.com")
+                .emailVerified(true)
+                .role(Role.USER)
+                .tokenVersion(0)
+                .build();
+        var details = new UserDetailsImpl(account);
+        String accessToken = jwtService.generateAccessToken(details);
+        String refreshToken = jwtService.generateRefreshToken(details);
+
+        account.setTokenVersion(1);
+
+        assertThat(jwtService.isAccessTokenValid(accessToken, details)).isFalse();
+        assertThat(jwtService.isRefreshTokenValid(refreshToken, details)).isFalse();
     }
 }

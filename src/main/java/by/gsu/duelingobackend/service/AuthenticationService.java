@@ -4,6 +4,7 @@ import by.gsu.duelingobackend.dto.request.SignInRequest;
 import by.gsu.duelingobackend.dto.request.SignUpRequest;
 import by.gsu.duelingobackend.dto.response.JwtAuthenticationResponse;
 import by.gsu.duelingobackend.dto.response.RegistrationResponse;
+import by.gsu.duelingobackend.dto.response.PasswordResetResponse;
 import by.gsu.duelingobackend.exceptions.WrongRefreshTokenException;
 import by.gsu.duelingobackend.exceptions.EntityAlreadyExistsException;
 import by.gsu.duelingobackend.model.User;
@@ -35,6 +36,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final EmailVerificationService emailVerificationService;
     private final UserRepository userRepository;
+    private final PasswordResetService passwordResetService;
 
     public RegistrationResponse signUp(SignUpRequest request) {
         String normalizedEmail = request.email().trim().toLowerCase(Locale.ROOT);
@@ -100,6 +102,14 @@ public class AuthenticationService {
     public RegistrationResponse resendVerification(String email) {
         boolean sent = emailVerificationService.resend(email);
         return new RegistrationResponse(email.trim().toLowerCase(Locale.ROOT), true, sent);
+    }
+
+    public PasswordResetResponse requestPasswordReset(String email) {
+        return passwordResetService.request(email);
+    }
+
+    public PasswordResetResponse confirmPasswordReset(String email, String code, String newPassword) {
+        return passwordResetService.confirm(email, code, newPassword);
     }
 
     public JwtAuthenticationResponse refreshToken(String refreshToken) {

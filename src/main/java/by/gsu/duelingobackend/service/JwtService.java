@@ -21,6 +21,7 @@ public class JwtService {
     private static final String TOKEN_TYPE_CLAIM = "token_type";
     private static final String ACCESS_TOKEN_TYPE = "access";
     private static final String REFRESH_TOKEN_TYPE = "refresh";
+    private static final String TOKEN_VERSION_CLAIM = "token_version";
 
     @Value("${jwt.access-token.expiration}")
     private Long accessTokenExpiration;
@@ -42,6 +43,7 @@ public class JwtService {
             claims.put("id", userDetailsImpl.getUser().getId());
             claims.put("email", userDetailsImpl.getUser().getEmail());
             claims.put("role", "ROLE_" + userDetailsImpl.getUser().getRole().name());
+            claims.put(TOKEN_VERSION_CLAIM, userDetailsImpl.getUser().getTokenVersion());
         }
         return generateToken(claims, userDetails, accessTokenExpiration);
     }
@@ -49,6 +51,9 @@ public class JwtService {
     public String generateRefreshToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(TOKEN_TYPE_CLAIM, REFRESH_TOKEN_TYPE);
+        if (userDetails instanceof UserDetailsImpl userDetailsImpl) {
+            claims.put(TOKEN_VERSION_CLAIM, userDetailsImpl.getUser().getTokenVersion());
+        }
         return generateToken(claims, userDetails, refreshTokenExpiration);
     }
 
@@ -64,9 +69,15 @@ public class JwtService {
         Claims claims = extractAllClaims(token);
         String username = claims.getSubject();
         String tokenType = claims.get(TOKEN_TYPE_CLAIM, String.class);
+        Object rawVersion = claims.get(TOKEN_VERSION_CLAIM);
+        int tokenVersion = rawVersion instanceof Number number ? number.intValue() : 0;
+        int currentVersion = userDetails instanceof UserDetailsImpl userDetailsImpl
+                ? userDetailsImpl.getUser().getTokenVersion()
+                : 0;
         return username != null
                 && username.equals(userDetails.getUsername())
                 && expectedType.equals(tokenType)
+                && tokenVersion == currentVersion
                 && claims.getExpiration().after(new Date());
     }
 

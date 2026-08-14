@@ -5,8 +5,11 @@ import by.gsu.duelingobackend.dto.request.SignInRequest;
 import by.gsu.duelingobackend.dto.request.SignUpRequest;
 import by.gsu.duelingobackend.dto.request.VerifyEmailRequest;
 import by.gsu.duelingobackend.dto.request.ResendVerificationRequest;
+import by.gsu.duelingobackend.dto.request.PasswordResetConfirmRequest;
+import by.gsu.duelingobackend.dto.request.PasswordResetRequest;
 import by.gsu.duelingobackend.dto.response.JwtAuthenticationResponse;
 import by.gsu.duelingobackend.dto.response.RegistrationResponse;
+import by.gsu.duelingobackend.dto.response.PasswordResetResponse;
 import by.gsu.duelingobackend.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +41,17 @@ public class AuthController {
     @PostMapping("/resend-verification")
     public RegistrationResponse resendVerification(@RequestBody @Valid ResendVerificationRequest request) {
         return authenticationService.resendVerification(request.email());
+    }
+
+    @PostMapping("/password-reset/request")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public PasswordResetResponse requestPasswordReset(@RequestBody @Valid PasswordResetRequest request) {
+        return authenticationService.requestPasswordReset(request.email());
+    }
+
+    @PostMapping("/password-reset/confirm")
+    public PasswordResetResponse confirmPasswordReset(@RequestBody @Valid PasswordResetConfirmRequest request) {
+        return authenticationService.confirmPasswordReset(request.email(), request.code(), request.newPassword());
     }
 
     @PostMapping("/sign-in")

@@ -4,6 +4,7 @@ import by.gsu.duelingobackend.dto.request.DuelFinishRequest;
 import by.gsu.duelingobackend.dto.response.DuelInHistoryResponse;
 import by.gsu.duelingobackend.dto.response.PaginationResponse;
 import by.gsu.duelingobackend.dto.response.MatchmakingEstimateResponse;
+import by.gsu.duelingobackend.dto.response.DuelStatsResponse;
 import by.gsu.duelingobackend.service.matchmaking.MatchmakingService;
 import by.gsu.duelingobackend.security.UserDetailsImpl;
 import by.gsu.duelingobackend.service.DuelService;
@@ -45,6 +46,11 @@ public class DuelRestController {
             @RequestParam(defaultValue = "5") int size
     ) {
         return duelService.getUserDuelHistory(userDetails.getUser().getId(), page, size);
+    }
+
+    @GetMapping("/stats")
+    public DuelStatsResponse getUserDuelStats(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return duelService.getUserDuelStats(userDetails.getUser().getId());
     }
 
     @PostMapping("/finish")

@@ -5,6 +5,7 @@ import by.gsu.duelingobackend.dto.request.DuelAnswerRequest;
 import by.gsu.duelingobackend.dto.response.DuelAnswerReviewResponse;
 import by.gsu.duelingobackend.dto.response.DuelInHistoryResponse;
 import by.gsu.duelingobackend.dto.response.DuelResponse;
+import by.gsu.duelingobackend.dto.response.DuelStatsResponse;
 import by.gsu.duelingobackend.dto.response.PaginationResponse;
 import by.gsu.duelingobackend.exceptions.EntityNotFoundException;
 import by.gsu.duelingobackend.mapper.DuelMapper;
@@ -172,6 +173,15 @@ public class DuelService {
         }
 
         completeDuel(duel, null);
+    }
+
+    @Transactional(readOnly = true)
+    public DuelStatsResponse getUserDuelStats(UUID userId) {
+        DuelRepository.DuelStatsProjection stats = duelRepository.getStatsByUserId(userId);
+        long total = stats.getTotal();
+        long wins = stats.getWins();
+        int winRate = total == 0 ? 0 : (int) Math.round(wins * 100.0 / total);
+        return new DuelStatsResponse(total, wins, stats.getLosses(), stats.getDraws(), winRate);
     }
 
     @Transactional
