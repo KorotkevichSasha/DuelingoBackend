@@ -18,7 +18,7 @@ jobs:
         with:
           java-version: "17"
           distribution: temurin
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
       - run: chmod +x gradlew
       - name: Test and package backend
         run: ./gradlew test bootJar --no-daemon
