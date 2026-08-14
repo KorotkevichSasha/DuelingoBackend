@@ -1,4 +1,3 @@
-import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SnackbarProvider } from 'notistack';
@@ -21,11 +20,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <SnackbarProvider maxSnack={3}>
           <CssBaseline />
-          <BrowserRouter>
-            <Layout>
-              <AppRoutes />
-            </Layout>
-          </BrowserRouter>
+          <Layout>
+            <AppRoutes />
+          </Layout>
         </SnackbarProvider>
       </ThemeProvider>
     </QueryClientProvider>

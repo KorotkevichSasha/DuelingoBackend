@@ -2,3 +2,18 @@ databaseChangeLog:
   - include:
       file: v-1.0/v-1.0-accumulative-changelog.yaml
       relativeToChangelogFile: true
+  - include:
+      file: v-1.1/2026-07-31--production-data-hardening.sql
+      relativeToChangelogFile: true
+  - include:
+      file: v-1.1/2026-08-06--add-duel-answer-history.sql
+      relativeToChangelogFile: true
+  - include:
+      file: v-1.1/2026-08-06--expand-achievements.sql
+      relativeToChangelogFile: true
+  - include:
+      file: v-1.1/2026-08-07--add-user-reports.sql
+      relativeToChangelogFile: true
+  - include:
+      file: v-1.1/2026-08-10--add-email-verification.sql
+      relativeToChangelogFile: true

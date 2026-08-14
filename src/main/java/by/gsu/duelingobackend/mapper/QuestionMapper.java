@@ -4,6 +4,7 @@ import by.gsu.duelingobackend.dto.response.AudioQuestionResponse;
 import by.gsu.duelingobackend.dto.response.QuestionDetailedResponse;
 import by.gsu.duelingobackend.model.document.Question;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
@@ -13,6 +14,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface QuestionMapper {
 
+    @Mapping(target = "id", expression = "java(question.getId().toString())")
     QuestionDetailedResponse toDetailedResponse(Question question);
     AudioQuestionResponse toAudioResponse(Question question);
 }

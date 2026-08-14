@@ -23,14 +23,13 @@ spring:
       password: ${SPRING_REDIS_PASSWORD}
 
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: validate
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
 
   servlet:
     multipart:
@@ -38,20 +37,29 @@ spring:
       max-request-size: 10MB
 
   mail:
-    host: smtp.gmail.com
-    port: 587
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
     username: ${SPRING_MAIL_USERNAME}
     password: ${SPRING_MAIL_PASSWORD}
+    default-encoding: UTF-8
+    test-connection: ${SPRING_MAIL_TEST_CONNECTION:true}
     properties:
       mail:
         smtp:
-          auth: true
+          auth: ${SPRING_MAIL_AUTH:true}
           starttls:
-            enable: true
+            enable: ${SPRING_MAIL_STARTTLS:true}
+            required: ${SPRING_MAIL_STARTTLS_REQUIRED:true}
+          connectiontimeout: ${SPRING_MAIL_CONNECTION_TIMEOUT:5000}
+          timeout: ${SPRING_MAIL_TIMEOUT:5000}
+          writetimeout: ${SPRING_MAIL_WRITE_TIMEOUT:5000}
 
 server:
   port: ${PORT:8082}
   address: 0.0.0.0
+  error:
+    include-message: never
+    include-stacktrace: never
 
 jwt:
   token:
@@ -81,5 +89,13 @@ management:
         enabled: true
 
 app:
+  public-base-url: ${APP_PUBLIC_BASE_URL}
+  mail:
+    from: ${APP_MAIL_FROM:${SPRING_MAIL_USERNAME}}
+  email-verification:
+    delivery-enabled: ${EMAIL_VERIFICATION_DELIVERY_ENABLED:true}
+    test-code: ${EMAIL_VERIFICATION_TEST_CODE:}
+  storage:
+    avatar-directory: ${APP_AVATAR_DIRECTORY:/app/uploads/avatars}
   security:
     allowed-origins: ${ALLOWED_ORIGINS}

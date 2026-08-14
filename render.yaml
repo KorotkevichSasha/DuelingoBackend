@@ -4,7 +4,7 @@ services:
     name: duelingo-backend
     env: docker
     dockerfilePath: ./Dockerfile
-    plan: free
+    plan: starter
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -40,17 +40,39 @@ services:
         sync: false
       - key: SPRING_MAIL_PASSWORD
         sync: false
+      - key: SPRING_MAIL_HOST
+        value: smtp.gmail.com
+      - key: SPRING_MAIL_PORT
+        value: 587
+      - key: SPRING_MAIL_AUTH
+        value: true
+      - key: SPRING_MAIL_STARTTLS
+        value: true
+      - key: APP_MAIL_FROM
+        sync: false
       - key: ALLOWED_ORIGINS
         sync: false
+      - key: APP_PUBLIC_BASE_URL
+        sync: false
+      - key: APP_AVATAR_DIRECTORY
+        value: /app/uploads/avatars
+    disk:
+      name: avatar-data
+      mountPath: /app/uploads
+      sizeGB: 1
 
   # Frontend Service
   - type: web
     name: duelingo-admin
     env: static
-    buildCommand: cd admin-panel && npm install && npm run build
+    buildCommand: cd admin-panel && npm ci && npm run build
     staticPublishPath: admin-panel/dist
     envVars:
       - key: VITE_API_URL
+        sync: false
+      - key: VITE_SUPPORT_EMAIL
+        sync: false
+      - key: VITE_OPERATOR_NAME
         sync: false
     routes:
       - type: rewrite

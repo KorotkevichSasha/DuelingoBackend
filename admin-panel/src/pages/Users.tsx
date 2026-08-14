@@ -20,8 +20,8 @@ import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import type { GridColDef, GridRowParams } from '@mui/x-data-grid';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useSnackbar } from 'notistack';
-import { fetchUsers, updateUserRole, resetUserPassword } from '../api/users';
-import { Edit as EditIcon, LockReset as LockResetIcon } from '@mui/icons-material';
+import { fetchUsers, updateUserRole } from '../api/users';
+import { Edit as EditIcon } from '@mui/icons-material';
 
 export default function Users() {
   const [page, setPage] = useState(0);
@@ -29,7 +29,6 @@ export default function Users() {
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
   const [roleDialogOpen, setRoleDialogOpen] = useState(false);
-  const [passwordResetDialogOpen, setPasswordResetDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<{ id: string; username: string; role: string } | null>(null);
   const [newRole, setNewRole] = useState('');
   const { enqueueSnackbar } = useSnackbar();
@@ -51,16 +50,6 @@ export default function Users() {
     setSelectedUser(null);
   };
 
-  const handlePasswordResetDialogOpen = (user: { id: string; username: string }) => {
-    setSelectedUser(user);
-    setPasswordResetDialogOpen(true);
-  };
-
-  const handlePasswordResetDialogClose = () => {
-    setPasswordResetDialogOpen(false);
-    setSelectedUser(null);
-  };
-
   const handleRoleChange = async () => {
     if (!selectedUser) return;
     
@@ -71,18 +60,6 @@ export default function Users() {
       handleRoleDialogClose();
     } catch {
       enqueueSnackbar('Failed to update user role', { variant: 'error' });
-    }
-  };
-
-  const handlePasswordReset = async () => {
-    if (!selectedUser) return;
-    
-    try {
-      await resetUserPassword(selectedUser.id);
-      enqueueSnackbar('Password reset successful', { variant: 'success' });
-      handlePasswordResetDialogClose();
-    } catch {
-      enqueueSnackbar('Failed to reset password', { variant: 'error' });
     }
   };
 
@@ -115,15 +92,6 @@ export default function Users() {
             id: params.row.id,
             username: params.row.username,
             role: params.row.role
-          })}
-          showInMenu
-        />,
-        <GridActionsCellItem 
-          icon={<LockResetIcon />} 
-          label="Reset Password" 
-          onClick={() => handlePasswordResetDialogOpen({
-            id: params.row.id,
-            username: params.row.username
           })}
           showInMenu
         />
@@ -218,23 +186,6 @@ export default function Users() {
           <Button onClick={handleRoleDialogClose}>Cancel</Button>
           <Button onClick={handleRoleChange} variant="contained" color="primary">
             Update Role
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Password Reset Dialog */}
-      <Dialog open={passwordResetDialogOpen} onClose={handlePasswordResetDialogClose}>
-        <DialogTitle>Reset User Password</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to reset the password for <strong>{selectedUser?.username}</strong>?
-            This will send a password reset link to the user's email.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handlePasswordResetDialogClose}>Cancel</Button>
-          <Button onClick={handlePasswordReset} variant="contained" color="primary">
-            Reset Password
           </Button>
         </DialogActions>
       </Dialog>

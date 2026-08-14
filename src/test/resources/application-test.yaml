@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/duelingo_test
+      auto-index-creation: false
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  mail:
+    host: localhost
+    port: 2525
+    username: test@example.invalid
+    password: test-password
+
+jwt:
+  token:
+    signing:
+      key: VGhpc0lzQVRlc3RTaWduaW5nS2V5VGhhdElzTG9uZ0Vub3VnaCE=
+  access-token:
+    expiration: 60000
+  refresh-token:
+    expiration: 120000
+
+management:
+  health:
+    mail:
+      enabled: false
+
+app:
+  public-base-url: http://localhost:8082
+  mail:
+    from: test@example.invalid
+  email-verification:
+    delivery-enabled: false
+    test-code: "123456"
+  storage:
+    avatar-directory: build/test-uploads
+  security:
+    allowed-origins: http://localhost:5173

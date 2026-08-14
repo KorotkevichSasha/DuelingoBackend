@@ -3,6 +3,7 @@ package by.gsu.duelingobackend.dto.response;
 import by.gsu.duelingobackend.dto.response.user.UserInDuelResponse;
 
 import java.util.UUID;
+import java.util.List;
 
 public record DuelInHistoryResponse(
         UUID id,
@@ -11,6 +12,9 @@ public record DuelInHistoryResponse(
         long player1Time,
         UserInDuelResponse player2,
         int player2Score,
-        long player2Time
+        long player2Time,
+        String mode,
+        List<DuelAnswerReviewResponse> yourAnswers,
+        List<DuelAnswerReviewResponse> opponentAnswers
 ) {
 }

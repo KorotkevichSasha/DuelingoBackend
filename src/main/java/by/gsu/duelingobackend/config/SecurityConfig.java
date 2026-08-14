@@ -3,6 +3,7 @@ package by.gsu.duelingobackend.config;
 import by.gsu.duelingobackend.model.enums.Role;
 import by.gsu.duelingobackend.security.CustomAccessDeniedHandler;
 import by.gsu.duelingobackend.security.JwtAuthenticationFilter;
+import by.gsu.duelingobackend.security.AuthRateLimitFilter;
 import by.gsu.duelingobackend.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -42,6 +43,7 @@ public class SecurityConfig {
     private List<String> allowedOrigins;
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthRateLimitFilter authRateLimitFilter;
     private final UserDetailsServiceImpl userDetailsService;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
@@ -65,6 +67,7 @@ public class SecurityConfig {
                 .exceptionHandling(e -> e.accessDeniedHandler(customAccessDeniedHandler)
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authRateLimitFilter, JwtAuthenticationFilter.class);
         return http.build();
     }
 

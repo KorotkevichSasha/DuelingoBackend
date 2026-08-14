@@ -20,11 +20,12 @@ import {
   ChevronLeft as ChevronLeftIcon,
   People as PeopleIcon,
   Assessment as AssessmentIcon,
+  ReportProblem as ReportProblemIcon,
   School as SchoolIcon,
   Dashboard as DashboardIcon,
   Logout as LogoutIcon,
 } from '@mui/icons-material';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { navigate, usePathname } from '../navigation';
 import { logout } from '../api/auth';
 import { useSnackbar } from 'notistack';
 
@@ -54,6 +55,7 @@ const menuItems = [
   { text: 'Users', icon: <PeopleIcon />, path: '/users' },
   { text: 'Content', icon: <SchoolIcon />, path: '/content' },
   { text: 'Statistics', icon: <AssessmentIcon />, path: '/statistics' },
+  { text: 'Reports', icon: <ReportProblemIcon />, path: '/reports' },
 ];
 
 interface LayoutProps {
@@ -62,10 +64,9 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const [open, setOpen] = useState(true);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const pathname = usePathname();
   const { enqueueSnackbar } = useSnackbar();
-  const isLoginPage = location.pathname === '/login';
+  const isPublicPage = ['/login', '/privacy', '/delete-account'].includes(pathname);
 
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -81,7 +82,7 @@ export default function Layout({ children }: LayoutProps) {
     }
   };
 
-  if (isLoginPage) {
+  if (isPublicPage) {
     return <Box component="main">{children}</Box>;
   }
 
@@ -110,7 +111,7 @@ export default function Layout({ children }: LayoutProps) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            Duelingo Admin Panel
+            DuelRush Admin Panel
           </Typography>
           <Button
             color="inherit"
@@ -147,7 +148,7 @@ export default function Layout({ children }: LayoutProps) {
           {menuItems.map((item) => (
             <ListItem key={item.text} disablePadding>
               <ListItemButton
-                selected={location.pathname === item.path}
+                selected={pathname === item.path}
                 onClick={() => navigate(item.path)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>

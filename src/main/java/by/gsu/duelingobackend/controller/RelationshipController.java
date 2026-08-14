@@ -1,6 +1,8 @@
 package by.gsu.duelingobackend.controller;
 
 import by.gsu.duelingobackend.dto.request.RelationshipRequest;
+import by.gsu.duelingobackend.dto.request.UserReportRequest;
+import jakarta.validation.Valid;
 import by.gsu.duelingobackend.dto.response.RelationshipResponse;
 import by.gsu.duelingobackend.security.UserDetailsImpl;
 import by.gsu.duelingobackend.service.RelationshipService;
@@ -41,12 +43,32 @@ public class RelationshipController {
         return relationshipService.getIncomingRequests(principal.getUser().getId());
     }
 
+    @GetMapping("/friend-requests/outgoing")
+    public List<RelationshipResponse> getOutgoingRequests(@AuthenticationPrincipal UserDetailsImpl principal) {
+        return relationshipService.getOutgoingRequests(principal.getUser().getId());
+    }
+
+    @DeleteMapping("/friend-requests/{requestId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void cancelOutgoingRequest(@PathVariable UUID requestId,
+            @AuthenticationPrincipal UserDetailsImpl principal) {
+        relationshipService.cancelOutgoingRequest(principal.getUser().getId(), requestId);
+    }
+
+    @DeleteMapping("/friends/{friendId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeFriend(@PathVariable UUID friendId,
+            @AuthenticationPrincipal UserDetailsImpl principal) {
+        relationshipService.removeFriend(principal.getUser().getId(), friendId);
+    }
+
     @PatchMapping("/friend-requests/{requestId}")
     public RelationshipResponse updateRelationshipStatus(
             @PathVariable UUID requestId,
-            @RequestParam String action
+            @RequestParam String action,
+            @AuthenticationPrincipal UserDetailsImpl principal
     ) {
-        return relationshipService.updateRelationshipStatus(requestId, action);
+        return relationshipService.updateRelationshipStatus(principal.getUser().getId(), requestId, action);
     }
 
     @PostMapping("/blocks")
@@ -54,6 +76,13 @@ public class RelationshipController {
             @RequestBody RelationshipRequest request,
             @AuthenticationPrincipal UserDetailsImpl principal) {
         return relationshipService.blockUser(principal.getUser().getId(), request);
+    }
+
+    @PostMapping("/reports")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void reportUser(@RequestBody @Valid UserReportRequest request,
+            @AuthenticationPrincipal UserDetailsImpl principal) {
+        relationshipService.reportUser(principal.getUser().getId(), request);
     }
 
     @DeleteMapping("/blocks/{blockedUserId}")

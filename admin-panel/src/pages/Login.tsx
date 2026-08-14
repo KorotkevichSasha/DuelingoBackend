@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { navigate } from '../navigation';
 import {
   Card,
   CardContent,
@@ -16,7 +16,6 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,8 +26,8 @@ export default function Login() {
       const response = await login({ username, password });
 
       // Store auth data
-      localStorage.setItem('token', response.accessToken);
-      localStorage.setItem('refreshToken', response.refreshToken);
+      sessionStorage.setItem('token', response.accessToken);
+      sessionStorage.setItem('refreshToken', response.refreshToken);
 
       enqueueSnackbar('Login successful', { variant: 'success' });
       navigate('/');

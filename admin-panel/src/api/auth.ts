@@ -19,7 +19,5 @@ export const login = async (credentials: LoginRequest): Promise<LoginResponse> =
 };
 
 export const logout = async (): Promise<void> => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('refreshToken');
-  localStorage.removeItem('user');
+  sessionStorage.clear();
 }; 

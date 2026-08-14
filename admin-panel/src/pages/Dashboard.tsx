@@ -6,7 +6,7 @@ import {
   EmojiEvents as EmojiEventsIcon,
 } from '@mui/icons-material';
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { navigate } from '../navigation';
 import {
   fetchUserStatistics,
   fetchContentStatistics,
@@ -38,7 +38,6 @@ const StatCard = ({
 );
 
 export default function Dashboard() {
-  const navigate = useNavigate();
   const { data: userStats } = useQuery({
     queryKey: ['userStatistics'],
     queryFn: fetchUserStatistics,
@@ -141,4 +140,4 @@ export default function Dashboard() {
       </Grid>
     </Box>
   );
-} 
+}

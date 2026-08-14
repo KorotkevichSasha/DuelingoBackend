@@ -51,6 +51,12 @@ public class Duel {
     @Column(name = "player2_time")
     private Long player2Time;
 
+    @Column(name = "player1_answers", columnDefinition = "TEXT")
+    private String player1Answers;
+
+    @Column(name = "player2_answers", columnDefinition = "TEXT")
+    private String player2Answers;
+
     @Column(name = "question_ids")
     private String[] questionIds;
 

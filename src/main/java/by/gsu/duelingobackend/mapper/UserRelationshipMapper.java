@@ -17,5 +17,7 @@ public interface UserRelationshipMapper {
     @Mapping(target = "fromUsername", source = "fromUser.username")
     @Mapping(target = "fromAvatarUrl", source = "fromUser.avatarUrl")
     @Mapping(target = "toUserId", source = "toUser.id")
+    @Mapping(target = "toUsername", source = "toUser.username")
+    @Mapping(target = "toAvatarUrl", source = "toUser.avatarUrl")
     RelationshipResponse toResponse(UserRelationship userRelationship);
 }

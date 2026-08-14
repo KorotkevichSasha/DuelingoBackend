@@ -10,6 +10,8 @@ public record RelationshipResponse(
         String fromUsername,
         String fromAvatarUrl,
         UUID toUserId,
+        String toUsername,
+        String toAvatarUrl,
         RelationshipStatus status
 ) {
 }

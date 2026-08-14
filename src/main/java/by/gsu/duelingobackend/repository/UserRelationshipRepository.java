@@ -25,6 +25,26 @@ public interface UserRelationshipRepository extends JpaRepository<UserRelationsh
 
 
     List<UserRelationship> findByToUserIdAndStatus(UUID toUserId, RelationshipStatus status);
+    List<UserRelationship> findByFromUserIdAndStatus(UUID fromUserId, RelationshipStatus status);
+
+    @Query("""
+        SELECT r FROM UserRelationship r
+        WHERE ((r.fromUser.id = :firstId AND r.toUser.id = :secondId)
+            OR (r.fromUser.id = :secondId AND r.toUser.id = :firstId))
+          AND r.status = :status
+    """)
+    Optional<UserRelationship> findBetweenUsersWithStatus(
+            @Param("firstId") UUID firstId,
+            @Param("secondId") UUID secondId,
+            @Param("status") RelationshipStatus status);
+
+    @Query("""
+        SELECT r FROM UserRelationship r
+        WHERE (r.fromUser.id = :firstId AND r.toUser.id = :secondId)
+           OR (r.fromUser.id = :secondId AND r.toUser.id = :firstId)
+    """)
+    Optional<UserRelationship> findBetweenUsers(
+            @Param("firstId") UUID firstId, @Param("secondId") UUID secondId);
 
     @Query("""
         SELECT r FROM UserRelationship r 

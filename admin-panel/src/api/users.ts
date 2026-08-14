@@ -45,7 +45,3 @@ export const fetchUsers = async (
 export const updateUserRole = async (userId: string, newRole: string): Promise<void> => {
   await api.put(`/admin/users/${userId}/role?newRole=${newRole}`);
 };
-
-export const resetUserPassword = async (userId: string): Promise<void> => {
-  await api.post(`/admin/users/${userId}/reset-password`);
-}; 
