@@ -12,12 +12,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.io.Resource;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -40,7 +42,7 @@ import java.util.Set;
         havingValue = "true",
         matchIfMissing = true
 )
-public class ContentBootstrapService implements ApplicationRunner {
+public class ContentBootstrapService {
 
     private static final String LISTENING_TOPIC = "Listening";
     private static final int QUESTIONS_PER_TEST = 10;
@@ -53,7 +55,16 @@ public class ContentBootstrapService implements ApplicationRunner {
     @Value("classpath:data/questions.json")
     private Resource questionsResource;
 
-    @Override
+    @Async
+    @EventListener(ApplicationReadyEvent.class)
+    public void bootstrapAfterStartup() {
+        try {
+            run(null);
+        } catch (RuntimeException exception) {
+            log.error("Learning content bootstrap failed; the API remains available", exception);
+        }
+    }
+
     public void run(ApplicationArguments args) {
         List<Question> bundledQuestions = reconcileQuestions(loadQuestions(), questionRepository.findAll());
         reconcileTests(buildTests(bundledQuestions), testRepository.findAll());
