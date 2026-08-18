@@ -14,7 +14,7 @@ public final class Constants {
             "/swagger-resources/**",
             "/v3/api-docs/**",
             "/ws/**",
-            "/actuator/health",
+            "/actuator/health/**",
             "/actuator/info"
     );
 
