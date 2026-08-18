@@ -1,41 +1,37 @@
 services:
-  # Backend Service
   - type: web
-    name: duelingo-backend
-    env: docker
+    name: duelrush-api-2026
+    runtime: docker
+    region: frankfurt
+    plan: free
     dockerfilePath: ./Dockerfile
-    plan: starter
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: PORT
         value: 8082
-      - key: SPRING_DATASOURCE_URL
+      - key: RENDER_DATABASE_URL
         fromDatabase:
-          name: duelingo-db
+          name: duelrush-postgres
           property: connectionString
-          transform: "jdbc:postgresql://${host}:${port}/${database}"
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
-          name: duelingo-db
+          name: duelrush-postgres
           property: user
       - key: SPRING_DATASOURCE_PASSWORD
         fromDatabase:
-          name: duelingo-db
+          name: duelrush-postgres
           property: password
-      # Railway MongoDB connection string
+      - key: SPRING_DATA_REDIS_URL
+        fromService:
+          type: keyvalue
+          name: duelrush-cache
+          property: connectionString
       - key: SPRING_DATA_MONGODB_URI
         sync: false
-      # Railway Redis connection
-      - key: SPRING_REDIS_HOST
-        sync: false
-      - key: SPRING_REDIS_PORT
-        sync: false
-      - key: SPRING_REDIS_PASSWORD
-        sync: false
       - key: JWT_SIGNING_KEY
-        sync: false
+        generateValue: true
       - key: SPRING_MAIL_USERNAME
         sync: false
       - key: SPRING_MAIL_PASSWORD
@@ -49,29 +45,24 @@ services:
       - key: SPRING_MAIL_STARTTLS
         value: true
       - key: APP_MAIL_FROM
-        sync: false
+        value: duelrush.app@gmail.com
       - key: ALLOWED_ORIGINS
-        sync: false
+        value: https://duelrush-admin-2026.onrender.com
       - key: APP_PUBLIC_BASE_URL
-        sync: false
+        value: https://duelrush-api-2026.onrender.com
       - key: APP_AVATAR_DIRECTORY
-        value: /app/uploads/avatars
-    disk:
-      name: avatar-data
-      mountPath: /app/uploads
-      sizeGB: 1
+        value: /tmp/duelrush/avatars
 
-  # Frontend Service
   - type: web
-    name: duelingo-admin
-    env: static
+    name: duelrush-admin-2026
+    runtime: static
     buildCommand: cd admin-panel && npm ci && npm run build
     staticPublishPath: admin-panel/dist
     envVars:
       - key: VITE_API_URL
-        sync: false
+        value: https://duelrush-api-2026.onrender.com
       - key: VITE_SUPPORT_EMAIL
-        sync: false
+        value: duelrush.app@gmail.com
       - key: VITE_OPERATOR_NAME
         sync: false
     routes:
@@ -79,7 +70,18 @@ services:
         source: /*
         destination: /index.html
 
+  - type: keyvalue
+    name: duelrush-cache
+    region: frankfurt
+    plan: free
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
+
 databases:
-  - name: duelingo-db
-    databaseName: duelingo
-    plan: free 
+  - name: duelrush-postgres
+    databaseName: duelrush
+    user: duelrush
+    region: frankfurt
+    plan: free
+    postgresMajorVersion: "15"
+    ipAllowList: []

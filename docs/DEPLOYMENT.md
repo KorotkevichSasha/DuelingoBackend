@@ -7,6 +7,18 @@
 - Persistent storage mounted at `/app/uploads`, or a future migration of avatars to object storage.
 - SMTP credentials for transactional email.
 
+## Render staging
+
+The root `render.yaml` intentionally provisions a zero-cost staging environment in Frankfurt:
+the API, a static administration site, Render Postgres, and Render Key Value. It expects a
+MongoDB Atlas connection string and the privacy-page operator name during initial Blueprint
+creation. The generated JWT secret must never be copied into source control.
+
+Free staging instances are not the public production tier: they can sleep, Postgres is
+time-limited, Key Value has no persistence, and `/tmp` avatar uploads disappear after a
+restart or redeploy. Before a public Google Play rollout, upgrade the API and databases and
+attach a persistent disk or migrate avatars to object storage.
+
 ## Required secrets
 
 Set every variable from `.env.example`. In production, `APP_PUBLIC_BASE_URL` must be the public HTTPS API origin and `ALLOWED_ORIGINS` must list only the real administration-panel origin. Generate `JWT_SIGNING_KEY` from at least 32 cryptographically random bytes encoded as Base64. Never reuse database, Redis, SMTP, Grafana, or JWT credentials.
