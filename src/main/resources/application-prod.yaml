@@ -1,6 +1,6 @@
 logging:
   level:
-    root: WARN
+    root: INFO
     by.gsu.duelingobackend: INFO
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
