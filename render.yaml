@@ -5,7 +5,9 @@ services:
     region: frankfurt
     plan: free
     dockerfilePath: ./Dockerfile
-    healthCheckPath: /actuator/health
+    # Liveness must stay independent from slow free-tier databases. The full
+    # /actuator/health endpoint remains available for operational diagnostics.
+    healthCheckPath: /actuator/health/liveness
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
