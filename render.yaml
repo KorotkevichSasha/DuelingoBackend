@@ -11,10 +11,18 @@ services:
         value: prod
       - key: PORT
         value: 8082
-      - key: RENDER_DATABASE_URL
+      - key: SPRING_DATASOURCE_HOST
         fromDatabase:
           name: duelrush-postgres
-          property: connectionString
+          property: host
+      - key: SPRING_DATASOURCE_PORT
+        fromDatabase:
+          name: duelrush-postgres
+          property: port
+      - key: SPRING_DATASOURCE_DATABASE
+        fromDatabase:
+          name: duelrush-postgres
+          property: database
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: duelrush-postgres
