@@ -57,4 +57,22 @@ public class EmailService {
             return false;
         }
     }
+
+    @Async
+    public void sendPasswordResetCode(String to, String code, long validMinutes) {
+        try {
+            var message = mailSender.createMimeMessage();
+            var helper = new MimeMessageHelper(message, false, StandardCharsets.UTF_8.name());
+            helper.setFrom(new InternetAddress(verificationSender, "DuelRush", StandardCharsets.UTF_8.name()));
+            helper.setTo(to);
+            helper.setSubject("DuelRush — восстановление пароля");
+            helper.setText("Ваш код для восстановления пароля DuelRush: " + code
+                    + "\n\nКод действует " + validMinutes + " минут. "
+                    + "Если вы не запрашивали восстановление, проигнорируйте письмо и никому не сообщайте код.");
+            mailSender.send(message);
+            log.info("Password reset email accepted by SMTP for {}", to);
+        } catch (Exception exception) {
+            log.error("Could not send password reset email to {}: {}", to, exception.getMessage());
+        }
+    }
 }

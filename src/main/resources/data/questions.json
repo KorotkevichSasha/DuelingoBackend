@@ -52,7 +52,8 @@
         "questionText":  "They ___ a new lesson every week.",
         "options":  [
                         "read",
-                        "is"
+                        "reads",
+                        "are reading"
                     ],
         "correctAnswers":  [
                                "read"
@@ -551,7 +552,8 @@
         "questionText":  "Daniel ___ a new lesson yesterday.",
         "options":  [
                         "read",
-                        "reads"
+                        "reads",
+                        "is reading"
                     ],
         "correctAnswers":  [
                                "read"
@@ -2513,12 +2515,11 @@
         "topic":  "Modal Verbs",
         "difficulty":  "EASY",
         "type":  "FILL_IN_CHOICE",
-        "questionText":  "Anna ___ study English to improve quickly.",
+        "questionText":  "Lena has the ability to swim two kilometres, so she ___ complete this distance.",
         "options":  [
                         "can",
-                        "does",
-                        "has",
-                        "is"
+                        "must",
+                        "should"
                     ],
         "correctAnswers":  [
                                "can"
@@ -2529,12 +2530,12 @@
         "topic":  "Modal Verbs",
         "difficulty":  "EASY",
         "type":  "FILL_IN_INPUT",
-        "questionText":  "You ___ write the report before the lesson starts. (подсказка: «следует»; совет или рекомендация)",
+        "questionText":  "You ___ wear a seat belt in the car. (подсказка: «должны»; логический вывод с высокой уверенностью)",
         "options":  [
 
                     ],
         "correctAnswers":  [
-                               "should"
+                               "must"
                            ],
         "audioUrl":  null
     },
@@ -2542,20 +2543,20 @@
         "topic":  "Modal Verbs",
         "difficulty":  "EASY",
         "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Софи должна остановиться, когда загорится красный свет светофора.",
+        "questionText":  "Софи может прочитать этот короткий рассказ без словаря.",
         "options":  [
                         "Sophie",
-                        "must",
-                        "stop",
-                        "when",
-                        "the",
-                        "traffic",
-                        "light",
-                        "is",
-                        "red"
+                        "can",
+                        "read",
+                        "this",
+                        "short",
+                        "story",
+                        "without",
+                        "a",
+                        "dictionary"
                     ],
         "correctAnswers":  [
-                               "Sophie must stop when the traffic light is red."
+                               "Sophie can read this short story without a dictionary."
                            ],
         "audioUrl":  null
     },
@@ -2563,12 +2564,11 @@
         "topic":  "Modal Verbs",
         "difficulty":  "EASY",
         "type":  "FILL_IN_CHOICE",
-        "questionText":  "They ___ read a new lesson if there is enough time.",
+        "questionText":  "The forecast says rain is possible, so it ___ rain this afternoon.",
         "options":  [
                         "may",
-                        "does",
-                        "has",
-                        "is"
+                        "must",
+                        "should"
                     ],
         "correctAnswers":  [
                                "may"
@@ -2579,117 +2579,9 @@
         "topic":  "Modal Verbs",
         "difficulty":  "EASY",
         "type":  "FILL_IN_INPUT",
-        "questionText":  "My sister ___ practice the piano after asking for permission. (подсказка: «могла бы»; возможность при условии разрешения)",
+        "questionText":  "You ___ drink some water if you feel tired. (подсказка: «следует»; совет или рекомендация)",
         "options":  [
 
-                    ],
-        "correctAnswers":  [
-                               "could"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "EASY",
-        "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Дети должны рассмотреть эту проблему, чтобы избежать той же ошибки.",
-        "options":  [
-                        "The",
-                        "children",
-                        "should",
-                        "review",
-                        "this",
-                        "problem",
-                        "to",
-                        "avoid",
-                        "the",
-                        "same",
-                        "mistake"
-                    ],
-        "correctAnswers":  [
-                               "The children should review this problem to avoid the same mistake."
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "EASY",
-        "type":  "FILL_IN_CHOICE",
-        "questionText":  "The new student ___ finish the morning news before submitting the answer.",
-        "options":  [
-                        "must",
-                        "does",
-                        "has",
-                        "is"
-                    ],
-        "correctAnswers":  [
-                               "must"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "EASY",
-        "type":  "FILL_IN_INPUT",
-        "questionText":  "These students ___ discuss an interesting book without using a dictionary. (подсказка: «могут»; реальная возможность)",
-        "options":  [
-
-                    ],
-        "correctAnswers":  [
-                               "can"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "EASY",
-        "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Молодой ученый может решить еженедельную викторину, когда придет учитель.",
-        "options":  [
-                        "A",
-                        "young",
-                        "scientist",
-                        "may",
-                        "solve",
-                        "the",
-                        "weekly",
-                        "quiz",
-                        "when",
-                        "the",
-                        "teacher",
-                        "arrives"
-                    ],
-        "correctAnswers":  [
-                               "A young scientist may solve the weekly quiz when the teacher arrives."
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "EASY",
-        "type":  "FILL_IN_CHOICE",
-        "questionText":  "The volunteers ___ explain the final chapter if the first plan fails.",
-        "options":  [
-                        "could",
-                        "does",
-                        "has",
-                        "is"
-                    ],
-        "correctAnswers":  [
-                               "could"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "MEDIUM",
-        "type":  "FILL_IN_CHOICE",
-        "questionText":  "Anna ___ study English to improve quickly.",
-        "options":  [
-                        "should",
-                        "will",
-                        "did",
-                        "was"
                     ],
         "correctAnswers":  [
                                "should"
@@ -2698,9 +2590,158 @@
     },
     {
         "topic":  "Modal Verbs",
+        "difficulty":  "EASY",
+        "type":  "SENTENCE_CONSTRUCTION",
+        "questionText":  "Посетители должны оставить сумки на стойке регистрации.",
+        "options":  [
+                        "Visitors",
+                        "must",
+                        "leave",
+                        "their",
+                        "bags",
+                        "at",
+                        "reception"
+                    ],
+        "correctAnswers":  [
+                               "Visitors must leave their bags at reception."
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "EASY",
+        "type":  "FILL_IN_CHOICE",
+        "questionText":  "This door is locked, so you ___ enter through it.",
+        "options":  [
+                        "cannot",
+                        "must not",
+                        "should not"
+                    ],
+        "correctAnswers":  [
+                               "cannot"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "EASY",
+        "type":  "FILL_IN_INPUT",
+        "questionText":  "___ I borrow your pen for a minute? (подсказка: «возможно»; формальное предположение)",
+        "options":  [
+
+                    ],
+        "correctAnswers":  [
+                               "May"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "EASY",
+        "type":  "SENTENCE_CONSTRUCTION",
+        "questionText":  "Нам следует проверить адрес перед отправкой посылки.",
+        "options":  [
+                        "We",
+                        "should",
+                        "check",
+                        "the",
+                        "address",
+                        "before",
+                        "sending",
+                        "the",
+                        "parcel"
+                    ],
+        "correctAnswers":  [
+                               "We should check the address before sending the parcel."
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "EASY",
+        "type":  "FILL_IN_CHOICE",
+        "questionText":  "Use the spare key; it ___ open the back door.",
+        "options":  [
+                        "can",
+                        "must",
+                        "should"
+                    ],
+        "correctAnswers":  [
+                               "can"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "MEDIUM",
+        "type":  "FILL_IN_CHOICE",
+        "questionText":  "The lights are on and her coat is here; she ___ be inside.",
+        "options":  [
+                        "must",
+                        "might",
+                        "cannot"
+                    ],
+        "correctAnswers":  [
+                               "must"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
         "difficulty":  "MEDIUM",
         "type":  "FILL_IN_INPUT",
-        "questionText":  "You ___ write the report before the lesson starts. (подсказка: «возможно, могли»; неуверенное предположение)",
+        "questionText":  "His car is gone, so he ___ have left already. (подсказка: «должны»; логический вывод с высокой уверенностью)",
+        "options":  [
+
+                    ],
+        "correctAnswers":  [
+                               "must"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "MEDIUM",
+        "type":  "SENTENCE_CONSTRUCTION",
+        "questionText":  "Тебе следовало сделать резервную копию файлов перед обновлением системы.",
+        "options":  [
+                        "You",
+                        "should",
+                        "have",
+                        "backed",
+                        "up",
+                        "the",
+                        "files",
+                        "before",
+                        "updating",
+                        "the",
+                        "system"
+                    ],
+        "correctAnswers":  [
+                               "You should have backed up the files before updating the system."
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "MEDIUM",
+        "type":  "FILL_IN_CHOICE",
+        "questionText":  "That explanation ___ be correct; it contradicts the verified data.",
+        "options":  [
+                        "cannot",
+                        "must",
+                        "should"
+                    ],
+        "correctAnswers":  [
+                               "cannot"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "MEDIUM",
+        "type":  "FILL_IN_INPUT",
+        "questionText":  "The parcel is late; it ___ have been sent to the wrong address. (подсказка: «возможно, могли»; неуверенное предположение)",
         "options":  [
 
                     ],
@@ -2713,19 +2754,20 @@
         "topic":  "Modal Verbs",
         "difficulty":  "MEDIUM",
         "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Прежде чем начать, Софи следовало просмотреть инструкции.",
+        "questionText":  "Сотрудники могут работать из дома по пятницам.",
         "options":  [
-                        "Sophie",
-                        "should",
-                        "have",
-                        "checked",
-                        "the",
-                        "instructions",
-                        "before",
-                        "starting"
+                        "Employees",
+                        "are",
+                        "allowed",
+                        "to",
+                        "work",
+                        "from",
+                        "home",
+                        "on",
+                        "Fridays"
                     ],
         "correctAnswers":  [
-                               "Sophie should have checked the instructions before starting."
+                               "Employees are allowed to work from home on Fridays."
                            ],
         "audioUrl":  null
     },
@@ -2733,12 +2775,24 @@
         "topic":  "Modal Verbs",
         "difficulty":  "MEDIUM",
         "type":  "FILL_IN_CHOICE",
-        "questionText":  "They ___ read a new lesson if there is enough time.",
+        "questionText":  "You ___ have told me about the allergy before I ordered dinner.",
         "options":  [
-                        "could",
-                        "will",
-                        "did",
-                        "was"
+                        "should",
+                        "can",
+                        "will"
+                    ],
+        "correctAnswers":  [
+                               "should"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "MEDIUM",
+        "type":  "FILL_IN_INPUT",
+        "questionText":  "We ___ finish today if everyone takes one section. (подсказка: «могла бы»; возможность при условии разрешения)",
+        "options":  [
+
                     ],
         "correctAnswers":  [
                                "could"
@@ -2748,36 +2802,22 @@
     {
         "topic":  "Modal Verbs",
         "difficulty":  "MEDIUM",
-        "type":  "FILL_IN_INPUT",
-        "questionText":  "My sister ___ practice the piano after asking for permission. (подсказка: «возможно»; формальное предположение)",
-        "options":  [
-
-                    ],
-        "correctAnswers":  [
-                               "may"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "MEDIUM",
         "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Дети должны рассмотреть эту проблему, чтобы избежать той же ошибки.",
+        "questionText":  "Возможно, поезд задержался из-за сильного снегопада.",
         "options":  [
                         "The",
-                        "children",
-                        "should",
-                        "review",
-                        "this",
-                        "problem",
-                        "to",
-                        "avoid",
+                        "train",
+                        "may",
+                        "have",
+                        "been",
+                        "delayed",
+                        "by",
                         "the",
-                        "same",
-                        "mistake"
+                        "heavy",
+                        "snow"
                     ],
         "correctAnswers":  [
-                               "The children should review this problem to avoid the same mistake."
+                               "The train may have been delayed by the heavy snow."
                            ],
         "audioUrl":  null
     },
@@ -2785,12 +2825,26 @@
         "topic":  "Modal Verbs",
         "difficulty":  "MEDIUM",
         "type":  "FILL_IN_CHOICE",
-        "questionText":  "The new student ___ finish the morning news before submitting the answer.",
+        "questionText":  "Candidates ___ use a dictionary during this examination; the rules forbid it.",
+        "options":  [
+                        "must not",
+                        "do not have to",
+                        "might not"
+                    ],
+        "correctAnswers":  [
+                               "must not"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "HARD",
+        "type":  "FILL_IN_CHOICE",
+        "questionText":  "The ground is dry, so it ___ have rained last night.",
         "options":  [
                         "cannot",
-                        "will",
-                        "did",
-                        "was"
+                        "must not",
+                        "should not"
                     ],
         "correctAnswers":  [
                                "cannot"
@@ -2799,9 +2853,60 @@
     },
     {
         "topic":  "Modal Verbs",
-        "difficulty":  "MEDIUM",
+        "difficulty":  "HARD",
         "type":  "FILL_IN_INPUT",
-        "questionText":  "These students ___ discuss an interesting book without using a dictionary. (подсказка: «должны»; логический вывод с высокой уверенностью)",
+        "questionText":  "You ___ informed the client before changing the contract. (подсказка: «следовало сделать»; модальный глагол о прошлом)",
+        "options":  [
+
+                    ],
+        "correctAnswers":  [
+                               "should have"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "HARD",
+        "type":  "SENTENCE_CONSTRUCTION",
+        "questionText":  "Комитет мог бы принять другое решение при наличии дополнительных доказательств.",
+        "options":  [
+                        "The",
+                        "committee",
+                        "might",
+                        "have",
+                        "reached",
+                        "a",
+                        "different",
+                        "decision",
+                        "with",
+                        "more",
+                        "evidence"
+                    ],
+        "correctAnswers":  [
+                               "The committee might have reached a different decision with more evidence."
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "HARD",
+        "type":  "FILL_IN_CHOICE",
+        "questionText":  "She knew the route well; she ___ have needed a map.",
+        "options":  [
+                        "cannot",
+                        "must not",
+                        "should not"
+                    ],
+        "correctAnswers":  [
+                               "cannot"
+                           ],
+        "audioUrl":  null
+    },
+    {
+        "topic":  "Modal Verbs",
+        "difficulty":  "HARD",
+        "type":  "FILL_IN_INPUT",
+        "questionText":  "The documents are missing; someone ___ have removed them. (подсказка: «должны»; логический вывод с высокой уверенностью)",
         "options":  [
 
                     ],
@@ -2812,92 +2917,26 @@
     },
     {
         "topic":  "Modal Verbs",
-        "difficulty":  "MEDIUM",
-        "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Молодой ученый может решить еженедельную викторину, когда придет учитель.",
-        "options":  [
-                        "A",
-                        "young",
-                        "scientist",
-                        "might",
-                        "solve",
-                        "the",
-                        "weekly",
-                        "quiz",
-                        "when",
-                        "the",
-                        "teacher",
-                        "arrives"
-                    ],
-        "correctAnswers":  [
-                               "A young scientist might solve the weekly quiz when the teacher arrives."
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "MEDIUM",
-        "type":  "FILL_IN_CHOICE",
-        "questionText":  "The volunteers ___ explain the final chapter if the first plan fails.",
-        "options":  [
-                        "could",
-                        "will",
-                        "did",
-                        "was"
-                    ],
-        "correctAnswers":  [
-                               "could"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "HARD",
-        "type":  "FILL_IN_CHOICE",
-        "questionText":  "Anna ___ studied English before the situation became complicated.",
-        "options":  [
-                        "should have",
-                        "must",
-                        "will have",
-                        "used to"
-                    ],
-        "correctAnswers":  [
-                               "should have"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "HARD",
-        "type":  "FILL_IN_INPUT",
-        "questionText":  "You ___ written the report before the situation became complicated. (подсказка: «следовало сделать»; модальный глагол о прошлом)",
-        "options":  [
-
-                    ],
-        "correctAnswers":  [
-                               "should have"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
         "difficulty":  "HARD",
         "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Софи следовало приготовить ужин, пока ситуация не осложнилась.",
+        "questionText":  "Тебе не нужно было покупать молоко: дома было три бутылки.",
         "options":  [
-                        "Sophie",
-                        "should",
+                        "You",
+                        "need",
+                        "not",
                         "have",
-                        "prepared",
-                        "dinner",
-                        "before",
-                        "the",
-                        "situation",
-                        "became",
-                        "complicated"
+                        "bought",
+                        "any",
+                        "milk;",
+                        "there",
+                        "were",
+                        "three",
+                        "bottles",
+                        "at",
+                        "home"
                     ],
         "correctAnswers":  [
-                               "Sophie should have prepared dinner before the situation became complicated."
+                               "You need not have bought any milk; there were three bottles at home."
                            ],
         "audioUrl":  null
     },
@@ -2905,15 +2944,14 @@
         "topic":  "Modal Verbs",
         "difficulty":  "HARD",
         "type":  "FILL_IN_CHOICE",
-        "questionText":  "They ___ read a new lesson before the situation became complicated.",
+        "questionText":  "Without the guide, we ___ have found the hidden entrance.",
         "options":  [
-                        "should have",
-                        "must",
-                        "will have",
-                        "used to"
+                        "could not",
+                        "must not",
+                        "should not"
                     ],
         "correctAnswers":  [
-                               "should have"
+                               "could not"
                            ],
         "audioUrl":  null
     },
@@ -2921,12 +2959,12 @@
         "topic":  "Modal Verbs",
         "difficulty":  "HARD",
         "type":  "FILL_IN_INPUT",
-        "questionText":  "My sister ___ practiced the piano before the situation became complicated. (подсказка: «следовало сделать»; модальный глагол о прошлом)",
+        "questionText":  "The message ___ have reached her, but we cannot be certain. (подсказка: «возможно»; формальное предположение)",
         "options":  [
 
                     ],
         "correctAnswers":  [
-                               "should have"
+                               "may"
                            ],
         "audioUrl":  null
     },
@@ -2934,23 +2972,20 @@
         "topic":  "Modal Verbs",
         "difficulty":  "HARD",
         "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Дети должны были рассмотреть эту проблему до того, как ситуация усложнилась.",
+        "questionText":  "Результаты следовало независимо проверить перед публикацией.",
         "options":  [
                         "The",
-                        "children",
+                        "results",
                         "should",
                         "have",
-                        "reviewed",
-                        "this",
-                        "problem",
+                        "been",
+                        "checked",
+                        "independently",
                         "before",
-                        "the",
-                        "situation",
-                        "became",
-                        "complicated"
+                        "publication"
                     ],
         "correctAnswers":  [
-                               "The children should have reviewed this problem before the situation became complicated."
+                               "The results should have been checked independently before publication."
                            ],
         "audioUrl":  null
     },
@@ -2958,70 +2993,14 @@
         "topic":  "Modal Verbs",
         "difficulty":  "HARD",
         "type":  "FILL_IN_CHOICE",
-        "questionText":  "The new student ___ finished the morning news before the situation became complicated.",
+        "questionText":  "Given the empty office, the meeting ___ have been cancelled without notice.",
         "options":  [
-                        "should have",
+                        "might",
                         "must",
-                        "will have",
-                        "used to"
+                        "should"
                     ],
         "correctAnswers":  [
-                               "should have"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "HARD",
-        "type":  "FILL_IN_INPUT",
-        "questionText":  "These students ___ discussed an interesting book before the situation became complicated. (подсказка: «следовало сделать»; модальный глагол о прошлом)",
-        "options":  [
-
-                    ],
-        "correctAnswers":  [
-                               "should have"
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "HARD",
-        "type":  "SENTENCE_CONSTRUCTION",
-        "questionText":  "Молодой ученый должен был решить еженедельную викторину до того, как ситуация осложнилась.",
-        "options":  [
-                        "A",
-                        "young",
-                        "scientist",
-                        "should",
-                        "have",
-                        "solved",
-                        "the",
-                        "weekly",
-                        "quiz",
-                        "before",
-                        "the",
-                        "situation",
-                        "became",
-                        "complicated"
-                    ],
-        "correctAnswers":  [
-                               "A young scientist should have solved the weekly quiz before the situation became complicated."
-                           ],
-        "audioUrl":  null
-    },
-    {
-        "topic":  "Modal Verbs",
-        "difficulty":  "HARD",
-        "type":  "FILL_IN_CHOICE",
-        "questionText":  "The volunteers ___ explained the final chapter before the situation became complicated.",
-        "options":  [
-                        "should have",
-                        "must",
-                        "will have",
-                        "used to"
-                    ],
-        "correctAnswers":  [
-                               "should have"
+                               "might"
                            ],
         "audioUrl":  null
     },
@@ -4553,7 +4532,8 @@
         "questionText":  "A new lesson and the notes ___ by the class every week.",
         "options":  [
                         "are read",
-                        "has read"
+                        "is read",
+                        "have read"
                     ],
         "correctAnswers":  [
                                "are read"
@@ -4749,9 +4729,10 @@
                         "and",
                         "the",
                         "notes",
-                        "was",
+                        "were",
                         "reviewed",
                         "before",
+                        "the",
                         "teacher",
                         "arrived"
                     ],

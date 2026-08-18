@@ -35,7 +35,9 @@ public class AuthRateLimitFilter extends OncePerRequestFilter {
                 || !(path.equals("/auth/sign-in")
                 || path.equals("/auth/sign-up")
                 || path.equals("/auth/verify-email")
-                || path.equals("/auth/resend-verification"));
+                || path.equals("/auth/resend-verification")
+                || path.equals("/auth/password-reset/request")
+                || path.equals("/auth/password-reset/confirm"));
     }
 
     @Override

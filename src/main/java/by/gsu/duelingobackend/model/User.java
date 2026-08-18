@@ -82,6 +82,10 @@ public class User {
     @Column(name = "email_verified", nullable = false)
     private boolean emailVerified = true;
 
+    @Builder.Default
+    @Column(name = "token_version", nullable = false)
+    private int tokenVersion = 0;
+
     @OneToMany(mappedBy = "user")
     private List<UserTestProgress> progress;
 

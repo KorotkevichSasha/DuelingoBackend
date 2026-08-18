@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -48,8 +49,8 @@ public class LeaderboardService {
     }
 
     public Long getUserRank(UUID userId) {
-        Long rank = redisTemplate.opsForZSet().reverseRank(LEADERBOARD_KEY, userId.toString());
-        return rank != null ? rank + 1 : null;
+        Double score = redisTemplate.opsForZSet().score(LEADERBOARD_KEY, userId.toString());
+        return score == null ? null : rankForScore(score);
     }
 
     public Integer getUserPoints(UUID userId) {
@@ -65,7 +66,8 @@ public class LeaderboardService {
                 user.getUsername(),
                 user.getPoints(),
                 user.getAvatarUrl(),
-                getUserRank(userId)
+                getUserRank(userId),
+                getPointsToNextRank(userId)
         );
     }
 
@@ -96,7 +98,7 @@ public class LeaderboardService {
                 .collect(Collectors.toMap(User::getId, Function.identity()));
 
         List<UserInLeaderboardResponse> responses = new ArrayList<>();
-        long position = start + 1;
+        Map<Double, Long> ranksByScore = new HashMap<>();
         for (ZSetOperations.TypedTuple<Object> tuple : tuples) {
             try {
                 UUID userId = UUID.fromString((String) tuple.getValue());
@@ -112,7 +114,8 @@ public class LeaderboardService {
                         user.getUsername(),
                         tuple.getScore().intValue(),
                         user.getAvatarUrl(),
-                        position++
+                        ranksByScore.computeIfAbsent(tuple.getScore(), this::rankForScore),
+                        pointsToNextScore(tuple.getScore())
                 ));
             } catch (IllegalArgumentException e) {
                 log.error("Skipping invalid UUID: {}", tuple.getValue());
@@ -143,6 +146,36 @@ public class LeaderboardService {
 
         users.forEach(user -> updateUserScore(user.getId(), user.getPoints()));
         log.info("Leaderboard synchronized with {} active users", users.size());
+    }
+
+    private long rankForScore(double score) {
+        Long usersWithMorePoints = redisTemplate.opsForZSet().count(
+                LEADERBOARD_KEY,
+                Math.nextUp(score),
+                Double.POSITIVE_INFINITY
+        );
+        return (usersWithMorePoints == null ? 0 : usersWithMorePoints) + 1;
+    }
+
+    private Integer getPointsToNextRank(UUID userId) {
+        Double score = redisTemplate.opsForZSet().score(LEADERBOARD_KEY, userId.toString());
+        return score == null ? null : pointsToNextScore(score);
+    }
+
+    private Integer pointsToNextScore(double score) {
+        Set<ZSetOperations.TypedTuple<Object>> next = redisTemplate.opsForZSet()
+                .rangeByScoreWithScores(
+                        LEADERBOARD_KEY,
+                        Math.nextUp(score),
+                        Double.POSITIVE_INFINITY,
+                        0,
+                        1
+                );
+        if (next == null || next.isEmpty()) {
+            return null;
+        }
+        Double nextScore = next.iterator().next().getScore();
+        return nextScore == null ? null : Math.max(1, nextScore.intValue() - (int) score);
     }
 
 

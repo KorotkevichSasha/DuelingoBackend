@@ -43,6 +43,18 @@ public class TestService {
                 .toList();
     }
 
+    public List<TestSummaryResponse> getAllTests(UUID userId) {
+        List<Test> tests = testRepository.findAllExcludingQuestions();
+        Set<String> completedTestIds = getCompletedTestIds(userId, tests);
+        return tests.stream()
+                .sorted(Comparator.comparing(Test::getTopic).thenComparing(Test::getDifficulty))
+                .map(test -> testMapper.toSummaryResponse(
+                        test,
+                        completedTestIds.contains(test.getId().toString())
+                ))
+                .toList();
+    }
+
     @Cacheable(value = "tests", key = "#id")
     public TestDetailedResponse getTestById(String id) {
         return testRepository.findById(id).map(testMapper::toDetailedResponse)
