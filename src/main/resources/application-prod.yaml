@@ -7,7 +7,14 @@ logging:
 
 spring:
   main:
-    lazy-initialization: true
+    # Render's health check has a short timeout. Initialize the web/security
+    # layer before opening the service so the first probe cannot trigger a
+    # slow lazy-bean stampede on the free 0.1 CPU instance.
+    lazy-initialization: false
+
+  mvc:
+    servlet:
+      load-on-startup: 1
 
   datasource:
     driver-class-name: org.postgresql.Driver
