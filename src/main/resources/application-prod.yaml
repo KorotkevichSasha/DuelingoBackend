@@ -6,6 +6,9 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
 spring:
+  main:
+    lazy-initialization: true
+
   datasource:
     driver-class-name: org.postgresql.Driver
     username: ${SPRING_DATASOURCE_USERNAME}
@@ -17,7 +20,7 @@ spring:
   data:
     mongodb:
       uri: ${SPRING_DATA_MONGODB_URI}
-      auto-index-creation: true
+      auto-index-creation: false
 
     redis:
       url: ${SPRING_DATA_REDIS_URL:redis://localhost:6379}
@@ -42,7 +45,7 @@ spring:
     username: ${SPRING_MAIL_USERNAME}
     password: ${SPRING_MAIL_PASSWORD}
     default-encoding: UTF-8
-    test-connection: ${SPRING_MAIL_TEST_CONNECTION:true}
+    test-connection: ${SPRING_MAIL_TEST_CONNECTION:false}
     properties:
       mail:
         smtp:
