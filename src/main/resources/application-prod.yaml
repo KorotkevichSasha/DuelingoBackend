@@ -10,7 +10,9 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-    url: ${SPRING_DATASOURCE_URL}
+    # Render provides postgresql://..., while the JDBC driver requires the jdbc: prefix.
+    # Local/container deployments continue to provide SPRING_DATASOURCE_URL directly.
+    url: ${SPRING_DATASOURCE_URL:jdbc:${RENDER_DATABASE_URL}}
 
   data:
     mongodb:
