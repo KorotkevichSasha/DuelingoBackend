@@ -55,7 +55,8 @@ spring:
           writetimeout: ${SPRING_MAIL_WRITE_TIMEOUT:5000}
 
 server:
-  port: ${PORT:8082}
+  # Render health-checks port 10000. SERVER_PORT remains available for other hosts.
+  port: ${SERVER_PORT:10000}
   address: 0.0.0.0
   error:
     include-message: never
