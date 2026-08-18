@@ -9,8 +9,6 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: PORT
-        value: 8082
       - key: SPRING_DATASOURCE_HOST
         fromDatabase:
           name: duelrush-postgres
