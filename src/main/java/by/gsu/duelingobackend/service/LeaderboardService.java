@@ -7,11 +7,13 @@ import by.gsu.duelingobackend.exceptions.EntityNotFoundException;
 import by.gsu.duelingobackend.model.User;
 import by.gsu.duelingobackend.repository.UserRepository;
 import by.gsu.duelingobackend.security.UserDetailsImpl;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -130,22 +132,27 @@ public class LeaderboardService {
         );
     }
 
-    @PostConstruct
+    @Async
+    @EventListener(ApplicationReadyEvent.class)
     public void initializeLeaderboard() {
-        List<User> users = userRepository.findAll();
-        Set<String> actualUserIds = users.stream()
-                .map(user -> user.getId().toString())
-                .collect(Collectors.toSet());
+        try {
+            List<User> users = userRepository.findAll();
+            Set<String> actualUserIds = users.stream()
+                    .map(user -> user.getId().toString())
+                    .collect(Collectors.toSet());
 
-        Set<Object> cachedUserIds = redisTemplate.opsForZSet().range(LEADERBOARD_KEY, 0, -1);
-        if (cachedUserIds != null) {
-            cachedUserIds.stream()
-                    .filter(cachedId -> !actualUserIds.contains(String.valueOf(cachedId)))
-                    .forEach(cachedId -> redisTemplate.opsForZSet().remove(LEADERBOARD_KEY, cachedId));
+            Set<Object> cachedUserIds = redisTemplate.opsForZSet().range(LEADERBOARD_KEY, 0, -1);
+            if (cachedUserIds != null) {
+                cachedUserIds.stream()
+                        .filter(cachedId -> !actualUserIds.contains(String.valueOf(cachedId)))
+                        .forEach(cachedId -> redisTemplate.opsForZSet().remove(LEADERBOARD_KEY, cachedId));
+            }
+
+            users.forEach(user -> updateUserScore(user.getId(), user.getPoints()));
+            log.info("Leaderboard synchronized with {} active users", users.size());
+        } catch (RuntimeException exception) {
+            log.error("Leaderboard bootstrap failed; the API remains available", exception);
         }
-
-        users.forEach(user -> updateUserScore(user.getId(), user.getPoints()));
-        log.info("Leaderboard synchronized with {} active users", users.size());
     }
 
     private long rankForScore(double score) {
