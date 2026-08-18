@@ -7,6 +7,7 @@ public record UserInLeaderboardResponse(
         String username,
         Integer points,
         String avatarUrl,
-        Long rank
+        Long rank,
+        Integer pointsToNextRank
 ) {
 }

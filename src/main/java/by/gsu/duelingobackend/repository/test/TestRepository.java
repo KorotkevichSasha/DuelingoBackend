@@ -10,4 +10,7 @@ public interface TestRepository extends MongoRepository<Test, String>, CustomTes
 
     @Query(value = "{ 'topic' : ?0 }", fields = "{ 'questions' : 0 }")
     List<Test> findByTopicExcludingQuestions(String topic);
+
+    @Query(value = "{}", fields = "{ 'questions' : 0 }")
+    List<Test> findAllExcludingQuestions();
 }

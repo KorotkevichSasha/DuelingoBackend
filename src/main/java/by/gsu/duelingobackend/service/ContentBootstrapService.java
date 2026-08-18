@@ -162,6 +162,8 @@ public class ContentBootstrapService implements ApplicationRunner {
                     }
             );
 
+            validateQuestionBank(seeds);
+
             Map<QuestionKey, Question> uniqueQuestions = new LinkedHashMap<>();
             for (SeedQuestion seed : seeds) {
                 Question question = toQuestion(seed);
@@ -175,6 +177,53 @@ public class ContentBootstrapService implements ApplicationRunner {
         } catch (IOException exception) {
             throw new IllegalStateException("Cannot read bundled learning questions", exception);
         }
+    }
+
+    private void validateQuestionBank(List<SeedQuestion> seeds) {
+        Map<String, SeedQuestion> prompts = new LinkedHashMap<>();
+        for (SeedQuestion seed : seeds) {
+            String prompt = seed.questionText() == null
+                    ? ""
+                    : seed.questionText().trim().toLowerCase();
+            SeedQuestion previous = prompts.putIfAbsent(prompt, seed);
+            if (previous != null) {
+                throw new IllegalStateException(
+                        "Duplicate bundled question prompt: " + seed.questionText()
+                );
+            }
+            if (seed.type() == QuestionType.FILL_IN_CHOICE) {
+                if (seed.options() == null || seed.options().size() < 3) {
+                    throw new IllegalStateException(
+                            "A choice question needs at least three options: " + seed.questionText()
+                    );
+                }
+                if (seed.correctAnswers() == null
+                        || seed.correctAnswers().stream().noneMatch(seed.options()::contains)) {
+                    throw new IllegalStateException(
+                            "A choice answer is missing from its options: " + seed.questionText()
+                    );
+                }
+            }
+            if (seed.type() == QuestionType.SENTENCE_CONSTRUCTION) {
+                if (seed.options() == null
+                        || seed.correctAnswers() == null
+                        || seed.correctAnswers().size() != 1
+                        || !normalizedWordBag(String.join(" ", seed.options()))
+                        .equals(normalizedWordBag(seed.correctAnswers().get(0)))) {
+                    throw new IllegalStateException(
+                            "Sentence cards do not match the correct answer: " + seed.questionText()
+                    );
+                }
+            }
+        }
+    }
+
+    private List<String> normalizedWordBag(String text) {
+        return List.of(text.split("\\s+"))
+                .stream()
+                .map(word -> word.replaceAll("[,.!?;:]", ""))
+                .sorted()
+                .toList();
     }
 
     private Question toQuestion(SeedQuestion seed) {

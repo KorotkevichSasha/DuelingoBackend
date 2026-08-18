@@ -286,6 +286,46 @@ $prepositionHard = @(
 )
 Apply-Specs 'Prepositions' 'HARD' $prepositionHard
 
+# Modal verbs need explicit context. A bare sentence such as
+# "They ___ read ... if there is enough time" accepts several natural
+# answers and cannot be scored fairly in a duel.
+Apply-Specs 'Modal Verbs' 'EASY' @(
+    'Lena has the ability to swim two kilometres, so she ___ complete this distance.|can|must|should',
+    'You ___ wear a seat belt in the car. (подсказка: «должен»; обязательное правило безопасности)|must|must|must',
+    'Sophie can read this short story without a dictionary.|Софи может прочитать этот короткий рассказ без словаря.',
+    'The forecast says rain is possible, so it ___ rain this afternoon.|may|must|should',
+    'You ___ drink some water if you feel tired. (подсказка: «следует»; дружеский совет)|should|should|should',
+    'Visitors must leave their bags at reception.|Посетители должны оставить сумки на стойке регистрации.',
+    'This door is locked, so you ___ enter through it.|cannot|must not|should not',
+    '___ I borrow your pen for a minute? (подсказка: вежливая просьба о разрешении)|May|May|May',
+    'We should check the address before sending the parcel.|Нам следует проверить адрес перед отправкой посылки.',
+    'Use the spare key; it ___ open the back door.|can|must|should'
+)
+Apply-Specs 'Modal Verbs' 'MEDIUM' @(
+    'The lights are on and her coat is here; she ___ be inside.|must|might|cannot',
+    'His car is gone, so he ___ have left already. (подсказка: «должно быть»; уверенный вывод о прошлом)|must|must|must',
+    'You should have backed up the files before updating the system.|Тебе следовало сделать резервную копию файлов перед обновлением системы.',
+    'That explanation ___ be correct; it contradicts the verified data.|cannot|must|should',
+    'The parcel is late; it ___ have been sent to the wrong address. (подсказка: «возможно»; неуверенное предположение о прошлом)|might|might|might',
+    'Employees are allowed to work from home on Fridays.|Сотрудники могут работать из дома по пятницам.',
+    'You ___ have told me about the allergy before I ordered dinner.|should|can|will',
+    'We ___ finish today if everyone takes one section. (подсказка: «могли бы»; реальная возможность при условии)|could|could|could',
+    'The train may have been delayed by the heavy snow.|Возможно, поезд задержался из-за сильного снегопада.',
+    'Candidates ___ use a dictionary during this examination; the rules forbid it.|must not|do not have to|might not'
+)
+Apply-Specs 'Modal Verbs' 'HARD' @(
+    'The ground is dry, so it ___ have rained last night.|cannot|must not|should not',
+    'You ___ informed the client before changing the contract. (подсказка: «следовало»; критика невыполненного действия в прошлом)|should have|should have|should have',
+    'The committee might have reached a different decision with more evidence.|Комитет мог бы принять другое решение при наличии дополнительных доказательств.',
+    'She knew the route well; she ___ have needed a map.|cannot|must not|should not',
+    'The documents are missing; someone ___ have removed them. (подсказка: «должно быть»; логический вывод о прошлом)|must|must|must',
+    'You need not have bought any milk; there were three bottles at home.|Тебе не нужно было покупать молоко: дома было три бутылки.',
+    'Without the guide, we ___ have found the hidden entrance.|could not|must not|should not',
+    'The message ___ have reached her, but we cannot be certain. (подсказка: «возможно»; предположение о прошлом)|may|may|may',
+    'The results should have been checked independently before publication.|Результаты следовало независимо проверить перед публикацией.',
+    'Given the empty office, the meeting ___ have been cancelled without notice.|might|must|should'
+)
+
 # A free-text exercise must test knowledge, not the learner's ability to guess
 # which of several grammatically possible words the author had in mind.  Every
 # FILL_IN_INPUT item therefore carries a Russian semantic cue or an exact
@@ -416,6 +456,15 @@ foreach ($question in $questions) {
     }
     if ($question.type -eq 'FILL_IN_CHOICE') {
         $question.options = @($question.options | Select-Object -Unique)
+        if ($question.questionText -eq 'They ___ a new lesson every week.') {
+            $question.options = @('read', 'reads', 'are reading')
+        }
+        if ($question.questionText -eq 'Daniel ___ a new lesson yesterday.') {
+            $question.options = @('read', 'reads', 'is reading')
+        }
+        if ($question.questionText -eq 'A new lesson and the notes ___ by the class every week.') {
+            $question.options = @('are read', 'is read', 'have read')
+        }
     }
     if ($question.type -eq 'FILL_IN_INPUT') {
         $question.options = @()

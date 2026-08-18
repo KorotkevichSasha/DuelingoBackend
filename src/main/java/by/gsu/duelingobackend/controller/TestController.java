@@ -31,6 +31,13 @@ public class TestController {
         return testService.getTestsForTopic(topic, principal.getUser().getId());
     }
 
+    @GetMapping("/all")
+    public List<TestSummaryResponse> getAllTests(
+            @AuthenticationPrincipal UserDetailsImpl principal
+    ) {
+        return testService.getAllTests(principal.getUser().getId());
+    }
+
     @GetMapping("/{testId}")
     public TestDetailedResponse getTestById(@PathVariable @NotBlank String testId) {
         return testService.getTestById(testId);

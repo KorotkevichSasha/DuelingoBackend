@@ -91,6 +91,14 @@ class ContentBootstrapServiceTest {
                 .allSatisfy(question -> {
                     assertThat(question.getQuestionText()).containsPattern("[А-Яа-яЁё]");
                     assertThat(question.getCorrectAnswers()).hasSize(1);
+                    List<String> answerWords = List.of(question.getCorrectAnswers().get(0).split("\\s+"))
+                            .stream()
+                            .map(word -> word.replaceAll("[,.!?;:]", ""))
+                            .toList();
+                    List<String> optionWords = question.getOptions().stream()
+                            .map(word -> word.replaceAll("[,.!?;:]", ""))
+                            .toList();
+                    assertThat(optionWords).containsExactlyInAnyOrderElementsOf(answerWords);
                 });
         assertThat(questions)
                 .filteredOn(question -> question.getType() == QuestionType.FILL_IN_INPUT)
@@ -100,6 +108,15 @@ class ContentBootstrapServiceTest {
                     assertThat(question.getOptions()).isEmpty();
                     assertThat(question.getCorrectAnswers()).isNotEmpty();
                 });
+        assertThat(questions)
+                .filteredOn(question -> question.getType() == QuestionType.FILL_IN_CHOICE)
+                .allSatisfy(question -> {
+                    assertThat(question.getOptions()).hasSizeGreaterThanOrEqualTo(3);
+                    assertThat(question.getOptions()).containsAnyElementsOf(question.getCorrectAnswers());
+                });
+        assertThat(questions)
+                .extracting(Question::getQuestionText)
+                .doesNotHaveDuplicates();
         assertThat(tests).allSatisfy(test -> assertThat(test.getQuestions()).hasSize(10));
         assertThat(tests.stream()
                 .map(by.gsu.duelingobackend.model.document.Test::getTopic)
