@@ -10,9 +10,9 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-    # Render provides postgresql://..., while the JDBC driver requires the jdbc: prefix.
-    # Local/container deployments continue to provide SPRING_DATASOURCE_URL directly.
-    url: ${SPRING_DATASOURCE_URL:jdbc:${RENDER_DATABASE_URL}}
+    # Render exposes discrete connection properties. Building the JDBC URL from
+    # them avoids the unsupported postgresql://user:password@host form.
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${SPRING_DATASOURCE_HOST}:${SPRING_DATASOURCE_PORT:5432}/${SPRING_DATASOURCE_DATABASE}}
 
   data:
     mongodb:
@@ -20,9 +20,7 @@ spring:
       auto-index-creation: true
 
     redis:
-      host: ${SPRING_REDIS_HOST}
-      port: ${SPRING_REDIS_PORT:6379}
-      password: ${SPRING_REDIS_PASSWORD}
+      url: ${SPRING_DATA_REDIS_URL:redis://localhost:6379}
 
   jpa:
     open-in-view: false
