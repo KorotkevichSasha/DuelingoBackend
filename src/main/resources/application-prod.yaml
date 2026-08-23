@@ -60,9 +60,9 @@ spring:
           starttls:
             enable: ${SPRING_MAIL_STARTTLS:true}
             required: ${SPRING_MAIL_STARTTLS_REQUIRED:true}
-          connectiontimeout: ${SPRING_MAIL_CONNECTION_TIMEOUT:5000}
-          timeout: ${SPRING_MAIL_TIMEOUT:5000}
-          writetimeout: ${SPRING_MAIL_WRITE_TIMEOUT:5000}
+          connectiontimeout: ${SPRING_MAIL_CONNECTION_TIMEOUT:30000}
+          timeout: ${SPRING_MAIL_TIMEOUT:30000}
+          writetimeout: ${SPRING_MAIL_WRITE_TIMEOUT:30000}
 
 server:
   # Render health-checks port 10000. SERVER_PORT remains available for other hosts.

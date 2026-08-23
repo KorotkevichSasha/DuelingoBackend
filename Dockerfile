@@ -23,5 +23,5 @@ EXPOSE 8082 10000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
   CMD curl --fail --silent "http://127.0.0.1:${SERVER_PORT:-10000}/actuator/health/liveness" > /dev/null || exit 1
 # Keep the JVM plus native memory safely below Render Free's 512 MB limit.
-ENV JAVA_TOOL_OPTIONS="-Xms64m -Xmx256m -XX:MaxMetaspaceSize=128m -XX:+UseSerialGC -XX:+ExitOnOutOfMemoryError"
+ENV JAVA_TOOL_OPTIONS="-Xms64m -Xmx256m -XX:MaxMetaspaceSize=128m -XX:+UseSerialGC -XX:+ExitOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
 ENTRYPOINT ["java", "-jar", "app.jar"]
