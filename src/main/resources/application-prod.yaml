@@ -107,6 +107,11 @@ app:
     from: ${APP_MAIL_FROM:${SPRING_MAIL_USERNAME}}
     brevo-api-key: ${BREVO_API_KEY:}
     brevo-base-url: ${BREVO_BASE_URL:https://api.brevo.com}
+    gmail-api:
+      client-id: ${GMAIL_API_CLIENT_ID:}
+      client-secret: ${GMAIL_API_CLIENT_SECRET:}
+      refresh-token: ${GMAIL_API_REFRESH_TOKEN:}
+      sender: ${GMAIL_API_SENDER:${APP_MAIL_FROM:${SPRING_MAIL_USERNAME}}}
   email-verification:
     delivery-enabled: ${EMAIL_VERIFICATION_DELIVERY_ENABLED:true}
     test-code: ${EMAIL_VERIFICATION_TEST_CODE:}
