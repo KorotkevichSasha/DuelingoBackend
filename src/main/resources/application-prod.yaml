@@ -105,6 +105,8 @@ app:
   public-base-url: ${APP_PUBLIC_BASE_URL}
   mail:
     from: ${APP_MAIL_FROM:${SPRING_MAIL_USERNAME}}
+    brevo-api-key: ${BREVO_API_KEY:}
+    brevo-base-url: ${BREVO_BASE_URL:https://api.brevo.com}
   email-verification:
     delivery-enabled: ${EMAIL_VERIFICATION_DELIVERY_ENABLED:true}
     test-code: ${EMAIL_VERIFICATION_TEST_CODE:}
