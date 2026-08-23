@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 public class EmailService {
 
     private final JavaMailSender mailSender;
+    private final BrevoEmailClient brevoEmailClient;
 
     @Value("${spring.mail.username}")
     private String sender;
@@ -27,6 +28,10 @@ public class EmailService {
 
     @Async
     public void sendSimpleMessage(String to, String subject, String text) {
+        if (brevoEmailClient.isConfigured()) {
+            brevoEmailClient.send(to, subject, text);
+            return;
+        }
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(sender);
@@ -40,15 +45,22 @@ public class EmailService {
     }
 
     public boolean sendVerificationCode(String to, String code, long validMinutes) {
+        String subject = "DuelRush — подтверждение почты";
+        String text = "Ваш код подтверждения DuelRush: " + code
+                + "\n\nКод действует " + validMinutes + " минут. "
+                + "Если вы не регистрировались, просто проигнорируйте это письмо.";
+        if (brevoEmailClient.isConfigured()) {
+            boolean sent = brevoEmailClient.send(to, subject, text);
+            if (sent) log.info("Verification email accepted by Brevo for {}", to);
+            return sent;
+        }
         try {
             var message = mailSender.createMimeMessage();
             var helper = new MimeMessageHelper(message, false, StandardCharsets.UTF_8.name());
             helper.setFrom(new InternetAddress(verificationSender, "DuelRush", StandardCharsets.UTF_8.name()));
             helper.setTo(to);
-            helper.setSubject("DuelRush — подтверждение почты");
-            helper.setText("Ваш код подтверждения DuelRush: " + code
-                    + "\n\nКод действует " + validMinutes + " минут. "
-                    + "Если вы не регистрировались, просто проигнорируйте это письмо.");
+            helper.setSubject(subject);
+            helper.setText(text);
             mailSender.send(message);
             log.info("Verification email accepted by SMTP for {}", to);
             return true;
@@ -60,15 +72,21 @@ public class EmailService {
 
     @Async
     public void sendPasswordResetCode(String to, String code, long validMinutes) {
+        String subject = "DuelRush — восстановление пароля";
+        String text = "Ваш код для восстановления пароля DuelRush: " + code
+                + "\n\nКод действует " + validMinutes + " минут. "
+                + "Если вы не запрашивали восстановление, проигнорируйте письмо и никому не сообщайте код.";
+        if (brevoEmailClient.isConfigured()) {
+            brevoEmailClient.send(to, subject, text);
+            return;
+        }
         try {
             var message = mailSender.createMimeMessage();
             var helper = new MimeMessageHelper(message, false, StandardCharsets.UTF_8.name());
             helper.setFrom(new InternetAddress(verificationSender, "DuelRush", StandardCharsets.UTF_8.name()));
             helper.setTo(to);
-            helper.setSubject("DuelRush — восстановление пароля");
-            helper.setText("Ваш код для восстановления пароля DuelRush: " + code
-                    + "\n\nКод действует " + validMinutes + " минут. "
-                    + "Если вы не запрашивали восстановление, проигнорируйте письмо и никому не сообщайте код.");
+            helper.setSubject(subject);
+            helper.setText(text);
             mailSender.send(message);
             log.info("Password reset email accepted by SMTP for {}", to);
         } catch (Exception exception) {
