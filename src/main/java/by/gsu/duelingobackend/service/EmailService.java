@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 public class EmailService {
 
     private final JavaMailSender mailSender;
+    private final GmailApiEmailClient gmailApiEmailClient;
     private final BrevoEmailClient brevoEmailClient;
 
     @Value("${spring.mail.username}")
@@ -28,6 +29,10 @@ public class EmailService {
 
     @Async
     public void sendSimpleMessage(String to, String subject, String text) {
+        if (gmailApiEmailClient.isConfigured()) {
+            gmailApiEmailClient.send(to, subject, text);
+            return;
+        }
         if (brevoEmailClient.isConfigured()) {
             brevoEmailClient.send(to, subject, text);
             return;
@@ -49,7 +54,11 @@ public class EmailService {
         String text = "Ваш код подтверждения DuelRush: " + code
                 + "\n\nКод действует " + validMinutes + " минут. "
                 + "Если вы не регистрировались, просто проигнорируйте это письмо.";
-        if (brevoEmailClient.isConfigured()) {
+        if (gmailApiEmailClient.isConfigured()) {
+            boolean sent = gmailApiEmailClient.send(to, subject, text);
+            if (sent) log.info("Verification email accepted by Gmail API for {}", to);
+            return sent;
+        } else if (brevoEmailClient.isConfigured()) {
             boolean sent = brevoEmailClient.send(to, subject, text);
             if (sent) log.info("Verification email accepted by Brevo for {}", to);
             return sent;
@@ -76,7 +85,10 @@ public class EmailService {
         String text = "Ваш код для восстановления пароля DuelRush: " + code
                 + "\n\nКод действует " + validMinutes + " минут. "
                 + "Если вы не запрашивали восстановление, проигнорируйте письмо и никому не сообщайте код.";
-        if (brevoEmailClient.isConfigured()) {
+        if (gmailApiEmailClient.isConfigured()) {
+            gmailApiEmailClient.send(to, subject, text);
+            return;
+        } else if (brevoEmailClient.isConfigured()) {
             brevoEmailClient.send(to, subject, text);
             return;
         }
