@@ -13,6 +13,7 @@ import by.gsu.duelingobackend.repository.question.QuestionRepository;
 import by.gsu.duelingobackend.service.matchmaking.EloRatingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.types.ObjectId;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -20,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,7 +40,15 @@ class DuelServiceTest {
     @Mock private QuestionRepository questionRepository;
     @Mock private DuelMapper duelMapper;
     @Mock private AchievementService achievementService;
+    @Mock private EconomyService economyService;
     @Mock private SimpMessagingTemplate messagingTemplate;
+
+    @BeforeEach
+    void setUpRewardResults() {
+        when(eloRatingService.updateRatings(any()))
+                .thenReturn(new EloRatingService.RatingChanges(0, 0, 0, 0));
+        when(economyService.awardDuelGold(any(), any())).thenReturn(Map.of());
+    }
 
     @Test
     void verifiesSubmittedAnswersInsteadOfTrustingTheClientScore() {
@@ -76,7 +86,8 @@ class DuelServiceTest {
                 duelMapper,
                 achievementService,
                 messagingTemplate,
-                new ObjectMapper()
+                new ObjectMapper(),
+                economyService
         );
 
         service.processDuelResults(
@@ -112,7 +123,8 @@ class DuelServiceTest {
                 duelMapper,
                 achievementService,
                 messagingTemplate,
-                new ObjectMapper()
+                new ObjectMapper(),
+                economyService
         );
 
         service.forfeitDuel(duelId, player1.getId());

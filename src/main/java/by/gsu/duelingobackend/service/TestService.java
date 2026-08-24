@@ -2,6 +2,7 @@ package by.gsu.duelingobackend.service;
 
 import by.gsu.duelingobackend.dto.response.TestDetailedResponse;
 import by.gsu.duelingobackend.dto.response.TestSummaryResponse;
+import by.gsu.duelingobackend.dto.response.LearningRewardResponse;
 import by.gsu.duelingobackend.exceptions.EntityNotFoundException;
 import by.gsu.duelingobackend.mapper.TestMapper;
 import by.gsu.duelingobackend.model.UserTestProgress;
@@ -9,6 +10,7 @@ import by.gsu.duelingobackend.model.document.Test;
 import by.gsu.duelingobackend.model.enums.AchievementConditionType;
 import by.gsu.duelingobackend.model.enums.ProgressStatus;
 import by.gsu.duelingobackend.repository.UserTestProgressRepository;
+import by.gsu.duelingobackend.repository.UserRepository;
 import by.gsu.duelingobackend.repository.test.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -29,6 +31,8 @@ public class TestService {
     private final UserTestProgressRepository userTestProgressRepository;
     private final TestMapper testMapper;
     private final AchievementService achievementService;
+    private final EconomyService economyService;
+    private final UserRepository userRepository;
 
     public List<TestSummaryResponse> getTestsForTopic(String topic, UUID userId) {
         List<Test> tests = testRepository.findByTopicExcludingQuestions(topic);
@@ -67,14 +71,16 @@ public class TestService {
     }
 
     @Transactional
-    public void markTestAsPassed(String testId, UUID userId) {
-        if (!testRepository.existsById(testId)) {
-            throw new EntityNotFoundException(String.format(TEST_NOT_FOUND_BY_ID_ERR_MSG, testId));
-        }
+    public LearningRewardResponse markTestAsPassed(String testId, UUID userId) {
+        Test test = testRepository.findById(testId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format(TEST_NOT_FOUND_BY_ID_ERR_MSG, testId)));
 
         Optional<UserTestProgress> existingProgress = userTestProgressRepository
                 .findByUserIdAndTestId(userId, testId);
 
+        boolean firstCompletion = existingProgress
+                .map(value -> value.getStatus() != ProgressStatus.COMPLETED)
+                .orElse(true);
         UserTestProgress progress;
         if (existingProgress.isPresent()) {
             progress = existingProgress.get();
@@ -87,7 +93,15 @@ public class TestService {
                     .build();
         }
         userTestProgressRepository.save(progress);
-        achievementService.updateProgress(userId, AchievementConditionType.TEST_PASSED, 1);
+        int reward = 0;
+        if (firstCompletion) {
+            achievementService.updateProgress(userId, AchievementConditionType.TEST_PASSED, 1);
+            reward = economyService.awardLearningGold(userId, test.getDifficulty());
+        }
+        int totalGold = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"))
+                .getGold();
+        return new LearningRewardResponse(reward, totalGold, firstCompletion);
     }
 
 

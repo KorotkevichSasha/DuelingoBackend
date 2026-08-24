@@ -2,6 +2,7 @@ package by.gsu.duelingobackend.controller;
 
 import by.gsu.duelingobackend.dto.response.TestDetailedResponse;
 import by.gsu.duelingobackend.dto.response.TestSummaryResponse;
+import by.gsu.duelingobackend.dto.response.LearningRewardResponse;
 import by.gsu.duelingobackend.security.UserDetailsImpl;
 import by.gsu.duelingobackend.service.TestService;
 import jakarta.validation.constraints.NotBlank;
@@ -44,9 +45,9 @@ public class TestController {
     }
 
     @PostMapping("/{testId}/mark-as-passed")
-    public void markTestAsPassed(@PathVariable @NotBlank String testId,
+    public LearningRewardResponse markTestAsPassed(@PathVariable @NotBlank String testId,
                                  @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        testService.markTestAsPassed(testId, userDetails.getUser().getId());
+        return testService.markTestAsPassed(testId, userDetails.getUser().getId());
     }
 
     @GetMapping("/topics")

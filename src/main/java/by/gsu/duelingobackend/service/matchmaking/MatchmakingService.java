@@ -167,7 +167,8 @@ public class MatchmakingService {
             case MEDIUM -> 120_000L;
             case HARD -> 75_000L;
         };
-        DuelResponse duel = duelService.createDuel(player1Id, player2Id, difficulty, questionCount);
+        DuelResponse duel = duelService.createDuel(
+                player1Id, player2Id, difficulty, questionCount, !friendChallenge);
         recordWaitTime(player1Id, difficulty);
         recordWaitTime(player2Id, difficulty);
         cleanupUserFromQueue(player1Id);
@@ -249,6 +250,8 @@ public class MatchmakingService {
                 .role(Role.USER)
                 .points(Math.max(0, points))
                 .avatarUrl("default:" + (difficulty.ordinal() + 4))
+                .virtualPlayer(true)
+                .gold(0)
                 .build();
         try {
             return userRepository.saveAndFlush(profile);

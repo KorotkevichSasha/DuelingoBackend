@@ -8,6 +8,8 @@ import by.gsu.duelingobackend.security.UserDetailsImpl;
 import by.gsu.duelingobackend.service.FileStorageService;
 import by.gsu.duelingobackend.service.RelationshipService;
 import by.gsu.duelingobackend.service.UserService;
+import by.gsu.duelingobackend.service.EconomyService;
+import by.gsu.duelingobackend.dto.response.EconomyResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -41,10 +43,23 @@ public class UserController {
     private final UserService userService;
     private final RelationshipService relationshipService;
     private final FileStorageService fileStorageService;
+    private final EconomyService economyService;
 
     @GetMapping("/profile")
     public UserProfileResponse getProfile(@AuthenticationPrincipal UserDetailsImpl principal) {
         return userService.getProfile(principal.getUsername());
+    }
+
+    @GetMapping("/economy")
+    public EconomyResponse getEconomy(@AuthenticationPrincipal UserDetailsImpl principal) {
+        return economyService.getEconomy(principal.getUser().getId());
+    }
+
+    @PostMapping("/economy/rush-packs/{packId}")
+    public EconomyResponse purchaseRushPack(
+            @AuthenticationPrincipal UserDetailsImpl principal,
+            @PathVariable String packId) {
+        return economyService.purchaseRushPack(principal.getUser().getId(), packId);
     }
 
     @PostMapping("/profile/avatar")

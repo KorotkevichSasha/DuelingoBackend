@@ -1,5 +1,7 @@
 package by.gsu.duelingobackend.dto.response.user;
 
+import by.gsu.duelingobackend.dto.response.EconomyResponse;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -10,6 +12,7 @@ public record UserProfileResponse(
         String email,
         Integer points,
         String avatarUrl,
-        LocalDateTime lastLogin
+        LocalDateTime lastLogin,
+        EconomyResponse economy
 ) implements Serializable {
 }

@@ -16,6 +16,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import by.gsu.duelingobackend.model.enums.QuestionDifficulty;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Entity
 @Getter
@@ -65,4 +68,17 @@ public class Duel {
 
     @Column(name = "ended_at")
     private LocalDateTime endedAt;
+
+    @Builder.Default
+    @Column(name = "ranked", nullable = false)
+    private boolean ranked = true;
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    @Column(name = "difficulty", nullable = false, length = 16)
+    private QuestionDifficulty difficulty = QuestionDifficulty.MEDIUM;
+
+    @Builder.Default
+    @Column(name = "rewards_settled", nullable = false)
+    private boolean rewardsSettled = false;
 }

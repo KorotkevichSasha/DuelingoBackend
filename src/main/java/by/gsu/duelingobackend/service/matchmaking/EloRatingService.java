@@ -26,7 +26,10 @@ public class EloRatingService {
     private final LeaderboardService leaderboardService;
 
     @Transactional
-    public void updateRatings(Duel duel) {
+    public RatingChanges updateRatings(Duel duel) {
+        if (!duel.isRanked()) {
+            return new RatingChanges(0, 0, duel.getPlayer1().getPoints(), duel.getPlayer2().getPoints());
+        }
         log.info("Updating ratings for duel: {}", duel.getId());
         log.info("Player1: {} (score: {}, points: {})", duel.getPlayer1().getUsername(), duel.getPlayer1Score(), duel.getPlayer1().getPoints());
         log.info("Player2: {} (score: {}, points: {})", duel.getPlayer2().getUsername(), duel.getPlayer2Score(), duel.getPlayer2().getPoints());
@@ -34,7 +37,9 @@ public class EloRatingService {
         User player1 = duel.getPlayer1();
         User player2 = duel.getPlayer2();
 
-        double expectedScore = getExpectedScore(player1.getPoints(), player2.getPoints());
+        int previousPlayer1Points = player1.getPoints();
+        int previousPlayer2Points = player2.getPoints();
+        double expectedScore = getExpectedScore(previousPlayer1Points, previousPlayer2Points);
         double actualScore = getActualScore(duel);
 
         int delta1 = (int) (K_FACTOR * (actualScore - expectedScore));
@@ -59,6 +64,7 @@ public class EloRatingService {
                     }
                 }
         );
+        return new RatingChanges(delta1, delta2, previousPlayer1Points, previousPlayer2Points);
     }
 
     private double getExpectedScore(int ratingA, int ratingB) {
@@ -69,4 +75,11 @@ public class EloRatingService {
         if (Objects.equals(duel.getPlayer1Score(), duel.getPlayer2Score())) return 0.5;
         return duel.getPlayer1Score() > duel.getPlayer2Score() ? 1.0 : 0.0;
     }
+
+    public record RatingChanges(
+            int player1Delta,
+            int player2Delta,
+            int player1PreviousPoints,
+            int player2PreviousPoints
+    ) {}
 }

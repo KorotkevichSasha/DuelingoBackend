@@ -5,6 +5,7 @@ import by.gsu.duelingobackend.dto.response.PaginationResponse;
 import by.gsu.duelingobackend.dto.response.user.UserInLeaderboardResponse;
 import by.gsu.duelingobackend.exceptions.EntityNotFoundException;
 import by.gsu.duelingobackend.model.User;
+import by.gsu.duelingobackend.model.enums.LeagueTier;
 import by.gsu.duelingobackend.repository.UserRepository;
 import by.gsu.duelingobackend.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
@@ -69,7 +70,8 @@ public class LeaderboardService {
                 user.getPoints(),
                 user.getAvatarUrl(),
                 getUserRank(userId),
-                getPointsToNextRank(userId)
+                getPointsToNextRank(userId),
+                LeagueTier.forPoints(user.getPoints()).response(user.getPoints())
         );
     }
 
@@ -117,7 +119,8 @@ public class LeaderboardService {
                         tuple.getScore().intValue(),
                         user.getAvatarUrl(),
                         ranksByScore.computeIfAbsent(tuple.getScore(), this::rankForScore),
-                        pointsToNextScore(tuple.getScore())
+                        pointsToNextScore(tuple.getScore()),
+                        LeagueTier.forPoints(tuple.getScore().intValue()).response(tuple.getScore().intValue())
                 ));
             } catch (IllegalArgumentException e) {
                 log.error("Skipping invalid UUID: {}", tuple.getValue());

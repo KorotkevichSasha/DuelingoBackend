@@ -72,6 +72,29 @@ public class User {
     @Column(name = "points", nullable = false)
     private Integer points = 0;
 
+    @Min(0)
+    @Builder.Default
+    @Column(name = "gold", nullable = false)
+    private Integer gold = 100;
+
+    @Min(0)
+    @Builder.Default
+    @Column(name = "rush_charges", nullable = false)
+    private Integer rushCharges = 25;
+
+    @Builder.Default
+    @Column(name = "rush_charges_updated_at", nullable = false)
+    private LocalDateTime rushChargesUpdatedAt = LocalDateTime.now();
+
+    @Builder.Default
+    @Column(name = "virtual_player", nullable = false)
+    private boolean virtualPlayer = false;
+
+    @Min(0)
+    @Builder.Default
+    @Column(name = "highest_league_rewarded", nullable = false)
+    private Integer highestLeagueRewarded = 0;
+
     @Column(name = "avatar_url")
     private String avatarUrl;
 
