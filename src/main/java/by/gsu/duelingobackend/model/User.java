@@ -80,7 +80,7 @@ public class User {
     @Min(0)
     @Builder.Default
     @Column(name = "rush_charges", nullable = false)
-    private Integer rushCharges = 25;
+    private Integer rushCharges = 10;
 
     @Builder.Default
     @Column(name = "rush_charges_updated_at", nullable = false)

@@ -43,7 +43,14 @@ public class UserAchievement {
     @Column(name = "is_achieved", nullable = false)
     private boolean isAchieved;
 
-    @Column(name = "achieved_at", nullable = false)
+    @Column(name = "achieved_at")
     private LocalDateTime achievedAt;
+
+    @Column(name = "reward_claimed", nullable = false)
+    @Builder.Default
+    private boolean rewardClaimed = false;
+
+    @Column(name = "reward_claimed_at")
+    private LocalDateTime rewardClaimedAt;
 }
 

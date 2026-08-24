@@ -24,8 +24,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class EconomyService {
 
-    public static final int MAX_RUSH_CHARGES = 25;
-    public static final int MINUTES_PER_CHARGE = 30;
+    public static final int MAX_RUSH_CHARGES = 10;
+    public static final int MINUTES_PER_CHARGE = 60;
 
     private final UserRepository users;
 
@@ -208,9 +208,9 @@ public class EconomyService {
     }
 
     private enum RushPack {
-        POCKET(5, 50),
-        BOOST(12, 105),
-        VAULT(25, 200);
+        POCKET(3, 35),
+        BOOST(6, 60),
+        VAULT(10, 90);
 
         private final int charges;
         private final int goldCost;

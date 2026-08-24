@@ -14,6 +14,8 @@ public record UserAchievementResponse(
         int requiredValue,
         int currentValue,
         boolean isAchieved,
-        String iconUrl
+        String iconUrl,
+        int rewardGold,
+        boolean rewardClaimed
 ) {}
 

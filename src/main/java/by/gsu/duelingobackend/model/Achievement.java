@@ -55,6 +55,10 @@ public class Achievement {
     @Column(name = "required_value", nullable = false)
     private Integer requiredValue;
 
+    @Column(name = "reward_gold", nullable = false)
+    @Builder.Default
+    private Integer rewardGold = 0;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "condition_type", nullable = false)
     private AchievementConditionType conditionType;
