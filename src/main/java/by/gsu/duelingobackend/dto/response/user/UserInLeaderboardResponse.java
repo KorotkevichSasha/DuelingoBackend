@@ -1,5 +1,7 @@
 package by.gsu.duelingobackend.dto.response.user;
 
+import by.gsu.duelingobackend.dto.response.LeagueResponse;
+
 import java.util.UUID;
 
 public record UserInLeaderboardResponse(
@@ -8,6 +10,7 @@ public record UserInLeaderboardResponse(
         Integer points,
         String avatarUrl,
         Long rank,
-        Integer pointsToNextRank
+        Integer pointsToNextRank,
+        LeagueResponse league
 ) {
 }

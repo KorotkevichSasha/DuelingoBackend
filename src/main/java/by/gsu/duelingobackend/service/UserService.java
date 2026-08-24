@@ -40,6 +40,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final FileStorageService fileStorageService;
     private final LeaderboardService leaderboardService;
+    private final EconomyService economyService;
 
     @Transactional
     public User create(User user) {
@@ -60,12 +61,14 @@ public class UserService {
     public UserProfileResponse getProfile(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(USER_NOT_FOUND_BY_USERNAME_ERR_MSG, username)));
+        user = economyService.refreshUserEconomy(user.getId());
         return userMapper.toUserProfileResponse(user);
     }
 
     public UserProfileResponse getProfileById(UUID userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(USER_NOT_FOUND_BY_ID_ERR_MSG, userId)));
+        user = economyService.refreshUserEconomy(user.getId());
         return userMapper.toUserProfileResponse(user);
     }
 

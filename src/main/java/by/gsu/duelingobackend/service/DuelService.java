@@ -18,6 +18,7 @@ import by.gsu.duelingobackend.repository.DuelRepository;
 import by.gsu.duelingobackend.repository.UserRepository;
 import by.gsu.duelingobackend.repository.question.QuestionRepository;
 import by.gsu.duelingobackend.service.matchmaking.EloRatingService;
+import by.gsu.duelingobackend.model.enums.LeagueTier;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,20 +64,31 @@ public class DuelService {
     private final AchievementService achievementService;
     private final SimpMessagingTemplate messagingTemplate;
     private final ObjectMapper objectMapper;
+    private final EconomyService economyService;
     private final Map<UUID, CompletableFuture<Void>> pendingDuels = new ConcurrentHashMap<>();
 
     private static final int DEFAULT_QUESTIONS_SIZE = 10;
 
     public DuelResponse createDuel(UUID player1Id, UUID player2Id) {
-        return createDuel(player1Id, player2Id, QuestionDifficulty.MEDIUM, DEFAULT_QUESTIONS_SIZE);
+        return createDuel(player1Id, player2Id, QuestionDifficulty.MEDIUM, DEFAULT_QUESTIONS_SIZE, true);
     }
 
     public DuelResponse createDuel(UUID player1Id, UUID player2Id, QuestionDifficulty difficulty, int questionCount) {
+        return createDuel(player1Id, player2Id, difficulty, questionCount, true);
+    }
+
+    @Transactional
+    public DuelResponse createDuel(UUID player1Id, UUID player2Id, QuestionDifficulty difficulty,
+                                   int questionCount, boolean ranked) {
         log.info("Starting duel creation between players {} and {}",
                 player1Id, player2Id);
 
         User player1 = getUserWithLogging(player1Id);
         User player2 = getUserWithLogging(player2Id);
+
+        if (ranked) {
+            economyService.consumeRankedDuelCharges(List.of(player1Id, player2Id));
+        }
 
         List<Question> questions = questionRepository.findRandomQuestions(
                 null,
@@ -91,7 +103,7 @@ public class DuelService {
             log.info("Selected {} questions for duel", questions.size());
         }
 
-        Duel duel = buildDuel(player1, player2, questions);
+        Duel duel = buildDuel(player1, player2, questions, difficulty, ranked);
         Duel savedDuel = duelRepository.save(duel);
 
         log.info("Duel created successfully with ID: {}", savedDuel.getId());
@@ -215,10 +227,17 @@ public class DuelService {
     private void completeDuel(Duel duel, String forfeitedBy) {
         duel.setEndedAt(LocalDateTime.now());
         duelRepository.save(duel);
-        eloRatingService.updateRatings(duel);
+        EloRatingService.RatingChanges ratingChanges = eloRatingService.updateRatings(duel);
+        Map<UUID, Integer> previousPoints = Map.of(
+                duel.getPlayer1().getId(), ratingChanges.player1PreviousPoints(),
+                duel.getPlayer2().getId(), ratingChanges.player2PreviousPoints()
+        );
+        Map<UUID, EconomyService.DuelReward> goldRewards = economyService.awardDuelGold(duel, previousPoints);
+        duel.setRewardsSettled(true);
+        duelRepository.save(duel);
         achievementService.updateProgress(duel.getPlayer1().getId(), AchievementConditionType.DUEL_PLAYED, 1);
         achievementService.updateProgress(duel.getPlayer2().getId(), AchievementConditionType.DUEL_PLAYED, 1);
-        sendDuelResult(duel, forfeitedBy);
+        sendDuelResult(duel, forfeitedBy, ratingChanges, goldRewards);
     }
 
     private void updatePlayerScore(
@@ -408,7 +427,12 @@ public class DuelService {
         }
     }
 
-    private void sendDuelResult(Duel duel, String forfeitedBy) {
+    private void sendDuelResult(
+            Duel duel,
+            String forfeitedBy,
+            EloRatingService.RatingChanges ratingChanges,
+            Map<UUID, EconomyService.DuelReward> goldRewards
+    ) {
         String winner;
 
         if (duel.getPlayer1Score() > duel.getPlayer2Score()) {
@@ -419,22 +443,49 @@ public class DuelService {
             winner = "Draw";
         }
 
-        DuelResultEvent resultEvent = new DuelResultEvent(
+        EconomyService.DuelReward player1Reward = goldRewards.getOrDefault(
+                duel.getPlayer1().getId(), EconomyService.DuelReward.none());
+        EconomyService.DuelReward player2Reward = goldRewards.getOrDefault(
+                duel.getPlayer2().getId(), EconomyService.DuelReward.none());
+        LeagueTier player1PreviousLeague = LeagueTier.forPoints(ratingChanges.player1PreviousPoints());
+        LeagueTier player2PreviousLeague = LeagueTier.forPoints(ratingChanges.player2PreviousPoints());
+        LeagueTier player1League = LeagueTier.forPoints(duel.getPlayer1().getPoints());
+        LeagueTier player2League = LeagueTier.forPoints(duel.getPlayer2().getPoints());
+
+        DuelResultEvent player1Event = new DuelResultEvent(
                 duel.getPlayer1Score(),
                 duel.getPlayer2Score(),
                 winner,
-                forfeitedBy
+                forfeitedBy,
+                player1Reward.totalGold(),
+                ratingChanges.player1Delta(),
+                player1League.name(),
+                player1Reward.leagueBonusGold() > 0,
+                player1PreviousLeague.name(),
+                player1Reward.leagueBonusGold()
+        );
+        DuelResultEvent player2Event = new DuelResultEvent(
+                duel.getPlayer1Score(),
+                duel.getPlayer2Score(),
+                winner,
+                forfeitedBy,
+                player2Reward.totalGold(),
+                ratingChanges.player2Delta(),
+                player2League.name(),
+                player2Reward.leagueBonusGold() > 0,
+                player2PreviousLeague.name(),
+                player2Reward.leagueBonusGold()
         );
 
         messagingTemplate.convertAndSendToUser(
                 duel.getPlayer1().getUsername(),
                 "/queue/duel-result",
-                resultEvent
+                player1Event
         );
         messagingTemplate.convertAndSendToUser(
                 duel.getPlayer2().getUsername(),
                 "/queue/duel-result",
-                resultEvent
+                player2Event
         );
     }
 
@@ -453,7 +504,8 @@ public class DuelService {
                 });
     }
 
-    private Duel buildDuel(User player1, User player2, List<Question> questions) {
+    private Duel buildDuel(User player1, User player2, List<Question> questions,
+                           QuestionDifficulty difficulty, boolean ranked) {
         return Duel.builder()
                 .player1(player1)
                 .player2(player2)
@@ -461,6 +513,8 @@ public class DuelService {
                 .startedAt(LocalDateTime.now())
                 .player1Score(null)
                 .player2Score(null)
+                .difficulty(difficulty)
+                .ranked(ranked)
                 .build();
     }
 
