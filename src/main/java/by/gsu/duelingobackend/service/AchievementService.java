@@ -1,8 +1,9 @@
 package by.gsu.duelingobackend.service;
 
 import by.gsu.duelingobackend.dto.response.UserAchievementResponse;
+import by.gsu.duelingobackend.dto.response.AchievementClaimResponse;
+import by.gsu.duelingobackend.exceptions.InvalidOperationException;
 import by.gsu.duelingobackend.exceptions.EntityNotFoundException;
-import by.gsu.duelingobackend.mapper.UserAchievementMapper;
 import by.gsu.duelingobackend.model.Achievement;
 import by.gsu.duelingobackend.model.User;
 import by.gsu.duelingobackend.model.UserAchievement;
@@ -30,7 +31,6 @@ public class AchievementService {
 
     private final AchievementRepository achievementRepository;
     private final UserAchievementRepository userAchievementRepository;
-    private final UserAchievementMapper userAchievementMapper;
     private final UserRepository userRepository;
 
     public List<Achievement> getAllAchievements() {
@@ -59,19 +59,42 @@ public class AchievementService {
                     int currentValue = ua != null ? ua.getCurrentValue() : 0;
                     boolean isAchieved = ua != null && ua.isAchieved();
 
-                    return new UserAchievementResponse(
-                            achievement.getId(),
-                            achievement.getTitle(),
-                            achievement.getDescription(),
-                            achievement.getType(),
-                            achievement.getLevel(),
-                            achievement.getRequiredValue(),
-                            currentValue,
-                            isAchieved,
-                            achievement.getIconUrl()
-                    );
+                    return response(achievement, ua, currentValue, isAchieved);
                 })
                 .toList();
+    }
+
+    @Transactional
+    public AchievementClaimResponse claimReward(UUID userId, UUID achievementId) {
+        UserAchievement userAchievement = userAchievementRepository
+                .findByUserIdAndAchievementIdForUpdate(userId, achievementId)
+                .orElseThrow(() -> new EntityNotFoundException("Achievement progress not found"));
+        if (!userAchievement.isAchieved()) {
+            throw new InvalidOperationException("Complete the achievement before claiming its reward");
+        }
+
+        User user = userRepository.findByIdForUpdate(userId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format(USER_NOT_FOUND_BY_ID_ERR_MSG, userId)));
+        int claimedGold = 0;
+        if (!userAchievement.isRewardClaimed()) {
+            claimedGold = userAchievement.getAchievement().getRewardGold();
+            user.setGold(user.getGold() + claimedGold);
+            userAchievement.setRewardClaimed(true);
+            userAchievement.setRewardClaimedAt(LocalDateTime.now());
+            userRepository.save(user);
+            userAchievementRepository.save(userAchievement);
+        }
+
+        return new AchievementClaimResponse(
+                claimedGold,
+                user.getGold(),
+                response(
+                        userAchievement.getAchievement(),
+                        userAchievement,
+                        userAchievement.getCurrentValue(),
+                        true
+                )
+        );
     }
 
     @Transactional
@@ -105,6 +128,27 @@ public class AchievementService {
                 userAchievementRepository.save(ua);
             }
         }
+    }
+
+    private UserAchievementResponse response(
+            Achievement achievement,
+            UserAchievement progress,
+            int currentValue,
+            boolean achieved
+    ) {
+        return new UserAchievementResponse(
+                achievement.getId(),
+                achievement.getTitle(),
+                achievement.getDescription(),
+                achievement.getType(),
+                achievement.getLevel(),
+                achievement.getRequiredValue(),
+                currentValue,
+                achieved,
+                achievement.getIconUrl(),
+                achievement.getRewardGold(),
+                progress != null && progress.isRewardClaimed()
+        );
     }
 
 }

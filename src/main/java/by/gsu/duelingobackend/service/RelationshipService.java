@@ -143,6 +143,7 @@ public class RelationshipService {
                 UserRelationship updated = relationshipRepository.save(relationship);
                 achievementService.updateProgress(relationship.getFromUser().getId(), AchievementConditionType.FRIEND_ADDED, 1);
                 achievementService.updateProgress(relationship.getToUser().getId(), AchievementConditionType.FRIEND_ADDED, 1);
+                achievementService.updateProgress(relationship.getFromUser().getId(), AchievementConditionType.FRIEND_INVITED, 1);
                 return userRelationshipMapper.toResponse(updated);
             }
             case "REJECT" -> {

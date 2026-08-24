@@ -26,33 +26,33 @@ class EconomyServiceTest {
 
     @Test
     void restoresRushSparksWithoutExceedingTheMaximum() {
-        User user = player(false, 100, 23);
-        user.setRushChargesUpdatedAt(LocalDateTime.now().minusMinutes(65));
+        User user = player(false, 100, 8);
+        user.setRushChargesUpdatedAt(LocalDateTime.now().minusMinutes(125));
         when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
 
         EconomyResponse result = new EconomyService(users).getEconomy(user.getId());
 
-        assertThat(result.rushCharges()).isEqualTo(25);
+        assertThat(result.rushCharges()).isEqualTo(10);
         assertThat(result.nextRushChargeAt()).isNull();
     }
 
     @Test
     void rankedDuelConsumesOnlyRealPlayersRushSparks() {
-        User human = player(false, 100, 25);
-        User virtualOpponent = player(true, 0, 25);
+        User human = player(false, 100, 10);
+        User virtualOpponent = player(true, 0, 10);
         List<UUID> ids = List.of(human.getId(), virtualOpponent.getId()).stream().sorted().toList();
         when(users.findAllByIdForUpdate(ids)).thenReturn(List.of(human, virtualOpponent));
 
         new EconomyService(users).consumeRankedDuelCharges(ids);
 
-        assertThat(human.getRushCharges()).isEqualTo(24);
-        assertThat(virtualOpponent.getRushCharges()).isEqualTo(25);
+        assertThat(human.getRushCharges()).isEqualTo(9);
+        assertThat(virtualOpponent.getRushCharges()).isEqualTo(10);
     }
 
     @Test
     void hardRankedWinnerReceivesMoreGoldThanLoser() {
-        User winner = player(false, 10, 25);
-        User loser = player(false, 10, 25);
+        User winner = player(false, 10, 10);
+        User loser = player(false, 10, 10);
         List<UUID> ids = List.of(winner.getId(), loser.getId()).stream().sorted().toList();
         when(users.findAllByIdForUpdate(ids)).thenReturn(List.of(winner, loser));
         Duel duel = Duel.builder()
@@ -73,9 +73,9 @@ class EconomyServiceTest {
 
     @Test
     void rewardsEachNewLeagueOnlyOnce() {
-        User promoted = player(false, 100, 25);
+        User promoted = player(false, 100, 10);
         promoted.setPoints(205);
-        User opponent = player(false, 100, 25);
+        User opponent = player(false, 100, 10);
         opponent.setHighestLeagueRewarded(0);
         List<UUID> ids = List.of(promoted.getId(), opponent.getId()).stream().sorted().toList();
         when(users.findAllByIdForUpdate(ids)).thenReturn(List.of(promoted, opponent));
