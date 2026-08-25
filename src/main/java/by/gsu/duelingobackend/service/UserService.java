@@ -14,7 +14,6 @@ import by.gsu.duelingobackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -73,7 +72,6 @@ public class UserService {
     }
 
     @Transactional
-    @CachePut(value = "users", key = "#username")
     public UserProfileResponse updateProfile(String username, EditProfileRequest editProfileRequest) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(USER_NOT_FOUND_BY_USERNAME_ERR_MSG, username)));
@@ -117,7 +115,6 @@ public class UserService {
     }
 
     @Transactional
-    @CachePut(value = "users", key = "#username")
     public UserProfileResponse updateAvatar(String username, MultipartFile file) {
         User user = getByUsername(username);
         String filename = user.getId().toString();
@@ -133,7 +130,6 @@ public class UserService {
     }
 
     @Transactional
-    @CachePut(value = "users", key = "#username")
     public UserProfileResponse selectDefaultAvatar(String username, int index) {
         if (index < 1 || index > 10) {
             throw new InvalidOperationException("Default avatar index must be between 1 and 10");
