@@ -23,6 +23,7 @@ import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -108,6 +109,16 @@ public class User {
     @Builder.Default
     @Column(name = "token_version", nullable = false)
     private int tokenVersion = 0;
+
+    @Column(name = "last_daily_tip_reward_at")
+    private LocalDate lastDailyTipRewardAt;
+
+    @Column(name = "listening_reward_date")
+    private LocalDate listeningRewardDate;
+
+    @Builder.Default
+    @Column(name = "listening_gold_today", nullable = false)
+    private Integer listeningGoldToday = 0;
 
     @OneToMany(mappedBy = "user")
     private List<UserTestProgress> progress;

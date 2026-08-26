@@ -29,3 +29,6 @@ databaseChangeLog:
   - include:
       file: v-1.1/2026-08-25--add-achievement-rewards-and-store.sql
       relativeToChangelogFile: true
+  - include:
+      file: v-1.1/2026-08-25--release-polish-and-community.sql
+      relativeToChangelogFile: true
