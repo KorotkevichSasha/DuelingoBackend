@@ -16,9 +16,11 @@ import by.gsu.duelingobackend.model.enums.AchievementConditionType;
 import by.gsu.duelingobackend.model.enums.QuestionDifficulty;
 import by.gsu.duelingobackend.repository.DuelRepository;
 import by.gsu.duelingobackend.repository.UserRepository;
+import by.gsu.duelingobackend.repository.UserRelationshipRepository;
 import by.gsu.duelingobackend.repository.question.QuestionRepository;
 import by.gsu.duelingobackend.service.matchmaking.EloRatingService;
 import by.gsu.duelingobackend.model.enums.LeagueTier;
+import by.gsu.duelingobackend.model.enums.RelationshipStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -65,6 +67,7 @@ public class DuelService {
     private final SimpMessagingTemplate messagingTemplate;
     private final ObjectMapper objectMapper;
     private final EconomyService economyService;
+    private final UserRelationshipRepository userRelationshipRepository;
     private final Map<UUID, CompletableFuture<Void>> pendingDuels = new ConcurrentHashMap<>();
 
     private static final int DEFAULT_QUESTIONS_SIZE = 10;
@@ -237,6 +240,12 @@ public class DuelService {
         duelRepository.save(duel);
         achievementService.updateProgress(duel.getPlayer1().getId(), AchievementConditionType.DUEL_PLAYED, 1);
         achievementService.updateProgress(duel.getPlayer2().getId(), AchievementConditionType.DUEL_PLAYED, 1);
+        if (userRelationshipRepository.findBetweenUsersWithStatus(
+                duel.getPlayer1().getId(), duel.getPlayer2().getId(), RelationshipStatus.FRIEND
+        ).isPresent()) {
+            achievementService.updateProgress(duel.getPlayer1().getId(), AchievementConditionType.FRIEND_DUEL_PLAYED, 1);
+            achievementService.updateProgress(duel.getPlayer2().getId(), AchievementConditionType.FRIEND_DUEL_PLAYED, 1);
+        }
         sendDuelResult(duel, forfeitedBy, ratingChanges, goldRewards);
     }
 

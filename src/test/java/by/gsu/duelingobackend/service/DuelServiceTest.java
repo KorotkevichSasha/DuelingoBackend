@@ -9,6 +9,7 @@ import by.gsu.duelingobackend.model.enums.QuestionDifficulty;
 import by.gsu.duelingobackend.model.enums.QuestionType;
 import by.gsu.duelingobackend.repository.DuelRepository;
 import by.gsu.duelingobackend.repository.UserRepository;
+import by.gsu.duelingobackend.repository.UserRelationshipRepository;
 import by.gsu.duelingobackend.repository.question.QuestionRepository;
 import by.gsu.duelingobackend.service.matchmaking.EloRatingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,6 +43,7 @@ class DuelServiceTest {
     @Mock private AchievementService achievementService;
     @Mock private EconomyService economyService;
     @Mock private SimpMessagingTemplate messagingTemplate;
+    @Mock private UserRelationshipRepository userRelationshipRepository;
 
     @BeforeEach
     void setUpRewardResults() {
@@ -87,7 +89,8 @@ class DuelServiceTest {
                 achievementService,
                 messagingTemplate,
                 new ObjectMapper(),
-                economyService
+                economyService,
+                userRelationshipRepository
         );
 
         service.processDuelResults(
@@ -124,7 +127,8 @@ class DuelServiceTest {
                 achievementService,
                 messagingTemplate,
                 new ObjectMapper(),
-                economyService
+                economyService,
+                userRelationshipRepository
         );
 
         service.forfeitDuel(duelId, player1.getId());
