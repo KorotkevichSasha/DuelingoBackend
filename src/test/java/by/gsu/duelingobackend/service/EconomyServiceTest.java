@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -101,6 +102,41 @@ class EconomyServiceTest {
 
         assertThat(repeated.get(promoted.getId()).leagueBonusGold()).isZero();
         assertThat(repeated.get(promoted.getId()).totalGold()).isEqualTo(18);
+    }
+
+    @Test
+    void dailyTipCanOnlyBeClaimedOncePerDay() {
+        User user = player(false, 10, 10);
+        when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
+        EconomyService service = new EconomyService(users);
+
+        var first = service.claimDailyTipReward(user.getId());
+        var second = service.claimDailyTipReward(user.getId());
+
+        assertThat(first.goldAwarded()).isEqualTo(2);
+        assertThat(first.firstCompletion()).isTrue();
+        assertThat(second.goldAwarded()).isZero();
+        assertThat(second.firstCompletion()).isFalse();
+        assertThat(user.getGold()).isEqualTo(12);
+        assertThat(user.getLastDailyTipRewardAt()).isEqualTo(LocalDate.now());
+    }
+
+    @Test
+    void listeningRewardDependsOnAccuracyAndHasADailyCap() {
+        User user = player(false, 10, 10);
+        when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
+        EconomyService service = new EconomyService(users);
+
+        assertThat(service.awardListeningGold(user.getId(), 59).goldAwarded()).isZero();
+        assertThat(service.awardListeningGold(user.getId(), 60).goldAwarded()).isEqualTo(1);
+        assertThat(service.awardListeningGold(user.getId(), 80).goldAwarded()).isEqualTo(2);
+        assertThat(service.awardListeningGold(user.getId(), 95).goldAwarded()).isEqualTo(3);
+        service.awardListeningGold(user.getId(), 95);
+        service.awardListeningGold(user.getId(), 95);
+        service.awardListeningGold(user.getId(), 95);
+        assertThat(service.awardListeningGold(user.getId(), 95).goldAwarded()).isZero();
+        assertThat(user.getListeningGoldToday()).isEqualTo(15);
+        assertThat(user.getGold()).isEqualTo(25);
     }
 
     private User player(boolean virtual, int gold, int charges) {

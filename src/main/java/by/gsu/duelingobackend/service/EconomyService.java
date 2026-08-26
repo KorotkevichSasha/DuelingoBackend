@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,6 +55,47 @@ public class EconomyService {
         }
         users.save(user);
         return response(user);
+    }
+
+    @Transactional
+    public by.gsu.duelingobackend.dto.response.LearningRewardResponse claimDailyTipReward(UUID userId) {
+        User user = lockedUser(userId);
+        LocalDate today = LocalDate.now();
+        boolean awarded = !today.equals(user.getLastDailyTipRewardAt());
+        int reward = awarded ? 2 : 0;
+        if (awarded) {
+            user.setGold(user.getGold() + reward);
+            user.setLastDailyTipRewardAt(today);
+            users.save(user);
+        }
+        return new by.gsu.duelingobackend.dto.response.LearningRewardResponse(
+                reward, user.getGold(), awarded);
+    }
+
+    @Transactional
+    public by.gsu.duelingobackend.dto.response.LearningRewardResponse awardListeningGold(
+            UUID userId, int similarityPercent) {
+        User user = lockedUser(userId);
+        LocalDate today = LocalDate.now();
+        if (!today.equals(user.getListeningRewardDate())) {
+            user.setListeningRewardDate(today);
+            user.setListeningGoldToday(0);
+        }
+        if (user.getListeningGoldToday() == null) {
+            user.setListeningGoldToday(0);
+        }
+        int requested = similarityPercent >= 95 ? 3
+                : similarityPercent >= 80 ? 2
+                : similarityPercent >= 60 ? 1 : 0;
+        int remaining = Math.max(0, 15 - user.getListeningGoldToday());
+        int reward = Math.min(requested, remaining);
+        if (reward > 0) {
+            user.setGold(user.getGold() + reward);
+            user.setListeningGoldToday(user.getListeningGoldToday() + reward);
+            users.save(user);
+        }
+        return new by.gsu.duelingobackend.dto.response.LearningRewardResponse(
+                reward, user.getGold(), reward > 0);
     }
 
     @Transactional

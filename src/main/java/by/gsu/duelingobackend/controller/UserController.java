@@ -10,6 +10,9 @@ import by.gsu.duelingobackend.service.RelationshipService;
 import by.gsu.duelingobackend.service.UserService;
 import by.gsu.duelingobackend.service.EconomyService;
 import by.gsu.duelingobackend.dto.response.EconomyResponse;
+import by.gsu.duelingobackend.dto.response.LearningRewardResponse;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -60,6 +63,19 @@ public class UserController {
             @AuthenticationPrincipal UserDetailsImpl principal,
             @PathVariable String packId) {
         return economyService.purchaseRushPack(principal.getUser().getId(), packId);
+    }
+
+    @PostMapping("/economy/daily-tip")
+    public LearningRewardResponse claimDailyTipReward(
+            @AuthenticationPrincipal UserDetailsImpl principal) {
+        return economyService.claimDailyTipReward(principal.getUser().getId());
+    }
+
+    @PostMapping("/economy/listening-reward")
+    public LearningRewardResponse claimListeningReward(
+            @AuthenticationPrincipal UserDetailsImpl principal,
+            @RequestParam @Min(0) @Max(100) int similarityPercent) {
+        return economyService.awardListeningGold(principal.getUser().getId(), similarityPercent);
     }
 
     @PostMapping("/profile/avatar")
