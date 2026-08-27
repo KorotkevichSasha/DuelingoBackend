@@ -400,7 +400,7 @@ public class DuelService {
     private String correctAnswer(Question question) {
         return question.getType() == by.gsu.duelingobackend.model.enums.QuestionType.SENTENCE_CONSTRUCTION
                 ? String.join(" ", question.getCorrectAnswers())
-                : String.join(" / ", question.getCorrectAnswers());
+                : question.getCorrectAnswers().stream().findFirst().orElse("");
     }
 
     private String answerAcceptedByQuestion(Question question) {

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -82,8 +83,17 @@ public class LeaderboardService {
         int start = page * size;
         int end = start + size - 1;
 
-        Set<ZSetOperations.TypedTuple<Object>> tuples = redisTemplate.opsForZSet()
-                .reverseRangeWithScores(LEADERBOARD_KEY, start, end);
+        // Fetch the prefix once: it gives us enough context to calculate dense
+        // ranks and the next distinct score without issuing Redis queries for
+        // every row in the page.
+        Set<ZSetOperations.TypedTuple<Object>> rankingPrefix = redisTemplate.opsForZSet()
+                .reverseRangeWithScores(LEADERBOARD_KEY, 0, end);
+        List<ZSetOperations.TypedTuple<Object>> allTuples = rankingPrefix == null
+                ? List.of()
+                : new ArrayList<>(rankingPrefix);
+        List<ZSetOperations.TypedTuple<Object>> tuples = start >= allTuples.size()
+                ? List.of()
+                : allTuples.subList(start, allTuples.size());
 
         List<UUID> userIds = tuples.stream()
                 .map(tuple -> {
@@ -102,7 +112,22 @@ public class LeaderboardService {
                 .collect(Collectors.toMap(User::getId, Function.identity()));
 
         List<UserInLeaderboardResponse> responses = new ArrayList<>();
-        Map<Double, Long> ranksByScore = new HashMap<>();
+        Map<Double, Long> ranksByScore = new LinkedHashMap<>();
+        Map<Double, Integer> pointsToNextByScore = new HashMap<>();
+        Double previousScore = null;
+        long denseRank = 0;
+        for (ZSetOperations.TypedTuple<Object> tuple : allTuples) {
+            Double score = tuple.getScore();
+            if (score != null && !ranksByScore.containsKey(score)) {
+                denseRank++;
+                ranksByScore.put(score, denseRank);
+                pointsToNextByScore.put(
+                        score,
+                        previousScore == null ? null : (int) Math.ceil(previousScore - score)
+                );
+                previousScore = score;
+            }
+        }
         for (ZSetOperations.TypedTuple<Object> tuple : tuples) {
             try {
                 UUID userId = UUID.fromString((String) tuple.getValue());
@@ -118,8 +143,8 @@ public class LeaderboardService {
                         user.getUsername(),
                         tuple.getScore().intValue(),
                         user.getAvatarUrl(),
-                        ranksByScore.computeIfAbsent(tuple.getScore(), this::rankForScore),
-                        pointsToNextScore(tuple.getScore()),
+                        ranksByScore.get(tuple.getScore()),
+                        pointsToNextByScore.get(tuple.getScore()),
                         LeagueTier.forPoints(tuple.getScore().intValue()).response(tuple.getScore().intValue())
                 ));
             } catch (IllegalArgumentException e) {
@@ -159,12 +184,20 @@ public class LeaderboardService {
     }
 
     private long rankForScore(double score) {
-        Long usersWithMorePoints = redisTemplate.opsForZSet().count(
+        Set<ZSetOperations.TypedTuple<Object>> higherScores = redisTemplate.opsForZSet()
+                .reverseRangeByScoreWithScores(
                 LEADERBOARD_KEY,
                 Math.nextUp(score),
                 Double.POSITIVE_INFINITY
         );
-        return (usersWithMorePoints == null ? 0 : usersWithMorePoints) + 1;
+        if (higherScores == null || higherScores.isEmpty()) {
+            return 1L;
+        }
+        return higherScores.stream()
+                .map(ZSetOperations.TypedTuple::getScore)
+                .filter(Objects::nonNull)
+                .distinct()
+                .count() + 1;
     }
 
     private Integer getPointsToNextRank(UUID userId) {
