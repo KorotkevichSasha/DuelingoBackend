@@ -107,4 +107,4 @@ if ($SkipAdminPanel) {
 } else {
     Write-Host "Admin panel: http://127.0.0.1:5173"
 }
-Write-Host "Android devices prepared: $($devices.Count)"
+Write-Host "Android devices prepared: $(@($devices).Count)"
