@@ -27,6 +27,9 @@ public class EconomyService {
 
     public static final int MAX_RUSH_CHARGES = 10;
     public static final int MINUTES_PER_CHARGE = 60;
+    public static final int REWARDED_AD_GOLD = 25;
+    public static final int MAX_REWARDED_ADS_PER_DAY = 5;
+    public static final int REWARDED_AD_COOLDOWN_SECONDS = 30;
 
     private final UserRepository users;
 
@@ -96,6 +99,32 @@ public class EconomyService {
         }
         return new by.gsu.duelingobackend.dto.response.LearningRewardResponse(
                 reward, user.getGold(), reward > 0);
+    }
+
+    @Transactional
+    public by.gsu.duelingobackend.dto.response.LearningRewardResponse awardRewardedAdGold(UUID userId) {
+        User user = lockedUser(userId);
+        LocalDate today = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
+        if (!today.equals(user.getRewardedAdDate())) {
+            user.setRewardedAdDate(today);
+            user.setRewardedAdsToday(0);
+        }
+        if (user.getRewardedAdsToday() == null) {
+            user.setRewardedAdsToday(0);
+        }
+        boolean coolingDown = user.getLastRewardedAdAt() != null
+                && user.getLastRewardedAdAt().plusSeconds(REWARDED_AD_COOLDOWN_SECONDS).isAfter(now);
+        if (coolingDown || user.getRewardedAdsToday() >= MAX_REWARDED_ADS_PER_DAY) {
+            return new by.gsu.duelingobackend.dto.response.LearningRewardResponse(
+                    0, user.getGold(), false);
+        }
+        user.setGold(user.getGold() + REWARDED_AD_GOLD);
+        user.setRewardedAdsToday(user.getRewardedAdsToday() + 1);
+        user.setLastRewardedAdAt(now);
+        users.save(user);
+        return new by.gsu.duelingobackend.dto.response.LearningRewardResponse(
+                REWARDED_AD_GOLD, user.getGold(), true);
     }
 
     @Transactional

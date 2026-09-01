@@ -139,6 +139,34 @@ class EconomyServiceTest {
         assertThat(user.getGold()).isEqualTo(25);
     }
 
+    @Test
+    void rewardedAdGivesTwentyFiveGoldAndRejectsImmediateDuplicate() {
+        User user = player(false, 10, 10);
+        when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
+        EconomyService service = new EconomyService(users);
+
+        var first = service.awardRewardedAdGold(user.getId());
+        var duplicate = service.awardRewardedAdGold(user.getId());
+
+        assertThat(first.goldAwarded()).isEqualTo(25);
+        assertThat(first.totalGold()).isEqualTo(35);
+        assertThat(duplicate.goldAwarded()).isZero();
+        assertThat(user.getRewardedAdsToday()).isEqualTo(1);
+    }
+
+    @Test
+    void rewardedAdHasAFiveViewDailyLimit() {
+        User user = player(false, 10, 10);
+        user.setRewardedAdDate(LocalDate.now());
+        user.setRewardedAdsToday(5);
+        when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
+
+        var result = new EconomyService(users).awardRewardedAdGold(user.getId());
+
+        assertThat(result.goldAwarded()).isZero();
+        assertThat(user.getGold()).isEqualTo(10);
+    }
+
     private User player(boolean virtual, int gold, int charges) {
         return User.builder()
                 .id(UUID.randomUUID())

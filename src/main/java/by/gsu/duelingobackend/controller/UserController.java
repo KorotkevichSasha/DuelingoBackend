@@ -78,6 +78,12 @@ public class UserController {
         return economyService.awardListeningGold(principal.getUser().getId(), similarityPercent);
     }
 
+    @PostMapping("/economy/rewarded-ad")
+    public LearningRewardResponse claimRewardedAdGold(
+            @AuthenticationPrincipal UserDetailsImpl principal) {
+        return economyService.awardRewardedAdGold(principal.getUser().getId());
+    }
+
     @PostMapping("/profile/avatar")
     public UserProfileResponse uploadAvatar(
             @AuthenticationPrincipal UserDetailsImpl principal,
