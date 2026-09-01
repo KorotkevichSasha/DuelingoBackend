@@ -120,6 +120,17 @@ public class User {
     @Column(name = "listening_gold_today", nullable = false)
     private Integer listeningGoldToday = 0;
 
+    @Column(name = "rewarded_ad_date")
+    private LocalDate rewardedAdDate;
+
+    @Min(0)
+    @Builder.Default
+    @Column(name = "rewarded_ads_today", nullable = false)
+    private Integer rewardedAdsToday = 0;
+
+    @Column(name = "last_rewarded_ad_at")
+    private LocalDateTime lastRewardedAdAt;
+
     @OneToMany(mappedBy = "user")
     private List<UserTestProgress> progress;
 
