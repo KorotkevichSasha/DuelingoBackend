@@ -29,12 +29,10 @@ public class EmailService {
 
     @Async
     public void sendSimpleMessage(String to, String subject, String text) {
-        if (gmailApiEmailClient.isConfigured()) {
-            gmailApiEmailClient.send(to, subject, text);
+        if (gmailApiEmailClient.isConfigured() && gmailApiEmailClient.send(to, subject, text)) {
             return;
         }
-        if (brevoEmailClient.isConfigured()) {
-            brevoEmailClient.send(to, subject, text);
+        if (brevoEmailClient.isConfigured() && brevoEmailClient.send(to, subject, text)) {
             return;
         }
         try {
@@ -54,14 +52,13 @@ public class EmailService {
         String text = "Ваш код подтверждения DuelRush: " + code
                 + "\n\nКод действует " + validMinutes + " минут. "
                 + "Если вы не регистрировались, просто проигнорируйте это письмо.";
-        if (gmailApiEmailClient.isConfigured()) {
-            boolean sent = gmailApiEmailClient.send(to, subject, text);
-            if (sent) log.info("Verification email accepted by Gmail API for {}", to);
-            return sent;
-        } else if (brevoEmailClient.isConfigured()) {
-            boolean sent = brevoEmailClient.send(to, subject, text);
-            if (sent) log.info("Verification email accepted by Brevo for {}", to);
-            return sent;
+        if (gmailApiEmailClient.isConfigured() && gmailApiEmailClient.send(to, subject, text)) {
+            log.info("Verification email accepted by Gmail API for {}", to);
+            return true;
+        }
+        if (brevoEmailClient.isConfigured() && brevoEmailClient.send(to, subject, text)) {
+            log.info("Verification email accepted by Brevo for {}", to);
+            return true;
         }
         try {
             var message = mailSender.createMimeMessage();
@@ -85,11 +82,10 @@ public class EmailService {
         String text = "Ваш код для восстановления пароля DuelRush: " + code
                 + "\n\nКод действует " + validMinutes + " минут. "
                 + "Если вы не запрашивали восстановление, проигнорируйте письмо и никому не сообщайте код.";
-        if (gmailApiEmailClient.isConfigured()) {
-            gmailApiEmailClient.send(to, subject, text);
+        if (gmailApiEmailClient.isConfigured() && gmailApiEmailClient.send(to, subject, text)) {
             return;
-        } else if (brevoEmailClient.isConfigured()) {
-            brevoEmailClient.send(to, subject, text);
+        }
+        if (brevoEmailClient.isConfigured() && brevoEmailClient.send(to, subject, text)) {
             return;
         }
         try {
