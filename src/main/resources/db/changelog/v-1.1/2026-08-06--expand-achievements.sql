@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset codex:expand-achievements splitStatements:true
+--changeset duelrush:expand-achievements-v2 splitStatements:true
 INSERT INTO achievements (id, title, description, type, level, required_value, condition_type, icon_url)
 SELECT v.id::uuid, v.title, v.description, v.type, v.level, v.required_value, v.condition_type, NULL
 FROM (VALUES

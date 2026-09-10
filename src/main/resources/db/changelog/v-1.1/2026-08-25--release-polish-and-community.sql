@@ -20,7 +20,8 @@ SET title = CASE required_value
 WHERE type = 'INVITES';
 
 --changeset duelrush:2026-08-25-community-showcase splitStatements:true
-DELETE FROM users WHERE lower(username) LIKE 'codex%';
+--validCheckSum: 1:any
+DELETE FROM users WHERE lower(email) LIKE '%@example.com';
 
 INSERT INTO users (
     id, username, password, email, role, points, avatar_url, email_verified,
