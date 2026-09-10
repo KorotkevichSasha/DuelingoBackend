@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset codex:2026-08-06-add-duel-answer-history
+--changeset duelrush:2026-08-06-add-duel-answer-history-v2
 ALTER TABLE duel
-    ADD COLUMN player1_answers TEXT,
-    ADD COLUMN player2_answers TEXT;
+    ADD COLUMN IF NOT EXISTS player1_answers TEXT,
+    ADD COLUMN IF NOT EXISTS player2_answers TEXT;

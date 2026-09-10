@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset codex:2026-07-31-remove-demo-accounts
+--changeset duelrush:2026-07-31-remove-demo-accounts-v2
 DELETE FROM users
 WHERE email IN (
     'duelmaster@example.com', 'quizking@example.com', 'wordwarrior@example.com',
@@ -10,7 +10,7 @@ WHERE email IN (
     'leo@example.com', 'wizard@example.com', 'edu@example.com', 'topplayer@example.com'
 );
 
---changeset codex:2026-07-31-clean-achievement-content
+--changeset duelrush:2026-07-31-clean-achievement-content-v2
 UPDATE achievements
 SET title = CASE
         WHEN type = 'DUELS' AND level = 'BRONZE' THEN 'Duel beginner'
@@ -37,6 +37,8 @@ SET title = CASE
     icon_url = NULL,
     updated_at = CURRENT_TIMESTAMP;
 
---changeset codex:2026-07-31-user-data-constraints
+--changeset duelrush:2026-07-31-user-data-constraints-v2
+ALTER TABLE users DROP CONSTRAINT IF EXISTS chk_users_points_nonnegative;
+ALTER TABLE users DROP CONSTRAINT IF EXISTS chk_users_role;
 ALTER TABLE users ADD CONSTRAINT chk_users_points_nonnegative CHECK (points >= 0);
 ALTER TABLE users ADD CONSTRAINT chk_users_role CHECK (role IN ('USER', 'ADMIN'));
