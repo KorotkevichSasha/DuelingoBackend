@@ -1,10 +1,13 @@
 package by.gsu.duelingobackend.service;
 
 import by.gsu.duelingobackend.dto.response.EconomyResponse;
+import by.gsu.duelingobackend.dto.request.PlayPurchaseRequest;
+import by.gsu.duelingobackend.model.PlayPurchase;
 import by.gsu.duelingobackend.model.Duel;
 import by.gsu.duelingobackend.model.User;
 import by.gsu.duelingobackend.model.enums.QuestionDifficulty;
 import by.gsu.duelingobackend.repository.UserRepository;
+import by.gsu.duelingobackend.repository.PlayPurchaseRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -19,11 +22,34 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 class EconomyServiceTest {
 
     @Mock private UserRepository users;
+    @Mock private PlayPurchaseRepository playPurchases;
+    @Mock private GooglePlayPurchaseVerifier playVerifier;
+
+    private EconomyService service() {
+        return new EconomyService(users, playPurchases, playVerifier);
+    }
+
+    @Test
+    void verifiedGooglePlayPurchaseAwardsGoldExactlyOnce() {
+        User user = player(false, 100, 10);
+        PlayPurchaseRequest request = new PlayPurchaseRequest(
+                "gold_550", "purchase-token", "signed-data", "signature");
+        when(playPurchases.findByPurchaseTokenHash(any())).thenReturn(Optional.empty());
+        when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
+
+        EconomyResponse result = service().applyGooglePlayPurchase(user.getId(), request);
+
+        assertThat(result.gold()).isEqualTo(650);
+        verify(playVerifier).verify(request);
+        verify(playPurchases).saveAndFlush(any(PlayPurchase.class));
+    }
 
     @Test
     void restoresRushSparksWithoutExceedingTheMaximum() {
@@ -31,7 +57,7 @@ class EconomyServiceTest {
         user.setRushChargesUpdatedAt(LocalDateTime.now().minusMinutes(125));
         when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
 
-        EconomyResponse result = new EconomyService(users).getEconomy(user.getId());
+        EconomyResponse result = service().getEconomy(user.getId());
 
         assertThat(result.rushCharges()).isEqualTo(10);
         assertThat(result.nextRushChargeAt()).isNull();
@@ -44,7 +70,7 @@ class EconomyServiceTest {
         List<UUID> ids = List.of(human.getId(), virtualOpponent.getId()).stream().sorted().toList();
         when(users.findAllByIdForUpdate(ids)).thenReturn(List.of(human, virtualOpponent));
 
-        new EconomyService(users).consumeRankedDuelCharges(ids);
+        service().consumeRankedDuelCharges(ids);
 
         assertThat(human.getRushCharges()).isEqualTo(9);
         assertThat(virtualOpponent.getRushCharges()).isEqualTo(10);
@@ -63,7 +89,7 @@ class EconomyServiceTest {
                 .ranked(true)
                 .build();
 
-        Map<UUID, EconomyService.DuelReward> rewards = new EconomyService(users).awardDuelGold(
+        Map<UUID, EconomyService.DuelReward> rewards = service().awardDuelGold(
                 duel, Map.of(winner.getId(), 0, loser.getId(), 0));
 
         assertThat(rewards.get(winner.getId()).totalGold()).isEqualTo(25);
@@ -86,7 +112,7 @@ class EconomyServiceTest {
                 .difficulty(QuestionDifficulty.MEDIUM)
                 .ranked(true)
                 .build();
-        EconomyService service = new EconomyService(users);
+        EconomyService service = service();
 
         var first = service.awardDuelGold(
                 duel, Map.of(promoted.getId(), 190, opponent.getId(), 0));
@@ -108,7 +134,7 @@ class EconomyServiceTest {
     void dailyTipCanOnlyBeClaimedOncePerDay() {
         User user = player(false, 10, 10);
         when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
-        EconomyService service = new EconomyService(users);
+        EconomyService service = service();
 
         var first = service.claimDailyTipReward(user.getId());
         var second = service.claimDailyTipReward(user.getId());
@@ -125,7 +151,7 @@ class EconomyServiceTest {
     void listeningRewardDependsOnAccuracyAndHasADailyCap() {
         User user = player(false, 10, 10);
         when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
-        EconomyService service = new EconomyService(users);
+        EconomyService service = service();
 
         assertThat(service.awardListeningGold(user.getId(), 59).goldAwarded()).isZero();
         assertThat(service.awardListeningGold(user.getId(), 60).goldAwarded()).isEqualTo(1);
@@ -143,7 +169,7 @@ class EconomyServiceTest {
     void rewardedAdGivesTwentyFiveGoldAndRejectsImmediateDuplicate() {
         User user = player(false, 10, 10);
         when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
-        EconomyService service = new EconomyService(users);
+        EconomyService service = service();
 
         var first = service.awardRewardedAdGold(user.getId());
         var duplicate = service.awardRewardedAdGold(user.getId());
@@ -161,7 +187,7 @@ class EconomyServiceTest {
         user.setRewardedAdsToday(5);
         when(users.findByIdForUpdate(user.getId())).thenReturn(Optional.of(user));
 
-        var result = new EconomyService(users).awardRewardedAdGold(user.getId());
+        var result = service().awardRewardedAdGold(user.getId());
 
         assertThat(result.goldAwarded()).isZero();
         assertThat(user.getGold()).isEqualTo(10);

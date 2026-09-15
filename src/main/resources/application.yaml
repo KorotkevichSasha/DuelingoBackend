@@ -16,3 +16,5 @@ server:
 app:
   content:
     bootstrap-enabled: ${CONTENT_BOOTSTRAP_ENABLED:true}
+  google-play:
+    license-key: ${GOOGLE_PLAY_LICENSE_KEY:}

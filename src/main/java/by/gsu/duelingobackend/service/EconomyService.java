@@ -5,6 +5,9 @@ import by.gsu.duelingobackend.exceptions.EntityNotFoundException;
 import by.gsu.duelingobackend.exceptions.InvalidOperationException;
 import by.gsu.duelingobackend.model.Duel;
 import by.gsu.duelingobackend.model.User;
+import by.gsu.duelingobackend.model.PlayPurchase;
+import by.gsu.duelingobackend.dto.request.PlayPurchaseRequest;
+import by.gsu.duelingobackend.repository.PlayPurchaseRepository;
 import by.gsu.duelingobackend.model.enums.LeagueTier;
 import by.gsu.duelingobackend.model.enums.QuestionDifficulty;
 import by.gsu.duelingobackend.repository.UserRepository;
@@ -20,6 +23,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.security.MessageDigest;
+import java.nio.charset.StandardCharsets;
+import java.util.HexFormat;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +38,8 @@ public class EconomyService {
     public static final int REWARDED_AD_COOLDOWN_SECONDS = 30;
 
     private final UserRepository users;
+    private final PlayPurchaseRepository playPurchases;
+    private final GooglePlayPurchaseVerifier googlePlayPurchaseVerifier;
 
     @Transactional
     public EconomyResponse getEconomy(UUID userId) {
@@ -58,6 +66,41 @@ public class EconomyService {
         }
         users.save(user);
         return response(user);
+    }
+
+    @Transactional
+    public EconomyResponse applyGooglePlayPurchase(UUID userId, PlayPurchaseRequest request) {
+        GoldProduct product = GoldProduct.from(request.productId());
+        String tokenHash = sha256(request.purchaseToken());
+        var existing = playPurchases.findByPurchaseTokenHash(tokenHash);
+        if (existing.isPresent()) {
+            if (!existing.get().getUser().getId().equals(userId)) {
+                throw new InvalidOperationException("This Google Play purchase has already been used");
+            }
+            return response(lockedUser(userId));
+        }
+
+        googlePlayPurchaseVerifier.verify(request);
+        User user = lockedUser(userId);
+        user.setGold(Math.addExact(user.getGold(), product.gold));
+        users.save(user);
+        playPurchases.saveAndFlush(PlayPurchase.builder()
+                .user(user)
+                .purchaseTokenHash(tokenHash)
+                .productId(request.productId())
+                .goldAwarded(product.gold)
+                .purchasedAt(LocalDateTime.now())
+                .build());
+        return response(user);
+    }
+
+    private static String sha256(String value) {
+        try {
+            return HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8)));
+        } catch (Exception exception) {
+            throw new IllegalStateException("SHA-256 is unavailable", exception);
+        }
     }
 
     @Transactional
@@ -275,6 +318,27 @@ public class EconomyService {
     public record DuelReward(int duelGold, int leagueBonusGold, int totalGold) {
         public static DuelReward none() {
             return new DuelReward(0, 0, 0);
+        }
+    }
+
+    private enum GoldProduct {
+        GOLD_100("gold_100", 100),
+        GOLD_550("gold_550", 550),
+        GOLD_1200("gold_1200", 1200);
+
+        private final String productId;
+        private final int gold;
+
+        GoldProduct(String productId, int gold) {
+            this.productId = productId;
+            this.gold = gold;
+        }
+
+        private static GoldProduct from(String value) {
+            for (GoldProduct product : values()) {
+                if (product.productId.equals(value)) return product;
+            }
+            throw new InvalidOperationException("Unknown Google Play product");
         }
     }
 

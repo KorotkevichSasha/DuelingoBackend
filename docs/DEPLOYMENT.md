@@ -39,3 +39,8 @@ Set every variable from `.env.example`. In production, `APP_PUBLIC_BASE_URL` mus
 - Configure uptime monitoring for `/actuator/health`, log retention, disk alerts, and certificate-expiry alerts.
 - Rotate secrets after any suspected exposure. Rotating the JWT signing key signs users out.
 - The included Render blueprint uses a paid persistent disk because avatar files must survive restarts. For horizontal scaling, replace local avatar storage with S3-compatible object storage first.
+# Deployment
+
+Set `GOOGLE_PLAY_LICENSE_KEY` to the Base64 RSA licence key from the app's
+Google Play monetisation setup. The backend uses it to reject forged purchase
+data and replayed receipts.

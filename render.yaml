@@ -60,6 +60,8 @@ services:
         value: https://duelrush-api-2026.onrender.com
       - key: APP_AVATAR_DIRECTORY
         value: /tmp/duelrush/avatars
+      - key: GOOGLE_PLAY_LICENSE_KEY
+        sync: false
 
   - type: web
     name: duelrush-admin-2026

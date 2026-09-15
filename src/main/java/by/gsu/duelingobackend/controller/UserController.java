@@ -11,6 +11,7 @@ import by.gsu.duelingobackend.service.UserService;
 import by.gsu.duelingobackend.service.EconomyService;
 import by.gsu.duelingobackend.dto.response.EconomyResponse;
 import by.gsu.duelingobackend.dto.response.LearningRewardResponse;
+import by.gsu.duelingobackend.dto.request.PlayPurchaseRequest;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.Valid;
@@ -82,6 +83,13 @@ public class UserController {
     public LearningRewardResponse claimRewardedAdGold(
             @AuthenticationPrincipal UserDetailsImpl principal) {
         return economyService.awardRewardedAdGold(principal.getUser().getId());
+    }
+
+    @PostMapping("/economy/play-purchases")
+    public EconomyResponse verifyPlayPurchase(
+            @AuthenticationPrincipal UserDetailsImpl principal,
+            @RequestBody @Valid PlayPurchaseRequest request) {
+        return economyService.applyGooglePlayPurchase(principal.getUser().getId(), request);
     }
 
     @PostMapping("/profile/avatar")
