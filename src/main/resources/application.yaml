@@ -16,5 +16,9 @@ server:
 app:
   content:
     bootstrap-enabled: ${CONTENT_BOOTSTRAP_ENABLED:true}
+  admin-bootstrap:
+    username: ${ADMIN_BOOTSTRAP_USERNAME:}
+    email: ${ADMIN_BOOTSTRAP_EMAIL:}
+    password: ${ADMIN_BOOTSTRAP_PASSWORD:}
   google-play:
     license-key: ${GOOGLE_PLAY_LICENSE_KEY:}

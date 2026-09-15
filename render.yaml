@@ -62,6 +62,12 @@ services:
         value: /tmp/duelrush/avatars
       - key: GOOGLE_PLAY_LICENSE_KEY
         sync: false
+      - key: ADMIN_BOOTSTRAP_USERNAME
+        sync: false
+      - key: ADMIN_BOOTSTRAP_EMAIL
+        sync: false
+      - key: ADMIN_BOOTSTRAP_PASSWORD
+        sync: false
 
   - type: web
     name: duelrush-admin-2026
