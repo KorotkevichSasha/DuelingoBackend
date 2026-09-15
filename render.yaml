@@ -3,7 +3,7 @@ services:
     name: duelrush-api-2026
     runtime: docker
     region: frankfurt
-    plan: free
+    plan: 0.5c-512mb
     dockerfilePath: ./Dockerfile
     # Liveness must stay independent from slow free-tier databases. The full
     # /actuator/health endpoint remains available for operational diagnostics.
