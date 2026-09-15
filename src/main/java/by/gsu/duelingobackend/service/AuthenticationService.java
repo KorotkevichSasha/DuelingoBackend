@@ -118,7 +118,10 @@ public class AuthenticationService {
         var userDetails = userDetailsService.loadUserByUsername(username);
 
         if (jwtService.isRefreshTokenValid(refreshToken, userDetails)) {
-            return refreshAccessToken(userDetails, refreshToken);
+            // Rotate both tokens so an actively used account stays signed in.
+            // A user only needs to authenticate again after the refresh token has
+            // been unused for its full lifetime, or after credentials are revoked.
+            return generateTokens(userDetails);
         }
 
         throw new WrongRefreshTokenException(INVALID_REFRESH_TOKEN_ERR_MSG);
@@ -130,8 +133,4 @@ public class AuthenticationService {
         return new JwtAuthenticationResponse(accessToken, refreshToken);
     }
 
-    private JwtAuthenticationResponse refreshAccessToken(UserDetails userDetails, String refreshToken) {
-        String accessToken = jwtService.generateAccessToken(userDetails);
-        return new JwtAuthenticationResponse(accessToken, refreshToken);
-    }
 }

@@ -81,7 +81,7 @@ jwt:
     expiration: 7200000 # 2 hours in milliseconds
 
   refresh-token:
-    expiration: 604800000 # 7 days in milliseconds
+    expiration: 15552000000 # 180 days; rotated whenever the app refreshes the session
 
 management:
   health:
